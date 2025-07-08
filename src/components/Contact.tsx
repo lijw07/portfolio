@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import './Contact.css';
-import { useSectionTracking, trackEvent } from './Analytics';
 
 const Contact = forwardRef<HTMLDivElement>((props, ref) => {
   const localRef = React.useRef<HTMLDivElement>(null);

@@ -8,16 +8,12 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 // import ScrollDebugger from './components/ScrollDebugger'; // Uncomment for debugging
-import { trackPageView } from './components/Analytics';
 import './App.css';
 
 function App() {
   const unityGameRef = useRef<HTMLDivElement>(null);
   const portfolioRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    trackPageView('Portfolio Home');
-  }, []);
   const aboutRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
