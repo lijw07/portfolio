@@ -12,6 +12,7 @@ import { trackPageView } from './components/Analytics';
 import './App.css';
 
 function App() {
+  const unityGameRef = useRef<HTMLDivElement>(null);
   const portfolioRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -57,10 +58,13 @@ function App() {
 
   return (
     <div className="App">
-      <UnityGame onSkip={scrollToPortfolio} />
+      <div ref={unityGameRef}>
+        <UnityGame onSkip={scrollToPortfolio} />
+      </div>
       <Header 
         onScrollToSection={scrollToSection}
         onScrollToTop={scrollToTop}
+        unityGameRef={unityGameRef}
         aboutRef={aboutRef}
         educationRef={educationRef}
         experienceRef={experienceRef}
