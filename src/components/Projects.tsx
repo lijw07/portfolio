@@ -41,7 +41,7 @@ const Projects: React.FC = () => {
       name: 'Interactive Portfolio',
       description: 'A modern, interactive portfolio website built with React and Unity. Features a Unity-based interactive intro, responsive design, and dynamic sections for education, projects, and contact information. Includes school logos, project media, and smooth scrolling navigation.',
       tech: ['React', 'TypeScript', 'Unity', 'CSS3', 'HTML5', 'JavaScript', 'Responsive Design'],
-      github: 'https://github.com/lijw07/Interactive-Portfolio',
+      github: 'https://github.com/lijw07/portfolio-react',
       featured: true
     },
     {
