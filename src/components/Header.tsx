@@ -4,6 +4,7 @@ import './Header.css';
 interface HeaderProps {
   onScrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void;
   onScrollToTop: () => void;
+  unityGameRef: React.RefObject<HTMLDivElement | null>;
   aboutRef: React.RefObject<HTMLDivElement | null>;
   educationRef: React.RefObject<HTMLDivElement | null>;
   experienceRef: React.RefObject<HTMLDivElement | null>;
@@ -15,6 +16,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   onScrollToSection,
   onScrollToTop,
+  unityGameRef,
   aboutRef,
   educationRef,
   experienceRef,
@@ -26,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({
     <header className="header">
       <div className="container">
         <div className="header-content">
-          <button onClick={onScrollToTop} className="logo">Jai Li</button>
+          <button onClick={() => onScrollToSection(unityGameRef)} className="logo">Jai Li</button>
           <nav className="navigation">
             <button onClick={() => onScrollToSection(aboutRef)} className="nav-link">About</button>
             <button onClick={() => onScrollToSection(educationRef)} className="nav-link">Education</button>
