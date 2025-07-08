@@ -199,15 +199,12 @@
   font-size: 1.1rem;
   line-height: 1.8;
   overflow-y: auto;
-  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: -12px; /* Offset scrollbar width to move it left */
   height: 100%;
   display: flex;
   flex-direction: column;
-  direction: rtl;
-}
-
-.about-text > * {
-  direction: ltr;
+  scrollbar-gutter: stable;
 }
 
 .about-text::-webkit-scrollbar {
