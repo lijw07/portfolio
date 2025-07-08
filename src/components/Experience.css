@@ -1,0 +1,246 @@
+.experience-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+}
+
+.experience-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: #2c3e50;
+  font-weight: 300;
+}
+
+.experience-showcase {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.experience-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.experience-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 35px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), rgba(46, 204, 113, 0.05));
+  border-radius: 15px;
+  border-left: 5px solid #3498db;
+}
+
+.job-icon {
+  width: 70px;
+  height: 70px;
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  border-radius: 50%;
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.experience-card:hover .job-icon {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(52, 152, 219, 0.4);
+}
+
+.job-details {
+  flex: 1;
+}
+
+.job-details h3 {
+  font-size: 1.9rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.company-info h4 {
+  font-size: 1.4rem;
+  color: #3498db;
+  margin-bottom: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.company-info h4::before {
+  content: '🏢';
+  font-size: 1rem;
+}
+
+.job-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.location {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.location::before {
+  content: '📍';
+  font-size: 0.8rem;
+}
+
+.period {
+  color: #27ae60;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.period::before {
+  content: '📅';
+  font-size: 0.8rem;
+}
+
+.experience-description {
+  margin-bottom: 25px;
+}
+
+.experience-description ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-description li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.experience-description li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #3498db;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.experience-technologies {
+  border-top: 2px solid #f8f9fa;
+  padding-top: 20px;
+}
+
+.tech-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-badge {
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 60px 0;
+  }
+  
+  .experience-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .experience-showcase {
+    padding: 0 20px;
+  }
+  
+  .experience-card {
+    padding: 30px;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .job-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .job-details h3 {
+    font-size: 1.5rem;
+  }
+  
+  .company-info h4 {
+    font-size: 1.2rem;
+  }
+  
+  .job-meta {
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .tech-list {
+    justify-content: center;
+  }
+}
