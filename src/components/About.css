@@ -198,7 +198,7 @@
 .about-text {
   font-size: 1.1rem;
   line-height: 1.8;
-  overflow-y: scroll; /* Always show scrollbar */
+  overflow-y: auto;
   padding-left: 32px; /* Reserve space for scrollbar + padding */
   padding-right: 8px;
   height: 100%;
@@ -206,6 +206,7 @@
   flex-direction: column;
   direction: rtl;
   scrollbar-gutter: stable;
+  margin-left: -12px; /* Pull content back to account for reserved scrollbar space */
 }
 
 .about-text > * {
