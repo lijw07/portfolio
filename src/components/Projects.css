@@ -23,18 +23,22 @@
   bottom: 0;
   background-image: 
     radial-gradient(1px 1px at 25% 40%, white, transparent),
-    radial-gradient(2px 2px at 75% 20%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 75% 20%, rgba(255,255,255,0.8), transparent),
     radial-gradient(1px 1px at 40% 80%, white, transparent),
-    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.9), transparent),
-    radial-gradient(2px 2px at 10% 30%, white, transparent),
-    radial-gradient(1px 1px at 60% 10%, rgba(255,255,255,0.7), transparent);
+    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.9), transparent);
   background-size: 100vw 300vh;
   animation: 
-    shooting-star-1 12s -1s linear infinite,
-    shooting-star-2 18s -6s linear infinite,
-    shooting-star-3 15s -3s linear infinite;
+    shooting-star-1 20s -1s linear infinite,
+    shooting-star-2 24s -6s linear infinite;
   pointer-events: none;
   z-index: 1;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container::before {
+    animation: none;
+  }
 }
 
 body:has(.game-fullview) .container::before,

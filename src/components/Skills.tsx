@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, memo, useMemo } from 'react';
 import './Skills.css';
 
-const Skills = forwardRef<HTMLDivElement>((props, ref) => {
-  const skillCategories = [
+const Skills = memo(forwardRef<HTMLDivElement>((props, ref) => {
+  const skillCategories = useMemo(() => [
     {
       category: 'Programming Languages',
       skills: ['Java', 'C#', 'SQL']
@@ -23,7 +23,7 @@ const Skills = forwardRef<HTMLDivElement>((props, ref) => {
       category: 'Development Tools',
       skills: ['VS Code', 'IntelliJ', 'Rider', 'DataGrip', 'Figma', 'Jira', 'Unix/Linux', 'Terminal/CLI']
     }
-  ];
+  ], []);
 
   return (
     <section className="skills-section" ref={ref}>
@@ -38,7 +38,7 @@ const Skills = forwardRef<HTMLDivElement>((props, ref) => {
               </div>
               <div className="skills-flow">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skill} className="skill-item" style={{ animationDelay: `${skillIndex * 0.1}s` }}>
+                  <div key={skill} className={`skill-item skill-item-${skillIndex}`}>
                     <span className="skill-name">{skill}</span>
                   </div>
                 ))}
@@ -49,7 +49,7 @@ const Skills = forwardRef<HTMLDivElement>((props, ref) => {
       </div>
     </section>
   );
-});
+}));
 
 Skills.displayName = 'Skills';
 

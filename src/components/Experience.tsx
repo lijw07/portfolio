@@ -28,7 +28,7 @@ const Experience = forwardRef<HTMLDivElement>((props, ref) => {
             <div key={index} className="experience-card">
               <div className="experience-header">
                 <div className="job-icon">
-                  <img src={process.env.PUBLIC_URL + "/brightspot_logo.jpeg"} alt="Brightspot Logo" className="company-logo" />
+                  <img src={process.env.PUBLIC_URL + "/brightspot_logo.jpeg"} alt="Brightspot Logo" className="company-logo" loading="lazy" />
                 </div>
                 <div className="job-details">
                   <h3>{exp.title}</h3>

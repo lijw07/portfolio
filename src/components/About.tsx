@@ -1,11 +1,11 @@
-import React, { forwardRef, useState, useRef, useEffect } from 'react';
+import React, { forwardRef, useState, useRef, useEffect, useMemo } from 'react';
 import './About.css';
 
 const About = forwardRef<HTMLDivElement>((props, ref) => {
   const [currentSection, setCurrentSection] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
 
-  const sections = [
+  const sections = useMemo(() => [
     {
       title: "About Me",
       content: (
@@ -51,7 +51,7 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         </>
       )
     }
-  ];
+  ], []);
 
   const nextSection = () => {
     setCurrentSection((prev) => (prev + 1) % sections.length);
@@ -104,7 +104,7 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
           <div className="about-image">
             <div className="image-placeholder">
-              <img src={process.env.PUBLIC_URL + "/me.png"} alt="Jai Li" className="profile-picture" />
+              <img src={process.env.PUBLIC_URL + "/me.png"} alt="Jai Li" className="profile-picture" loading="lazy" />
             </div>
           </div>
         </div>
