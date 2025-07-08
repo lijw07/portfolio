@@ -167,9 +167,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👨‍💻 Author
 
 **Jai Li**
-- Portfolio: [Your Portfolio URL]
-- GitHub: [Your GitHub Profile]
-- LinkedIn: [Your LinkedIn Profile]
 
 ## 🙏 Acknowledgments
 
