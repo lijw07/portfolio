@@ -2,8 +2,6 @@ import React, { forwardRef } from 'react';
 import './Contact.css';
 
 const Contact = forwardRef<HTMLDivElement>((props, ref) => {
-  const localRef = React.useRef<HTMLDivElement>(null);
-  useSectionTracking('Contact Section', localRef);
   const contactMethods = [
     {
       icon: '📧',
@@ -29,14 +27,7 @@ const Contact = forwardRef<HTMLDivElement>((props, ref) => {
   ];
 
   return (
-    <section className="contact-section" ref={(el: HTMLDivElement | null) => {
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-      localRef.current = el;
-    }}>
+    <section className="contact-section" ref={ref}>
       <div className="container">
         <div className="contact-header">
           <h2>Let's Connect</h2>
@@ -55,7 +46,6 @@ const Contact = forwardRef<HTMLDivElement>((props, ref) => {
               target={method.link.startsWith('http') ? '_blank' : '_self'}
               rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
               onDragStart={(e) => e.preventDefault()}
-              onClick={() => trackEvent('contact_click', 'contact', method.title)}
             >
               <div className="contact-icon">
                 {method.icon.startsWith('/') ? (
