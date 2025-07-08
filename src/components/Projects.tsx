@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, memo } from 'react';
 import './Projects.css';
 
 declare global {
@@ -12,7 +12,7 @@ interface ProjectImageCarouselProps {
   projectName: string;
 }
 
-const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images, projectName }) => {
+const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = memo(({ images, projectName }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {
@@ -73,7 +73,7 @@ const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images, pro
       </div>
     </div>
   );
-};
+});
 
 const formatDate = (dateString: string): string => {
   if (dateString === 'Present') return 'Present';
