@@ -49,11 +49,14 @@ function App() {
   };
 
   const scrollToTop = () => {
-    console.log('scrollToTop called'); // Debug log
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+    
+    // Also ensure we're at the very beginning by using the document body
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   return (

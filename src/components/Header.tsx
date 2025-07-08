@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({
     <header className="header">
       <div className="container">
         <div className="header-content">
-          <button onClick={() => { console.log('Jai Li clicked'); onScrollToTop(); }} className="logo">Jai Li</button>
+          <button onClick={onScrollToTop} className="logo">Jai Li</button>
           <nav className="navigation">
             <button onClick={() => onScrollToSection(aboutRef)} className="nav-link">About</button>
             <button onClick={() => onScrollToSection(educationRef)} className="nav-link">Education</button>
