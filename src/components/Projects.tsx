@@ -1,6 +1,5 @@
 import React, { useState, forwardRef } from 'react';
 import './Projects.css';
-import { useSectionTracking, trackEvent } from './Analytics';
 
 interface ProjectImageCarouselProps {
   images: string[];
@@ -55,8 +54,6 @@ const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images, pro
 };
 
 const Projects = forwardRef<HTMLDivElement>((props, ref) => {
-  const localRef = React.useRef<HTMLDivElement>(null);
-  useSectionTracking('Projects Section', localRef);
   const projects = [
     {
       name: 'Costar Automated Information Extraction',
@@ -123,14 +120,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
 
 
   return (
-    <section className="projects-section" ref={(el: HTMLDivElement | null) => {
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-      localRef.current = el;
-    }}>
+    <section className="projects-section" ref={ref}>
       <div className="container">
         <h2>Featured Projects</h2>
         <div className="projects-timeline">
@@ -148,7 +138,6 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="github-link"
-                      onClick={() => trackEvent('project_link_click', 'projects', project.name)}
                     >
                       🔗 View Code
                     </a>

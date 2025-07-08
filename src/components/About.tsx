@@ -1,13 +1,7 @@
 import React, { forwardRef, useState } from 'react';
 import './About.css';
-import { useSectionTracking } from './Analytics';
 
 const About = forwardRef<HTMLDivElement>((props, ref) => {
-  // Create a local ref for section tracking
-  const localRef = React.useRef<HTMLDivElement>(null);
-  
-  // Use the local ref for tracking
-  useSectionTracking('About Section', localRef);
   const [currentSection, setCurrentSection] = useState(0);
 
   const sections = [
@@ -69,17 +63,7 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <section 
       className="about-section" 
-      ref={(el: HTMLDivElement | null) => {
-        // Assign to both refs
-        if (ref) {
-          if (typeof ref === 'function') {
-            ref(el);
-          } else {
-            ref.current = el;
-          }
-        }
-        localRef.current = el;
-      }}
+      ref={ref}
     >
       <div className="container">
         <div className="about-header">

@@ -1,10 +1,7 @@
 import React, { forwardRef } from 'react';
 import './Skills.css';
-import { useSectionTracking } from './Analytics';
 
 const Skills = forwardRef<HTMLDivElement>((props, ref) => {
-  const localRef = React.useRef<HTMLDivElement>(null);
-  useSectionTracking('Skills Section', localRef);
   const skillCategories = [
     {
       category: 'Programming Languages',
@@ -29,14 +26,7 @@ const Skills = forwardRef<HTMLDivElement>((props, ref) => {
   ];
 
   return (
-    <section className="skills-section" ref={(el: HTMLDivElement | null) => {
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-      localRef.current = el;
-    }}>
+    <section className="skills-section" ref={ref}>
       <div className="container">
         <h2>Skills & Technologies</h2>
         <div className="skills-showcase">
