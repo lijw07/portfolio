@@ -13,7 +13,7 @@
 }
 
 .portfolio-content {
-  scroll-behavior: smooth;
+  /* scroll-behavior is already set on html element */
 }
 
 .container {

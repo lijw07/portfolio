@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import UnityGame from './components/UnityGame';
 import Header from './components/Header';
 import About from './components/About';
@@ -7,10 +7,16 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+// import ScrollDebugger from './components/ScrollDebugger'; // Uncomment for debugging
+import { trackPageView } from './components/Analytics';
 import './App.css';
 
 function App() {
   const portfolioRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    trackPageView('Portfolio Home');
+  }, []);
   const aboutRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
@@ -27,20 +33,23 @@ function App() {
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
-      const elementPosition = ref.current.offsetTop;
-      // Adjust offset based on screen size
       const isMobile = window.innerWidth <= 768;
-      const headerOffset = isMobile ? 120 : 50; // Larger offset for mobile due to stacked header
-      const offsetPosition = elementPosition - headerOffset;
+      let headerOffset = isMobile ? 120 : 80;
       
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      // All sections now have consistent padding, no special offset needed
+      
+      // Use scrollIntoView then adjust for header
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Adjust for fixed header
+      setTimeout(() => {
+        window.scrollBy({ top: -headerOffset, behavior: 'smooth' });
+      }, 100);
     }
   };
 
   const scrollToTop = () => {
+    console.log('scrollToTop called'); // Debug log
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -60,6 +69,16 @@ function App() {
         projectsRef={projectsRef}
         contactRef={contactRef}
       />
+      {/* <ScrollDebugger 
+        refs={[
+          { name: 'About', ref: aboutRef },
+          { name: 'Education', ref: educationRef },
+          { name: 'Experience', ref: experienceRef },
+          { name: 'Skills', ref: skillsRef },
+          { name: 'Projects', ref: projectsRef },
+          { name: 'Contact', ref: contactRef }
+        ]}
+      /> */}
       <div ref={portfolioRef} className="portfolio-content">
         <About ref={aboutRef} />
         <Education ref={educationRef} />

@@ -1,7 +1,10 @@
 import React, { forwardRef } from 'react';
 import './Experience.css';
+import { useSectionTracking } from './Analytics';
 
 const Experience = forwardRef<HTMLDivElement>((props, ref) => {
+  const localRef = React.useRef<HTMLDivElement>(null);
+  useSectionTracking('Experience Section', localRef);
   const experiences = [
     {
       title: 'Software Engineer',
@@ -20,7 +23,14 @@ const Experience = forwardRef<HTMLDivElement>((props, ref) => {
   ];
 
   return (
-    <section className="experience-section" ref={ref}>
+    <section className="experience-section" ref={(el: HTMLDivElement | null) => {
+      if (typeof ref === 'function') {
+        ref(el);
+      } else if (ref) {
+        ref.current = el;
+      }
+      localRef.current = el;
+    }}>
       <div className="container">
         <h2>Work Experience</h2>
         <div className="experience-showcase">
