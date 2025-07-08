@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import UnityGame from './components/UnityGame';
 import Header from './components/Header';
 import About from './components/About';
