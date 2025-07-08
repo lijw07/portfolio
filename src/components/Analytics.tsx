@@ -22,9 +22,6 @@ export const useSectionTracking = (sectionName: string, elementRef: React.RefObj
                 value: 1
               });
             }
-            
-            // Also log to console for development
-            console.log(`Section viewed: ${sectionName}`);
           }
         });
       },

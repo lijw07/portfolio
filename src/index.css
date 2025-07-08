@@ -19,7 +19,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   min-height: 100vh;
-  will-change: scroll-position;
 }
 
 #root {

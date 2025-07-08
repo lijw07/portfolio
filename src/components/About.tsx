@@ -3,7 +3,11 @@ import './About.css';
 import { useSectionTracking } from './Analytics';
 
 const About = forwardRef<HTMLDivElement>((props, ref) => {
-  useSectionTracking('About Section', ref as React.RefObject<HTMLElement | null>);
+  // Create a local ref for section tracking
+  const localRef = React.useRef<HTMLDivElement>(null);
+  
+  // Use the local ref for tracking
+  useSectionTracking('About Section', localRef);
   const [currentSection, setCurrentSection] = useState(0);
 
   const sections = [
@@ -63,7 +67,20 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
   };
 
   return (
-    <section className="about-section" ref={ref}>
+    <section 
+      className="about-section" 
+      ref={(el: HTMLDivElement | null) => {
+        // Assign to both refs
+        if (ref) {
+          if (typeof ref === 'function') {
+            ref(el);
+          } else {
+            ref.current = el;
+          }
+        }
+        localRef.current = el;
+      }}
+    >
       <div className="container">
         <div className="about-header">
           <h2>Get to Know Me</h2>
