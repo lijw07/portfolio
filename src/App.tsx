@@ -53,10 +53,6 @@ function App() {
       top: 0,
       behavior: 'smooth'
     });
-    
-    // Also ensure we're at the very beginning by using the document body
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
   };
 
   return (
