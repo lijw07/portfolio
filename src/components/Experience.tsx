@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './Experience.css';
 
-const Experience: React.FC = () => {
+const Experience = forwardRef<HTMLDivElement>((props, ref) => {
   const experiences = [
     {
       title: 'Software Engineer',
@@ -20,7 +20,7 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <section className="experience-section">
+    <section className="experience-section" ref={ref}>
       <div className="container">
         <h2>Work Experience</h2>
         <div className="experience-showcase">
@@ -28,7 +28,7 @@ const Experience: React.FC = () => {
             <div key={index} className="experience-card">
               <div className="experience-header">
                 <div className="job-icon">
-                  💼
+                  <img src={process.env.PUBLIC_URL + "/brightspot_logo.jpeg"} alt="Brightspot Logo" className="company-logo" />
                 </div>
                 <div className="job-details">
                   <h3>{exp.title}</h3>
@@ -62,6 +62,8 @@ const Experience: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Experience.displayName = 'Experience';
 
 export default Experience;

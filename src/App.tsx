@@ -61,24 +61,12 @@ function App() {
         contactRef={contactRef}
       />
       <div ref={portfolioRef} className="portfolio-content">
-        <div ref={aboutRef}>
-          <About />
-        </div>
-        <div ref={educationRef}>
-          <Education />
-        </div>
-        <div ref={experienceRef}>
-          <Experience />
-        </div>
-        <div ref={skillsRef}>
-          <Skills />
-        </div>
-        <div ref={projectsRef}>
-          <Projects />
-        </div>
-        <div ref={contactRef}>
-          <Contact />
-        </div>
+        <About ref={aboutRef} />
+        <Education ref={educationRef} />
+        <Experience ref={experienceRef} />
+        <Skills ref={skillsRef} />
+        <Projects ref={projectsRef} />
+        <Contact ref={contactRef} />
         <footer className="footer">
           <div className="container">
             <p>&copy; 2025 Portfolio by Jai Li. Built with React & Unity.</p>

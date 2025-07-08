@@ -33,6 +33,32 @@ const UnityGame: React.FC<UnityGameProps> = ({ onSkip }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const exitGame = () => {
+    // Clean up Unity instance
+    if (unityInstance) {
+      try {
+        unityInstance.Quit();
+      } catch (error) {
+        console.log('Unity instance cleanup:', error);
+      }
+      setUnityInstance(null);
+    }
+    
+    // Reset all states
+    setGameStarted(false);
+    setLoading(false);
+    setProgress(0);
+    setError(null);
+    
+    // Clean up Unity canvas
+    if (canvasRef.current) {
+      const context = canvasRef.current.getContext('2d');
+      if (context) {
+        context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      }
+    }
+  };
+
   const startGame = async () => {
     if (gameStarted) return;
     
@@ -126,6 +152,9 @@ const UnityGame: React.FC<UnityGameProps> = ({ onSkip }) => {
         </div>
       ) : (
         <div className="game-fullview">
+          <button className="exit-game-button-floating" onClick={exitGame} title="Exit Game">
+            ✕
+          </button>
           <div className="game-layout">
             <div className="game-instructions">
               <div className="instructions-content">

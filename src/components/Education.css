@@ -1,7 +1,12 @@
 .education-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #333;
+  background: 
+    radial-gradient(ellipse at top, #0a0015 0%, #050008 50%, #000000 100%),
+    radial-gradient(ellipse at bottom, #000018 0%, #000006 50%, #000000 100%),
+    linear-gradient(180deg, #000000 0%, #000000 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .education-section h2 {
@@ -10,7 +15,11 @@
   margin-bottom: 60px;
   color: white;
   font-weight: 300;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #fff, #9370db, #4169e1, #00bfff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
 }
 
 .education-grid {
@@ -22,13 +31,15 @@
 }
 
 .education-card {
-  background: white;
+  background: rgba(15, 15, 25, 1);
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
 }
 
 .education-card::before {
@@ -38,12 +49,15 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #f093fb, #f5576c);
+  background: linear-gradient(90deg, #9370db, #4169e1, #00bfff);
+  box-shadow: 0 0 10px rgba(147, 112, 219, 0.8);
 }
 
 .education-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(25, 25, 40, 0.9);
 }
 
 .education-icon {
@@ -66,6 +80,11 @@
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 .education-card:hover .education-icon {
@@ -96,7 +115,7 @@
 
 .education-header h3 {
   font-size: 1.6rem;
-  color: #2c3e50;
+  color: white;
   margin-bottom: 10px;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -104,7 +123,7 @@
 
 .specialization {
   font-size: 1.1rem;
-  color: #8e44ad;
+  color: rgba(147, 112, 219, 0.9);
   margin: 0;
   font-style: italic;
   font-weight: 500;
@@ -114,18 +133,18 @@
 .education-school {
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f8f9fa;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .education-school h4 {
   font-size: 1.2rem;
-  color: #34495e;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 5px;
   font-weight: 600;
 }
 
 .location {
-  color: #7f8c8d;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -140,13 +159,13 @@
 }
 
 .period {
-  color: #e74c3c;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
   font-size: 0.9rem;
 }
 
 .gpa {
-  color: #27ae60;
+  color: rgba(147, 112, 219, 0.9);
   font-weight: 600;
   font-size: 0.9rem;
 }
