@@ -167,9 +167,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👨‍💻 Author
 
 **Jai Li**
-- Portfolio: [Your Portfolio URL]
-- GitHub: [Your GitHub Profile]
-- LinkedIn: [Your LinkedIn Profile]
 
 ## 🙏 Acknowledgments
 
@@ -177,7 +174,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - React team for the excellent framework
 - Create React App for the development setup
 - All the open-source contributors who made this project possible
-
----
-
-*Built with ❤️ using React & Unity*
