@@ -9,6 +9,12 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import './App.css';
 
+declare global {
+  interface Window {
+    gtag: (command: string, targetId: string, config?: any) => void;
+  }
+}
+
 function App() {
   const unityGameRef = useRef<HTMLDivElement>(null);
   const portfolioRef = useRef<HTMLDivElement>(null);
@@ -21,6 +27,15 @@ function App() {
   const contactRef = useRef<HTMLDivElement>(null);
 
   const scrollToPortfolio = () => {
+    // Track Unity game skip
+    if (window.gtag) {
+      window.gtag('event', 'unity_game_skip', {
+        event_category: 'engagement',
+        event_label: 'skip_to_portfolio',
+        value: 1
+      });
+    }
+    
     portfolioRef.current?.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
@@ -32,6 +47,16 @@ function App() {
       const isMobile = window.innerWidth <= 768;
       let headerOffset = isMobile ? 120 : 80;
       
+      // Track section navigation
+      const sectionName = getSectionName(ref);
+      if (sectionName && window.gtag) {
+        window.gtag('event', 'section_navigation', {
+          event_category: 'engagement',
+          event_label: sectionName,
+          value: 1
+        });
+      }
+      
       // All sections now have consistent padding, no special offset needed
       
       // Use scrollIntoView then adjust for header
@@ -42,6 +67,16 @@ function App() {
         window.scrollBy({ top: -headerOffset, behavior: 'smooth' });
       }, 100);
     }
+  };
+
+  const getSectionName = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref === aboutRef) return 'About';
+    if (ref === educationRef) return 'Education';
+    if (ref === experienceRef) return 'Experience';
+    if (ref === skillsRef) return 'Skills';
+    if (ref === projectsRef) return 'Projects';
+    if (ref === contactRef) return 'Contact';
+    return null;
   };
 
   const scrollToTop = () => {

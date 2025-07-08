@@ -1,7 +1,23 @@
 import React, { forwardRef } from 'react';
 import './Contact.css';
 
+declare global {
+  interface Window {
+    gtag: (command: string, targetId: string, config?: any) => void;
+  }
+}
+
 const Contact = forwardRef<HTMLDivElement>((props, ref) => {
+  const handleContactClick = (method: string) => {
+    if (window.gtag) {
+      window.gtag('event', 'contact_click', {
+        event_category: 'engagement',
+        event_label: method,
+        value: 1
+      });
+    }
+  };
+
   const contactMethods = [
     {
       icon: '📧',
@@ -46,6 +62,7 @@ const Contact = forwardRef<HTMLDivElement>((props, ref) => {
               target={method.link.startsWith('http') ? '_blank' : '_self'}
               rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
               onDragStart={(e) => e.preventDefault()}
+              onClick={() => handleContactClick(method.title)}
             >
               <div className="contact-icon">
                 {method.icon.startsWith('/') ? (

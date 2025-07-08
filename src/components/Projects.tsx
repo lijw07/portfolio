@@ -1,6 +1,12 @@
 import React, { useState, forwardRef } from 'react';
 import './Projects.css';
 
+declare global {
+  interface Window {
+    gtag: (command: string, targetId: string, config?: any) => void;
+  }
+}
+
 interface ProjectImageCarouselProps {
   images: string[];
   projectName: string;
@@ -11,10 +17,26 @@ const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images, pro
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    
+    if (window.gtag) {
+      window.gtag('event', 'project_image_navigation', {
+        event_category: 'engagement',
+        event_label: `${projectName}_next_image`,
+        value: 1
+      });
+    }
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    
+    if (window.gtag) {
+      window.gtag('event', 'project_image_navigation', {
+        event_category: 'engagement',
+        event_label: `${projectName}_prev_image`,
+        value: 1
+      });
+    }
   };
 
   return (
@@ -66,6 +88,25 @@ const formatDate = (dateString: string): string => {
 };
 
 const Projects = forwardRef<HTMLDivElement>((props, ref) => {
+  const handleGitHubClick = (projectName: string) => {
+    if (window.gtag) {
+      window.gtag('event', 'project_github_click', {
+        event_category: 'engagement',
+        event_label: projectName,
+        value: 1
+      });
+    }
+  };
+
+  const handleVideoPlay = (projectName: string) => {
+    if (window.gtag) {
+      window.gtag('event', 'project_video_play', {
+        event_category: 'engagement',
+        event_label: projectName,
+        value: 1
+      });
+    }
+  };
   const projects = [
     {
       name: 'Costar Automated Information Extraction',
@@ -173,6 +214,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="github-link"
+                      onClick={() => handleGitHubClick(project.name)}
                     >
                       🔗 View Code
                     </a>
@@ -195,6 +237,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
                       className="trailer-video"
                       preload="none"
                       playsInline
+                      onPlay={() => handleVideoPlay(project.name)}
                       onError={(e) => {
                         console.error('Video failed to load:', e);
                         e.currentTarget.style.display = 'none';
