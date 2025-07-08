@@ -1,8 +1,9 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, useRef, useEffect } from 'react';
 import './About.css';
 
 const About = forwardRef<HTMLDivElement>((props, ref) => {
   const [currentSection, setCurrentSection] = useState(0);
+  const textRef = useRef<HTMLDivElement>(null);
 
   const sections = [
     {
@@ -60,6 +61,32 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
     setCurrentSection((prev) => (prev - 1 + sections.length) % sections.length);
   };
 
+  useEffect(() => {
+    const textElement = textRef.current;
+    if (!textElement) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      const { scrollTop, scrollHeight, clientHeight } = textElement;
+      const isAtTop = scrollTop === 0;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+      // Prevent page scroll when scrolling within the text area
+      if (e.deltaY > 0 && isAtBottom) {
+        // Scrolling down at bottom - prevent default
+        e.preventDefault();
+      } else if (e.deltaY < 0 && isAtTop) {
+        // Scrolling up at top - prevent default
+        e.preventDefault();
+      }
+    };
+
+    textElement.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      textElement.removeEventListener('wheel', handleWheel);
+    };
+  }, [currentSection]);
+
   return (
     <section 
       className="about-section" 
@@ -71,7 +98,7 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         </div>
         
         <div className="about-content">
-          <div className="about-text">
+          <div className="about-text" ref={textRef}>
             <h3>{sections[currentSection].title}</h3>
             {sections[currentSection].content}
           </div>
