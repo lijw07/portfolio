@@ -36,8 +36,9 @@ export const useSectionTracking = (sectionName: string, elementRef: React.RefObj
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      const element = elementRef.current;
+      if (element) {
+        observer.unobserve(element);
       }
     };
   }, [sectionName, elementRef]);
