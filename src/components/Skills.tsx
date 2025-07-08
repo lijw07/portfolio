@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './Skills.css';
 
-const Skills: React.FC = () => {
+const Skills = forwardRef<HTMLDivElement>((props, ref) => {
   const skillCategories = [
     {
       category: 'Programming Languages',
@@ -26,7 +26,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <section className="skills-section">
+    <section className="skills-section" ref={ref}>
       <div className="container">
         <h2>Skills & Technologies</h2>
         <div className="skills-showcase">
@@ -49,6 +49,8 @@ const Skills: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Skills.displayName = 'Skills';
 
 export default Skills;

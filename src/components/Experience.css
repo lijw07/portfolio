@@ -1,15 +1,25 @@
 .experience-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #333;
+  background: 
+    radial-gradient(ellipse at top, #0a0015 0%, #050008 50%, #000000 100%),
+    radial-gradient(ellipse at bottom, #000018 0%, #000006 50%, #000000 100%),
+    linear-gradient(180deg, #000000 0%, #000000 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .experience-section h2 {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 60px;
-  color: #2c3e50;
+  color: white;
   font-weight: 300;
+  background: linear-gradient(45deg, #fff, #9370db, #4169e1, #00bfff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
 }
 
 .experience-showcase {
@@ -21,13 +31,15 @@
 }
 
 .experience-card {
-  background: white;
+  background: rgba(15, 15, 25, 1);
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
 }
 
 .experience-card::before {
@@ -37,12 +49,15 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, #9370db, #4169e1, #00bfff);
+  box-shadow: 0 0 10px rgba(147, 112, 219, 0.8);
 }
 
 .experience-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(25, 25, 40, 0.9);
 }
 
 .experience-header {
@@ -59,15 +74,27 @@
 .job-icon {
   width: 70px;
   height: 70px;
-  font-size: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3498db, #2ecc71);
-  border-radius: 50%;
+  background: white;
+  border-radius: 12px;
   box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
   transition: all 0.3s ease;
   flex-shrink: 0;
+  padding: 8px;
+}
+
+.company-logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 .experience-card:hover .job-icon {
@@ -81,7 +108,7 @@
 
 .job-details h3 {
   font-size: 1.9rem;
-  color: #2c3e50;
+  color: white;
   margin-bottom: 8px;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -89,7 +116,7 @@
 
 .company-info h4 {
   font-size: 1.4rem;
-  color: #3498db;
+  color: rgba(147, 112, 219, 0.9);
   margin-bottom: 10px;
   font-weight: 600;
   display: flex;
@@ -97,10 +124,6 @@
   gap: 8px;
 }
 
-.company-info h4::before {
-  content: '🏢';
-  font-size: 1rem;
-}
 
 .job-meta {
   display: flex;
@@ -109,7 +132,7 @@
 }
 
 .location {
-  color: #7f8c8d;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -122,7 +145,7 @@
 }
 
 .period {
-  color: #27ae60;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
   font-size: 0.9rem;
   display: flex;
@@ -150,26 +173,26 @@
   padding-left: 25px;
   margin-bottom: 12px;
   line-height: 1.6;
-  color: #555;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .experience-description li::before {
   content: '▸';
   position: absolute;
   left: 0;
-  color: #3498db;
+  color: rgba(147, 112, 219, 0.8);
   font-weight: bold;
   font-size: 1.1rem;
 }
 
 .experience-technologies {
-  border-top: 2px solid #f8f9fa;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
   padding-top: 20px;
 }
 
 .tech-label {
   font-weight: 600;
-  color: #2c3e50;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 15px;
   font-size: 1rem;
 }
@@ -181,18 +204,22 @@
 }
 
 .tech-badge {
-  background: linear-gradient(45deg, #3498db, #2ecc71);
-  color: white;
+  background: rgba(30, 30, 50, 0.8);
+  color: rgba(255, 255, 255, 0.95);
   padding: 8px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 500;
+  border: 1px solid rgba(147, 112, 219, 0.4);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 
 .tech-badge:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+  background: rgba(40, 40, 60, 0.9);
+  border-color: rgba(147, 112, 219, 0.6);
+  box-shadow: 0 5px 15px rgba(147, 112, 219, 0.3);
 }
 
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './Education.css';
 
-const Education: React.FC = () => {
+const Education = forwardRef<HTMLDivElement>((props, ref) => {
   const education = [
     {
       degree: 'M.S. Computer Science',
@@ -11,7 +11,7 @@ const Education: React.FC = () => {
       period: 'Jan 2025 – Expected 2027',
       gpa: '4.0',
       status: 'In Progress',
-      icon: '/GtIcon.png'
+      icon: process.env.PUBLIC_URL + '/GtIcon.png'
     },
     {
       degree: 'B.S. Computer Science',
@@ -21,7 +21,7 @@ const Education: React.FC = () => {
       period: 'Jan 2020 – May 2022',
       gpa: null,
       status: 'Completed',
-      icon: '/VCU.png'
+      icon: process.env.PUBLIC_URL + '/VCU.png'
     },
     {
       degree: 'A.S. Computer Science',
@@ -31,12 +31,12 @@ const Education: React.FC = () => {
       period: 'Aug 2018 – Dec 2019',
       gpa: null,
       status: 'Completed',
-      icon: '/NOVA.jpg'
+      icon: process.env.PUBLIC_URL + '/NOVA.jpg'
     }
   ];
 
   return (
-    <section className="education-section">
+    <section className="education-section" ref={ref}>
       <div className="container">
         <h2>Education</h2>
         <div className="education-grid">
@@ -72,6 +72,8 @@ const Education: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Education.displayName = 'Education';
 
 export default Education;

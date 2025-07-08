@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './Contact.css';
 
-const Contact: React.FC = () => {
+const Contact = forwardRef<HTMLDivElement>((props, ref) => {
   const contactMethods = [
     {
       icon: '📧',
@@ -11,14 +11,14 @@ const Contact: React.FC = () => {
       description: 'Send me an email for business inquiries'
     },
     {
-      icon: '/linkedin-icon.webp',
+      icon: process.env.PUBLIC_URL + '/linkedin-icon.webp',
       title: 'LinkedIn',
       value: 'Connect on LinkedIn',
       link: 'https://www.linkedin.com/in/jai-li-va/',
       description: 'Connect with me professionally'
     },
     {
-      icon: '/github-icon.png',
+      icon: process.env.PUBLIC_URL + '/github-icon.png',
       title: 'GitHub',
       value: 'github.com/lijw07',
       link: 'https://github.com/lijw07',
@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section className="contact-section">
+    <section className="contact-section" ref={ref}>
       <div className="container">
         <div className="contact-header">
           <h2>Let's Connect</h2>
@@ -45,10 +45,16 @@ const Contact: React.FC = () => {
               className="contact-card"
               target={method.link.startsWith('http') ? '_blank' : '_self'}
               rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
+              onDragStart={(e) => e.preventDefault()}
             >
               <div className="contact-icon">
                 {method.icon.startsWith('/') ? (
-                  <img src={method.icon} alt={`${method.title} icon`} />
+                  <img 
+                    src={method.icon} 
+                    alt={`${method.title} icon`}
+                    onDragStart={(e) => e.preventDefault()}
+                    draggable={false}
+                  />
                 ) : (
                   method.icon
                 )}
@@ -64,6 +70,8 @@ const Contact: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Contact.displayName = 'Contact';
 
 export default Contact;

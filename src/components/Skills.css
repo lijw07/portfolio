@@ -1,6 +1,9 @@
 .skills-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d2d5e 100%);
+  background: 
+    radial-gradient(ellipse at top, #0a0015 0%, #050008 50%, #000000 100%),
+    radial-gradient(ellipse at bottom, #000018 0%, #000006 50%, #000000 100%),
+    linear-gradient(180deg, #000000 0%, #000000 100%);
   color: white;
   position: relative;
   overflow: hidden;
@@ -25,11 +28,12 @@
   margin-bottom: 80px;
   color: white;
   font-weight: 700;
-  background: linear-gradient(45deg, #fff, #6a5acd, #483d8b);
+  background: linear-gradient(45deg, #fff, #9370db, #4169e1, #00bfff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  text-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
 }
 
 .skills-section h2::after {
@@ -40,8 +44,9 @@
   transform: translateX(-50%);
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg, #6a5acd, #483d8b);
+  background: linear-gradient(90deg, #9370db, #4169e1, #00bfff);
   border-radius: 2px;
+  box-shadow: 0 0 10px rgba(147, 112, 219, 0.8);
 }
 
 .skills-showcase {

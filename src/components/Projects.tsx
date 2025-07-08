@@ -1,7 +1,59 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
 import './Projects.css';
 
-const Projects: React.FC = () => {
+interface ProjectImageCarouselProps {
+  images: string[];
+  projectName: string;
+}
+
+const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images, projectName }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="project-images">
+      <div className="image-carousel">
+        <div className="image-container">
+          <img 
+            src={images[currentImageIndex]} 
+            alt={`${projectName} screenshot ${currentImageIndex + 1}`}
+            className="project-image"
+            loading="lazy"
+          />
+          
+          <button 
+            className="carousel-button prev" 
+            onClick={prevImage}
+            aria-label="Previous image"
+          >
+            ❮
+          </button>
+          
+          <button 
+            className="carousel-button next" 
+            onClick={nextImage}
+            aria-label="Next image"
+          >
+            ❯
+          </button>
+          
+          <div className="image-counter">
+            {currentImageIndex + 1} / {images.length}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Projects = forwardRef<HTMLDivElement>((props, ref) => {
   const projects = [
     {
       name: 'Costar Automated Information Extraction',
@@ -20,7 +72,7 @@ const Projects: React.FC = () => {
       description: 'Built a 3D puzzle-adventure game in Unity with 4 unique animal characters and custom mechanics. Programmed AI behaviors and NPC pathfinding using state machines and Unity Animator.<br/><i>Feel Free to request a demo build!</i>',
       tech: ['C#', 'Unity', 'AI Programming', 'State Machines', 'UI Systems', 'Game Design'],
       github: 'https://github.com/lijw07/Paws-and-Hooves',
-      trailer: '/Index_Paws_And_Hooves_Trailer.mp4',
+      trailer: process.env.PUBLIC_URL + '/Index_Paws_And_Hooves_Trailer.mp4',
       featured: true
     },
     {
@@ -35,6 +87,20 @@ const Projects: React.FC = () => {
       description: 'Developed a multi-tenant web application to centralize client/user data management from diverse sources. Connected up to 20 data sources/APIs in a single session, enabling secure CRUD operations.',
       tech: ['C#', 'ASP.NET Core MVC', 'EF Core', 'xUnit', 'React', 'Docker', 'AWS RDS', 'GCP', 'MySQL', 'SQL Server', 'MongoDB'],
       github: 'https://github.com/lijw07/Centralized-Application-Management-System',
+      images: [
+        process.env.PUBLIC_URL + '/1.png',
+        process.env.PUBLIC_URL + '/2.png',
+        process.env.PUBLIC_URL + '/3.png',
+        process.env.PUBLIC_URL + '/4.png',
+        process.env.PUBLIC_URL + '/5.png',
+        process.env.PUBLIC_URL + '/6.png',
+        process.env.PUBLIC_URL + '/7.png',
+        process.env.PUBLIC_URL + '/8.png',
+        process.env.PUBLIC_URL + '/9.png',
+        process.env.PUBLIC_URL + '/10.png',
+        process.env.PUBLIC_URL + '/11.png',
+        process.env.PUBLIC_URL + '/12.png'
+      ],
       featured: true
     },
     {
@@ -54,7 +120,7 @@ const Projects: React.FC = () => {
 
 
   return (
-    <section className="projects-section">
+    <section className="projects-section" ref={ref}>
       <div className="container">
         <h2>Featured Projects</h2>
         <div className="projects-timeline">
@@ -77,11 +143,25 @@ const Projects: React.FC = () => {
                 
                 {project.trailer && (
                   <div className="project-trailer">
-                    <video controls width="100%" className="trailer-video">
+                    <video 
+                      controls 
+                      width="100%" 
+                      className="trailer-video"
+                      preload="none"
+                      playsInline
+                      onError={(e) => {
+                        console.error('Video failed to load:', e);
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    >
                       <source src={project.trailer} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
+                )}
+                
+                {project.images && project.images.length > 0 && (
+                  <ProjectImageCarousel images={project.images} projectName={project.name} />
                 )}
                 
                 <div className="project-tech">
@@ -98,6 +178,8 @@ const Projects: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Projects.displayName = 'Projects';
 
 export default Projects;

@@ -1,6 +1,9 @@
 .contact-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #9b59b6 100%);
+  background: 
+    radial-gradient(ellipse at top, #0a0015 0%, #050008 50%, #000000 100%),
+    radial-gradient(ellipse at bottom, #000018 0%, #000006 50%, #000000 100%),
+    linear-gradient(180deg, #000000 0%, #000000 100%);
   color: white;
   position: relative;
   overflow: hidden;
@@ -28,8 +31,8 @@
   font-size: 3rem;
   margin-bottom: 20px;
   font-weight: 300;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, #fff, #ecf0f1);
+  text-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
+  background: linear-gradient(45deg, #fff, #9370db, #4169e1, #00bfff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -54,7 +57,7 @@
 }
 
 .contact-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 15, 25, 1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
@@ -64,12 +67,17 @@
   color: inherit;
   display: flex;
   align-items: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
   gap: 20px;
 }
 
 .contact-card:hover {
   transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(20, 20, 35, 1);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   border-color: rgba(255, 255, 255, 0.3);
 }
@@ -93,6 +101,12 @@
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: none;
 }
 
 .contact-icon img[src*="linkedin"] {
@@ -134,7 +148,7 @@
   text-align: center;
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 15, 25, 1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 25px;
