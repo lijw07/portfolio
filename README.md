@@ -174,7 +174,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - React team for the excellent framework
 - Create React App for the development setup
 - All the open-source contributors who made this project possible
-
----
-
-*Built with ❤️ using React & Unity*
