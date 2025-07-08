@@ -1,46 +1,183 @@
-# Getting Started with Create React App
+# Interactive Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A unique, interactive portfolio website built with React and Unity that showcases professional experience through an engaging 2D game experience alongside a traditional portfolio format.
 
-## Available Scripts
+## 🎮 Features
 
-In the project directory, you can run:
+### Interactive Game Experience
+- **Unity 2D Game Integration**: Explore the portfolio through an interactive game (desktop only)
+- **Quest-Based Navigation**: Complete objectives to discover different sections of the portfolio
+- **Game Controls**: WASD/Arrow keys for movement, F key for interaction, Shift for sprint
+- **Responsive Design**: Automatically adapts to screen size (game available on desktop, traditional portfolio on mobile)
 
-### `npm start`
+### Traditional Portfolio Sections
+- **About**: Personal introduction and background
+- **Education**: Academic qualifications and achievements
+- **Experience**: Professional work history
+- **Skills**: Technical competencies and tools
+- **Projects**: Showcase of development work
+- **Contact**: Professional contact information
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Technical Features
+- **Smooth Scrolling Navigation**: Seamless transitions between sections
+- **Mobile-Responsive Design**: Optimized for all screen sizes
+- **Unity WebGL Integration**: Embedded game experience with fallback options
+- **Progressive Enhancement**: Graceful degradation when Unity content fails to load
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **Frontend**: React 19.1.0 with TypeScript
+- **Game Engine**: Unity (WebGL build)
+- **Styling**: CSS3 with custom responsive design
+- **Build Tool**: React Scripts
+- **Testing**: Jest, React Testing Library
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Quick Start
 
-### `npm run build`
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/Interactive-Portfolio.git
+cd Interactive-Portfolio
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate to the React app:
+```bash
+cd portfolio-react
+```
 
-### `npm run eject`
+3. Install dependencies:
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Start the development server:
+```bash
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 📁 Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+Interactive-Portfolio/
+├── portfolio-react/
+│   ├── public/
+│   │   ├── unity-build/          # Unity WebGL build files
+│   │   ├── unity-template/       # Unity UI templates
+│   │   └── assets/               # Images and media
+│   ├── src/
+│   │   ├── components/           # React components
+│   │   │   ├── Header.tsx        # Navigation header
+│   │   │   ├── UnityGame.tsx     # Unity game integration
+│   │   │   ├── About.tsx         # About section
+│   │   │   ├── Education.tsx     # Education section
+│   │   │   ├── Experience.tsx    # Experience section
+│   │   │   ├── Skills.tsx        # Skills section
+│   │   │   ├── Projects.tsx      # Projects section
+│   │   │   └── Contact.tsx       # Contact section
+│   │   ├── App.tsx               # Main app component
+│   │   └── index.tsx             # Entry point
+│   ├── package.json
+│   └── tsconfig.json
+└── README.md
+```
 
-## Learn More
+## 🎯 Available Scripts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🎮 Game Experience
+
+The interactive game experience is designed for desktop users and includes:
+
+### Game Controls
+- **Movement**: WASD keys or Arrow keys
+- **Interaction**: F key to interact with objects and NPCs
+- **Sprint**: Hold Shift while moving for faster movement
+
+### Game Objectives
+- Take the train to the Hall of Portfolio
+- Visit the Education Wing to learn about academic background
+- Explore the Project Gallery to see featured work
+- Check the Skills Laboratory for technical demonstrations
+- Collect achievement badges in each section
+- Find hidden Easter eggs throughout the portfolio
+- Complete the portfolio tour for a special reward
+
+## 📱 Responsive Design
+
+The portfolio automatically adapts to different screen sizes:
+- **Desktop (≥1024px)**: Full interactive game experience + traditional portfolio
+- **Mobile/Tablet (<1024px)**: Traditional portfolio sections only
+
+## 🔧 Unity Integration
+
+The Unity game is integrated using WebGL builds with:
+- Custom loader implementation
+- Progress tracking during game loading
+- Error handling and fallback UI
+- Timeout protection (15-second loading limit)
+
+## 🎨 Customization
+
+To customize the portfolio:
+
+1. **Personal Information**: Update the content in each component file
+2. **Styling**: Modify the corresponding CSS files for each component
+3. **Unity Game**: Replace the Unity build files in `public/unity-build/`
+4. **Assets**: Add your images and media to the `public/` directory
+
+## 🌐 Deployment
+
+For production deployment:
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Deploy the `build/` directory to your preferred hosting service:
+   - Netlify
+   - Vercel
+   - GitHub Pages
+   - AWS S3 + CloudFront
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👨‍💻 Author
+
+**Jai Li**
+- Portfolio: [Your Portfolio URL]
+- GitHub: [Your GitHub Profile]
+- LinkedIn: [Your LinkedIn Profile]
+
+## 🙏 Acknowledgments
+
+- Unity Technologies for the game engine
+- React team for the excellent framework
+- Create React App for the development setup
+- All the open-source contributors who made this project possible
+
+---
+
+*Built with ❤️ using React & Unity*
