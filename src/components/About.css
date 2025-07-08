@@ -198,13 +198,14 @@
 .about-text {
   font-size: 1.1rem;
   line-height: 1.8;
-  overflow-y: auto;
-  padding-left: 20px;
+  overflow-y: scroll; /* Always show scrollbar */
+  padding-left: 32px; /* Reserve space for scrollbar + padding */
   padding-right: 8px;
   height: 100%;
   display: flex;
   flex-direction: column;
   direction: rtl;
+  scrollbar-gutter: stable;
 }
 
 .about-text > * {
