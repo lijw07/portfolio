@@ -10,6 +10,8 @@ declare global {
 // Track section views when they come into viewport
 export const useSectionTracking = (sectionName: string, elementRef: React.RefObject<HTMLElement | null>) => {
   useEffect(() => {
+    const element = elementRef.current;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,12 +33,11 @@ export const useSectionTracking = (sectionName: string, elementRef: React.RefObj
       }
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      const element = elementRef.current;
       if (element) {
         observer.unobserve(element);
       }
