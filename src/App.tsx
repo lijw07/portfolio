@@ -49,21 +49,10 @@ function App() {
   };
 
   const scrollToTop = () => {
-    // Try smooth scroll first
-    if (window.scrollTo) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
-    
-    // Fallback for browsers that don't support smooth behavior
-    setTimeout(() => {
-      if (window.pageYOffset > 0) {
-        window.scrollTo(0, 0);
-      }
-    }, 100);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
