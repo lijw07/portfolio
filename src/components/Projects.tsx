@@ -72,7 +72,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
       description: 'Built a 3D puzzle-adventure game in Unity with 4 unique animal characters and custom mechanics. Programmed AI behaviors and NPC pathfinding using state machines and Unity Animator.<br/><i>Feel Free to request a demo build!</i>',
       tech: ['C#', 'Unity', 'AI Programming', 'State Machines', 'UI Systems', 'Game Design'],
       github: 'https://github.com/lijw07/Paws-and-Hooves',
-      trailer: process.env.PUBLIC_URL + '/Index_Paws_And_Hooves_Trailer.mp4',
+      trailer: process.env.PUBLIC_URL + '/Index_Paws_And_Hooves_Trailer_compressed.mp4',
       featured: true
     },
     {
