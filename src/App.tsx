@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import UnityGame from './components/UnityGame';
+// import UnityGame from './components/UnityGame';
 import Header from './components/Header';
 import About from './components/About';
 import Education from './components/Education';
@@ -26,21 +26,21 @@ function App() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
-  const scrollToPortfolio = () => {
-    // Track Unity game skip
-    if (window.gtag) {
-      window.gtag('event', 'unity_game_skip', {
-        event_category: 'engagement',
-        event_label: 'skip_to_portfolio',
-        value: 1
-      });
-    }
+  // const scrollToPortfolio = () => {
+  //   // Track Unity game skip
+  //   if (window.gtag) {
+  //     window.gtag('event', 'unity_game_skip', {
+  //       event_category: 'engagement',
+  //       event_label: 'skip_to_portfolio',
+  //       value: 1
+  //     });
+  //   }
     
-    portfolioRef.current?.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
-  };
+  //   portfolioRef.current?.scrollIntoView({ 
+  //     behavior: 'smooth',
+  //     block: 'start'
+  //   });
+  // };
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
