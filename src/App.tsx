@@ -88,9 +88,9 @@ function App() {
 
   return (
     <div className="App">
-      <div ref={unityGameRef}>
+      {/* <div ref={unityGameRef}>
         <UnityGame onSkip={scrollToPortfolio} />
-      </div>
+      </div> */}
       <Header 
         onScrollToSection={scrollToSection}
         onScrollToTop={scrollToTop}
