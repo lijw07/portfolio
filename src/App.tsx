@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-// import UnityGame from './components/UnityGame';
+import React, { useRef, useEffect, useState } from 'react';
+import UnityGame from './components/UnityGame';
 import Header from './components/Header';
 import About from './components/About';
 import Education from './components/Education';
@@ -16,31 +16,27 @@ declare global {
 }
 
 function App() {
-  const unityGameRef = useRef<HTMLDivElement>(null);
-  const portfolioRef = useRef<HTMLDivElement>(null);
-  
   const aboutRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [showGame, setShowGame] = useState(true);
 
-  // const scrollToPortfolio = () => {
-  //   // Track Unity game skip
-  //   if (window.gtag) {
-  //     window.gtag('event', 'unity_game_skip', {
-  //       event_category: 'engagement',
-  //       event_label: 'skip_to_portfolio',
-  //       value: 1
-  //     });
-  //   }
-    
-  //   portfolioRef.current?.scrollIntoView({ 
-  //     behavior: 'smooth',
-  //     block: 'start'
-  //   });
-  // };
+  useEffect(() => {
+    const checkDevice = () => {
+      // Desktop is defined as screens larger than typical tablets (> 1024px)
+      setIsDesktop(window.innerWidth > 1024);
+    };
+
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
@@ -56,8 +52,6 @@ function App() {
           value: 1
         });
       }
-      
-      // All sections now have consistent padding, no special offset needed
       
       // Use scrollIntoView then adjust for header
       ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -86,33 +80,31 @@ function App() {
     });
   };
 
+  // If desktop and user wants game, show Unity game without header
+  if (isDesktop && showGame) {
+    return (
+      <div className="App game-mode">
+        <UnityGame onQuitGame={() => setShowGame(false)} />
+      </div>
+    );
+  }
+
+  // Show portfolio (for mobile/tablet OR desktop users who quit the game)
   return (
     <div className="App">
-      {/* <div ref={unityGameRef}>
-        <UnityGame onSkip={scrollToPortfolio} />
-      </div> */}
       <Header 
         onScrollToSection={scrollToSection}
         onScrollToTop={scrollToTop}
-        unityGameRef={unityGameRef}
         aboutRef={aboutRef}
         educationRef={educationRef}
         experienceRef={experienceRef}
         skillsRef={skillsRef}
         projectsRef={projectsRef}
         contactRef={contactRef}
+        showPlayGameButton={isDesktop && !showGame}
+        onPlayGame={() => setShowGame(true)}
       />
-      {/* <ScrollDebugger 
-        refs={[
-          { name: 'About', ref: aboutRef },
-          { name: 'Education', ref: educationRef },
-          { name: 'Experience', ref: experienceRef },
-          { name: 'Skills', ref: skillsRef },
-          { name: 'Projects', ref: projectsRef },
-          { name: 'Contact', ref: contactRef }
-        ]}
-      /> */}
-      <div ref={portfolioRef} className="portfolio-content">
+      <div className="portfolio-content">
         <About ref={aboutRef} />
         <Education ref={educationRef} />
         <Experience ref={experienceRef} />
@@ -121,7 +113,7 @@ function App() {
         <Contact ref={contactRef} />
         <footer className="footer">
           <div className="container">
-            <p>&copy; 2025 Portfolio by Jai Li. Built with React & Unity.</p>
+            <p>&copy; 2025 Portfolio by Jai Li. Built with React.</p>
           </div>
         </footer>
       </div>

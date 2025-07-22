@@ -4,25 +4,27 @@ import './Header.css';
 interface HeaderProps {
   onScrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void;
   onScrollToTop: () => void;
-  unityGameRef: React.RefObject<HTMLDivElement | null>;
   aboutRef: React.RefObject<HTMLDivElement | null>;
   educationRef: React.RefObject<HTMLDivElement | null>;
   experienceRef: React.RefObject<HTMLDivElement | null>;
   skillsRef: React.RefObject<HTMLDivElement | null>;
   projectsRef: React.RefObject<HTMLDivElement | null>;
   contactRef: React.RefObject<HTMLDivElement | null>;
+  showPlayGameButton?: boolean;
+  onPlayGame?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   onScrollToSection,
   onScrollToTop,
-  unityGameRef,
   aboutRef,
   educationRef,
   experienceRef,
   skillsRef,
   projectsRef,
-  contactRef
+  contactRef,
+  showPlayGameButton,
+  onPlayGame
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -53,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({
       <header className="header">
         <div className="container">
           <div className="header-content">
-            <button onClick={() => onScrollToSection(unityGameRef)} className="logo">Jai Li</button>
+            <button onClick={onScrollToTop} className="logo">Jai Li</button>
             
             {/* Desktop Navigation */}
             <nav className="navigation desktop-nav">
@@ -63,6 +65,11 @@ const Header: React.FC<HeaderProps> = ({
               <button onClick={() => onScrollToSection(skillsRef)} className="nav-link">Skills</button>
               <button onClick={() => onScrollToSection(projectsRef)} className="nav-link">Projects</button>
               <button onClick={() => onScrollToSection(contactRef)} className="nav-link">Contact</button>
+              {showPlayGameButton && (
+                <button onClick={onPlayGame} className="nav-link play-game-button">
+                  🎮 Play Game
+                </button>
+              )}
             </nav>
 
             {/* Hamburger Menu Button */}

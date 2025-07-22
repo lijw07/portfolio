@@ -53,6 +53,22 @@
   color: #3498db;
 }
 
+.play-game-button {
+  background: linear-gradient(45deg, #2ecc71, #27ae60);
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-left: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+}
+
+.play-game-button:hover {
+  background: linear-gradient(45deg, #27ae60, #229954);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+}
+
 .header .social-links {
   display: flex;
   gap: 15px;

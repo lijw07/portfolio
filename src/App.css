@@ -12,6 +12,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App.game-mode {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .portfolio-content {
   /* scroll-behavior is already set on html element */
 }
