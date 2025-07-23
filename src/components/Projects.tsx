@@ -131,7 +131,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
       github: 'https://github.com/lijw07/Paws-and-Hooves',
       trailer: process.env.PUBLIC_URL + '/Index_Paws_And_Hooves_Trailer_compressed.mp4',
       startDate: '2025-01',
-      endDate: '2022-06',
+      endDate: '2025-06',
       featured: true
     },
     {
@@ -183,15 +183,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref) => {
       startDate: '2025-04',
       endDate: '2025-07',
       featured: true
-    },
-    {
-    name: 'Discord-like Chat Application',
-    description: 'Development and planning is still in progress. This is a full-stack real-time chat application featuring user authentication, server/channel management, voice channels, direct messaging, file sharing, and role-based permissions. Built with modern technologies for scalability and performance.',
-    tech: ['Java', 'Electron', 'Spring Boot', 'Spring Security', 'Spring WebSocket', 'MongoDB', 'React', 'TypeScript', 'Socket.io', 'Redis', 'Docker', 'AWS S3', 'JWT', 'Maven', 'Node.js'],
-    startDate: 'Present',
-    endDate: 'Present',
-    featured: true
-  }
+    }
   ];
 
 
