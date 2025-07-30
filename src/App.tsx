@@ -7,7 +7,7 @@ interface AnimatedTextProps {
 
 const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
   const charCount = text.length;
-  const baseDelay = 0.008; // 8ms per character
+  const baseDelay = 0.008;
   
   return (
     <span className="project-text">
@@ -20,7 +20,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
             '--unhover-delay': `${(charCount - index - 1) * baseDelay}s`
           } as React.CSSProperties}
         >
-          {char}
+          {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </span>
@@ -46,8 +46,74 @@ const DirectionalButton: React.FC<DirectionalButtonProps> = ({ href, children, i
   );
 };
 
+interface TrailerModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  trailerUrl: string;
+}
+
+const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl }) => {
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      // Ensure body doesn't scroll when modal is open
+      document.body.style.overflow = 'hidden';
+      console.log('Modal opened, video URL:', trailerUrl);
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose, trailerUrl]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="video-container">
+          <video
+            controls
+            controlsList="nodownload noplaybackrate"
+            playsInline
+            disablePictureInPicture
+            preload="metadata"
+            className="trailer-video"
+            src={trailerUrl}
+            onLoadedMetadata={(e) => {
+              const video = e.target as HTMLVideoElement;
+              video.volume = 0.05; // Set volume to 5%
+              console.log('Video metadata loaded successfully');
+            }}
+            onCanPlay={(e) => {
+              const video = e.target as HTMLVideoElement;
+              console.log('Video can play, starting...');
+              video.play().catch(err => {
+                console.log('Autoplay blocked, user needs to click play:', err);
+              });
+            }}
+            onError={(e) => {
+              const video = e.target as HTMLVideoElement;
+              console.error('Video load failed for:', video.src);
+              console.error('Error:', video.error);
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   const [displayText, setDisplayText] = useState('');
+  const [showTrailer, setShowTrailer] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -66,7 +132,7 @@ function App() {
       } else {
         clearInterval(typingInterval);
       }
-    }, 100); // Adjust speed here (milliseconds per character)
+    }, 200); // Adjust speed here (milliseconds per character)
     
     return () => clearInterval(typingInterval);
   }, []);
@@ -136,8 +202,21 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="https://github.com/lijw07/paws-and-hooves" target="_blank" rel="noopener noreferrer">
-              <AnimatedText text="Paws and Hooves" />
+            <a 
+              href="https://github.com/lijw07/paws-and-hooves" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <span 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowTrailer(true);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <AnimatedText text="Paws and Hooves (Click title for trailer)" />
+              </span>
             </a>
           </li>
           <li>
@@ -151,13 +230,13 @@ function App() {
             </a>
           </li>
           <li>
-            <span className="no-link">Automated Information Extraction for Multilingual Lease Documents</span>
+            <span className="no-link"><AnimatedText text="Automated Information Extraction for Multilingual Lease Documents (Private Repo)" /></span>
           </li>
           <li>
-            <span className="no-link">Enterprise CMS Modules for Client-Specific Solutions</span>
+            <span className="no-link"><AnimatedText text="Enterprise CMS Modules for Client-Specific Solutions (Private Repo)" /></span>
           </li>
           <li>
-            <span className="no-link">Regurgitate</span>
+            <span className="no-link"><AnimatedText text="Regurgitate (Private Repo)" /></span>
           </li>
           <li>
             <a href="https://ads.google.com/intl/en_us/start/overview-ha/?subid=us-en-ha-awa-bk-c-000!o3~Cj0KCQjwhafEBhCcARIsAEGZEKJAul66GgkOSXDWPOurdERZvtxa--rq6w0ws_X-sax9HlMqHvwRC-4aAmcrEALw_wcB~137408560317~kwd-94527731~17414652933~725145496224&gad_source=1&gad_campaignid=17414652933&gclid=Cj0KCQjwhafEBhCcARIsAEGZEKJAul66GgkOSXDWPOurdERZvtxa--rq6w0ws_X-sax9HlMqHvwRC-4aAmcrEALw_wcB&gclsrc=aw.ds" target="_blank" rel="noopener noreferrer">
@@ -262,6 +341,11 @@ function App() {
           </DirectionalButton>
         </div>
       </section>
+      <TrailerModal 
+        isOpen={showTrailer} 
+        onClose={() => setShowTrailer(false)}
+        trailerUrl={`${process.env.PUBLIC_URL}/Index_Paws_And_Hooves_Trailer_compressed.mp4`}
+      />
     </div>
   );
 }
