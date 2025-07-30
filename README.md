@@ -143,16 +143,3 @@ Custom modal for video playback with:
 
 ### DirectionalButton Component
 Styled link component for the Connect section with consistent hover effects.
-
-## 👨‍💻 Author
-
-**Jai Li**
-- Agile Software Engineer
-- Indie Game Developer
-- Master's Student at Georgia Tech
-
-## 🙏 Acknowledgments
-
-- React team for the excellent framework
-- Create React App for the development setup
-- Google Fonts for the Pixelify Sans typeface

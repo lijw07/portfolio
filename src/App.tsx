@@ -336,9 +336,9 @@ function App() {
           <DirectionalButton href="https://stackoverflow.com/users/10416064/crust01">
             Stackoverflow
           </DirectionalButton>
-          <DirectionalButton href="mailto:Tommyli874@gmail.com" isEmail={true}>
-            Email
-          </DirectionalButton>
+          <span className="connect-link selectable">
+            <span>Tommyli874@gmail.com</span>
+          </span>
         </div>
       </section>
       <TrailerModal 
