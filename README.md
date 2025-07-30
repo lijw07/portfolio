@@ -1,36 +1,43 @@
-# Interactive Portfolio
+# Portfolio - Jai Li
 
-A unique, interactive portfolio website built with React and Unity that showcases professional experience through an engaging 2D game experience alongside a traditional portfolio format.
+A modern, minimalist portfolio website showcasing my software engineering experience and projects with a unique pixel art aesthetic.
 
-## 🎮 Features
+## 🎨 Features
 
-### Interactive Game Experience
-- **Unity 2D Game Integration**: Explore the portfolio through an interactive game (desktop only)
-- **Quest-Based Navigation**: Complete objectives to discover different sections of the portfolio
-- **Game Controls**: WASD/Arrow keys for movement, F key for interaction, Shift for sprint
-- **Responsive Design**: Automatically adapts to screen size (game available on desktop, traditional portfolio on mobile)
+### Visual Design
+- **Pixel Art Theme**: Custom 'Pixelify Sans' font for a retro aesthetic
+- **Dark/Light Mode**: Toggle between themes with smooth transitions
+- **Animated Typography**: Character-by-character hover animations on project titles
+- **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices
 
-### Traditional Portfolio Sections
-- **About**: Personal introduction and background
-- **Education**: Academic qualifications and achievements
-- **Experience**: Professional work history
-- **Skills**: Technical competencies and tools
-- **Projects**: Showcase of development work
-- **Contact**: Professional contact information
+### Interactive Elements
+- **Typing Animation**: Portfolio title types out on page load
+- **Video Trailer Modal**: Click on "Paws and Hooves" to view the game trailer
+- **Smooth Scrolling**: Seamless navigation throughout the page
+- **Hover Effects**: Interactive animations on all links and buttons
+
+### Content Sections
+- **About**: Personal introduction as an agile software engineer
+- **Education**: Academic background from NVCC, VCU, and Georgia Tech
+- **Experience**: Current role as Software Engineer at Brightspot
+- **Skills**: Technical stack including Java, C#, Unity, cloud services, and more
+- **Selected Work**: 20+ projects including personal projects and enterprise solutions
+- **Connect**: Direct links to GitHub, LinkedIn, LeetCode, Stack Overflow, and email
 
 ### Technical Features
-- **Smooth Scrolling Navigation**: Seamless transitions between sections
-- **Mobile-Responsive Design**: Optimized for all screen sizes
-- **Unity WebGL Integration**: Embedded game experience with fallback options
-- **Progressive Enhancement**: Graceful degradation when Unity content fails to load
+- **Performance Optimized**: Fast loading with optimized assets
+- **Accessibility**: Semantic HTML and ARIA labels where needed
+- **SEO Ready**: Proper meta tags and structured content
+- **Text Selection Disabled**: Clean viewing experience with intentional UI/UX choices
+- **Video Controls**: Custom video player with volume preset and restricted controls
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 19.1.0 with TypeScript
-- **Game Engine**: Unity (WebGL build)
-- **Styling**: CSS3 with custom responsive design
-- **Build Tool**: React Scripts
-- **Testing**: Jest, React Testing Library
+- **Styling**: Custom CSS with CSS Variables for theming
+- **Build Tool**: Create React App
+- **Deployment**: GitHub Pages
+- **Assets**: Compressed MP4 video, optimized images
 
 ## 🚀 Quick Start
 
@@ -42,135 +49,110 @@ A unique, interactive portfolio website built with React and Unity that showcase
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/Interactive-Portfolio.git
-cd Interactive-Portfolio
+git clone https://github.com/lijw07/portfolio.git
+cd portfolio
 ```
 
-2. Navigate to the React app:
-```bash
-cd portfolio-react
-```
-
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm start
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## 📁 Project Structure
 
 ```
-Interactive-Portfolio/
-├── portfolio-react/
-│   ├── public/
-│   │   ├── unity-build/          # Unity WebGL build files
-│   │   ├── unity-template/       # Unity UI templates
-│   │   └── assets/               # Images and media
-│   ├── src/
-│   │   ├── components/           # React components
-│   │   │   ├── Header.tsx        # Navigation header
-│   │   │   ├── UnityGame.tsx     # Unity game integration
-│   │   │   ├── About.tsx         # About section
-│   │   │   ├── Education.tsx     # Education section
-│   │   │   ├── Experience.tsx    # Experience section
-│   │   │   ├── Skills.tsx        # Skills section
-│   │   │   ├── Projects.tsx      # Projects section
-│   │   │   └── Contact.tsx       # Contact section
-│   │   ├── App.tsx               # Main app component
-│   │   └── index.tsx             # Entry point
-│   ├── package.json
-│   └── tsconfig.json
+portfolio/
+├── public/
+│   ├── Index_Paws_And_Hooves_Trailer_compressed.mp4  # Game trailer
+│   ├── favicon.ico
+│   └── index.html
+├── src/
+│   ├── App.tsx           # Main component with all sections
+│   ├── App.css           # All styling including themes
+│   ├── index.tsx         # Entry point
+│   └── index.css         # Minimal global styles
+├── package.json
+├── tsconfig.json
 └── README.md
 ```
 
 ## 🎯 Available Scripts
 
 - `npm start` - Runs the app in development mode
-- `npm test` - Launches the test runner
 - `npm run build` - Builds the app for production
-- `npm run eject` - Ejects from Create React App (one-way operation)
-
-## 🎮 Game Experience
-
-The interactive game experience is designed for desktop users and includes:
-
-### Game Controls
-- **Movement**: WASD keys or Arrow keys
-- **Interaction**: F key to interact with objects and NPCs
-- **Sprint**: Hold Shift while moving for faster movement
-
-### Game Objectives
-- Take the train to the Hall of Portfolio
-- Visit the Education Wing to learn about academic background
-- Explore the Project Gallery to see featured work
-- Check the Skills Laboratory for technical demonstrations
-- Collect achievement badges in each section
-- Find hidden Easter eggs throughout the portfolio
-- Complete the portfolio tour for a special reward
-
-## 📱 Responsive Design
-
-The portfolio automatically adapts to different screen sizes:
-- **Desktop (≥1024px)**: Full interactive game experience + traditional portfolio
-- **Mobile/Tablet (<1024px)**: Traditional portfolio sections only
-
-## 🔧 Unity Integration
-
-The Unity game is integrated using WebGL builds with:
-- Custom loader implementation
-- Progress tracking during game loading
-- Error handling and fallback UI
-- Timeout protection (15-second loading limit)
+- `npm test` - Launches the test runner
+- `npm run deploy` - Deploys to GitHub Pages
 
 ## 🎨 Customization
 
-To customize the portfolio:
+### Theme Colors
+The portfolio uses CSS variables for easy theme customization:
+```css
+/* Light theme (default) */
+--bg-color: #fff;
+--text-color: #333;
 
-1. **Personal Information**: Update the content in each component file
-2. **Styling**: Modify the corresponding CSS files for each component
-3. **Unity Game**: Replace the Unity build files in `public/unity-build/`
-4. **Assets**: Add your images and media to the `public/` directory
+/* Dark theme */
+--bg-color: #1a1a1a;
+--text-color: #e0e0e0;
+```
 
-## 🌐 Deployment
+### Typography
+- Primary font: 'Pixelify Sans' (Google Fonts)
+- Responsive font sizing using `clamp()`
+- Custom animations on hover
 
-For production deployment:
+## 📱 Responsive Breakpoints
+
+- Desktop: ≥968px (full layout with side-by-side sections)
+- Tablet/Mobile: <968px (stacked layout with adjusted spacing)
+
+## 🚀 Deployment
+
+The site is configured for GitHub Pages deployment:
 
 1. Build the project:
 ```bash
 npm run build
 ```
 
-2. Deploy the `build/` directory to your preferred hosting service:
-   - Netlify
-   - Vercel
-   - GitHub Pages
-   - AWS S3 + CloudFront
+2. Deploy to GitHub Pages:
+```bash
+npm run deploy
+```
 
-## 🤝 Contributing
+## 🔧 Key Components
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### AnimatedText Component
+Splits text into individual characters for hover animations with proper space handling.
 
-## 📄 License
+### TrailerModal Component
+Custom modal for video playback with:
+- Click-outside-to-close functionality
+- Escape key support
+- Volume preset to 5%
+- Picture-in-picture disabled
+- Download option removed
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+### DirectionalButton Component
+Styled link component for the Connect section with consistent hover effects.
 
 ## 👨‍💻 Author
 
 **Jai Li**
+- Agile Software Engineer
+- Indie Game Developer
+- Master's Student at Georgia Tech
 
 ## 🙏 Acknowledgments
 
-- Unity Technologies for the game engine
 - React team for the excellent framework
 - Create React App for the development setup
-- All the open-source contributors who made this project possible
+- Google Fonts for the Pixelify Sans typeface
