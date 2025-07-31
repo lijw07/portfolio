@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import SpriteAnimation from './components/SpriteAnimation';
 
 interface AnimatedTextProps {
   text: string;
@@ -119,9 +120,9 @@ function App() {
     if (savedTheme === 'light' || savedTheme === 'dark') {
       return savedTheme;
     }
-    return 'light'; // Default to light theme
+    return 'light';
   });
-  const fullText = 'Portfolio';
+  const fullText = 'Portfolio....';
   
   useEffect(() => {
     let currentIndex = 0;
@@ -153,6 +154,9 @@ function App() {
       </button>
       <div className="hero-section">
         <h1>{displayText}<span className="cursor">|</span></h1>
+        <div className="sprite-animation-container">
+          <SpriteAnimation />
+        </div>
       </div>
       
       <section className="about-section standalone">
