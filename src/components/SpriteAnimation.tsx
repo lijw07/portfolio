@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo, useCallback } from 'react';
 import * as PIXI from 'pixi.js';
 
 const SpriteAnimation: React.FC = () => {
@@ -8,7 +8,7 @@ const SpriteAnimation: React.FC = () => {
   const mountedRef = useRef<boolean>(false);
   const spriteTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
-  const spriteConfigs: Record<string, { cellSize: number; idleEndRow: number; yOffset: number }> = {
+  const spriteConfigs = useMemo<Record<string, { cellSize: number; idleEndRow: number; yOffset: number }>>(() => ({
     'Spearman.png': { cellSize: 48, idleEndRow: 6, yOffset: 75 },
     'Swordman.png': { cellSize: 48, idleEndRow: 6, yOffset: 75 },
     'Archer.png': { cellSize: 48, idleEndRow: 6, yOffset: 75 },
@@ -23,9 +23,9 @@ const SpriteAnimation: React.FC = () => {
     'Orc_Peon.png': { cellSize: 32, idleEndRow: 6, yOffset: 83 },
     'Angel_1.png': { cellSize: 64, idleEndRow: 6, yOffset: 67 },
     'Angel_2.png': { cellSize: 64, idleEndRow: 6, yOffset: 67 }
-  };
+  }), []);
 
-  const initializeAnimation = () => {
+  const initializeAnimation = useCallback(() => {
     if (!pixiContainer.current || !mountedRef.current) return;
 
     // Clear any pending sprite timeouts
@@ -231,14 +231,15 @@ const SpriteAnimation: React.FC = () => {
         }
       }
     };
-  };
+  }, [spriteConfigs]);
 
   useEffect(() => {
+    const pixiContainerEl = pixiContainer.current;
     mountedRef.current = true;
     
     // Always clear any existing content first
-    if (pixiContainer.current) {
-      pixiContainer.current.innerHTML = '';
+    if (pixiContainerEl) {
+      pixiContainerEl.innerHTML = '';
     }
     
     // Small delay to ensure cleanup happens first
@@ -274,11 +275,11 @@ const SpriteAnimation: React.FC = () => {
         appRef.current.destroy(true, { children: true, texture: true });
         appRef.current = null;
       }
-      if (pixiContainer.current) {
-        pixiContainer.current.innerHTML = '';
+      if (pixiContainerEl) {
+        pixiContainerEl.innerHTML = '';
       }
     };
-  }, []);
+  }, [initializeAnimation]);
 
   return <div ref={pixiContainer} style={{ width: '100%', height: '150px', display: 'block' }} />;
 };
