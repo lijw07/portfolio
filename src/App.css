@@ -21,7 +21,6 @@ body {
   user-select: none;
 }
 
-/* Allow selection for specific elements */
 .selectable {
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -29,7 +28,6 @@ body {
   user-select: text;
 }
 
-/* Theme toggle button */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -50,7 +48,6 @@ body {
   opacity: 0.7;
 }
 
-/* Dark mode styles */
 [data-theme="dark"] body {
   background-color: black;
   color: white;
@@ -73,10 +70,9 @@ h1 {
   font-weight: normal;
   text-align: center;
   padding: 0 20px;
-  min-height: 1.2em; /* Prevents layout shift during typing */
+  min-height: 1.2em;
 }
 
-/* Cursor styling */
 .cursor {
   display: inline-block;
   animation: blink 1s infinite;
@@ -88,7 +84,6 @@ h1 {
   51%, 100% { opacity: 0; }
 }
 
-/* Responsive breakpoints */
 @media (max-width: 768px) {
   h1 {
     font-size: clamp(2.5rem, 12vw, 6rem);
@@ -101,7 +96,6 @@ h1 {
   }
 }
 
-/* Content Container for side-by-side layout */
 .content-container {
   display: flex;
   width: 100%;
@@ -109,7 +103,6 @@ h1 {
   justify-content: space-between;
 }
 
-/* About Me Section */
 .about-section {
   flex: 0 1 55%;
   text-align: left;
@@ -151,7 +144,6 @@ h1 {
   margin-bottom: 2rem;
 }
 
-/* Skills Section */
 .skills-section {
   flex: 0 1 50%;
   text-align: left;
@@ -178,7 +170,6 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* Education Section */
 .education-section {
   width: 100%;
   padding: 20px 60px 80px 60px;
@@ -205,7 +196,6 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* Experience Section */
 .experience-section {
   flex: 0 1 55%;
   text-align: left;
@@ -243,7 +233,6 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* Projects Section */
 .projects-section {
   width: 100%;
   padding: 20px 60px 20px 60px;
@@ -291,7 +280,8 @@ h1 {
   z-index: 2;
 }
 
-.projects-section li a .char {
+.projects-section li a .char,
+.projects-section li .no-link .char {
   display: inline-block;
   color: inherit;
   transition: color 0.15s ease;
@@ -322,6 +312,15 @@ h1 {
 .projects-section li .no-link {
   cursor: default;
   opacity: 0.8;
+  font-size: inherit;
+}
+
+.projects-section li .no-link .project-text {
+  font-size: inherit;
+}
+
+.projects-section li .no-link .project-text .char {
+  font-size: inherit;
 }
 
 .projects-section li::after {
@@ -348,7 +347,6 @@ h1 {
   border-bottom: none;
 }
 
-/* Dark mode hover color */
 [data-theme="dark"] .projects-section li:has(a)::before {
   background-color: white;
 }
@@ -361,7 +359,6 @@ h1 {
   transition-delay: 0.3s;
 }
 
-/* Connect Section */
 .connect-section {
   width: 100%;
   padding: 0 60px 80px 60px;
@@ -426,12 +423,10 @@ h1 {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Light mode specific hover */
 [data-theme="light"] .connect-link:hover span {
   color: white;
 }
 
-/* Dark mode specific hover */
 [data-theme="dark"] .connect-link:hover span {
   color: black;
 }
@@ -439,7 +434,6 @@ h1 {
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
-/* Dark mode for sections */
 [data-theme="dark"] .about-section,
 [data-theme="dark"] .skills-section,
 [data-theme="dark"] .education-section,
@@ -449,7 +443,6 @@ h1 {
   color: white;
 }
 
-/* Modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -548,7 +541,6 @@ h1 {
   background-color: #000;
 }
 
-/* Responsive adjustments */
 @media (max-width: 968px) {
   .theme-toggle {
     top: 15px;

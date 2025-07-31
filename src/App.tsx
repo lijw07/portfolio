@@ -63,7 +63,6 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
     
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      // Ensure body doesn't scroll when modal is open
       document.body.style.overflow = 'hidden';
       console.log('Modal opened, video URL:', trailerUrl);
     }
@@ -90,7 +89,7 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
             src={trailerUrl}
             onLoadedMetadata={(e) => {
               const video = e.target as HTMLVideoElement;
-              video.volume = 0.05; // Set volume to 5%
+              video.volume = 0.05;
               console.log('Video metadata loaded successfully');
             }}
             onCanPlay={(e) => {
@@ -133,7 +132,7 @@ function App() {
       } else {
         clearInterval(typingInterval);
       }
-    }, 200); // Adjust speed here (milliseconds per character)
+    }, 200);
     
     return () => clearInterval(typingInterval);
   }, []);

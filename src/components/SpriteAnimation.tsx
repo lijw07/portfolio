@@ -28,7 +28,6 @@ const SpriteAnimation: React.FC = () => {
   const initializeAnimation = useCallback(() => {
     if (!pixiContainer.current || !mountedRef.current) return;
 
-    // Clear any pending sprite timeouts
     spriteTimeoutsRef.current.forEach(timeout => clearTimeout(timeout));
     spriteTimeoutsRef.current = [];
 
@@ -183,13 +182,12 @@ const SpriteAnimation: React.FC = () => {
           'Angel_2.png'
         ];
         
-        // Shuffle and select sprites based on maxSprites
         const shuffledSprites = [...allSprites].sort(() => Math.random() - 0.5);
         const selectedSprites = shuffledSprites.slice(0, maxSprites);
         
         let totalDelay = 0;
         for (let i = 0; i < selectedSprites.length; i++) {
-          const randomDelay = Math.random() * 750; // 0-750ms random delay
+          const randomDelay = Math.random() * 750;
           totalDelay += randomDelay;
           await createSprite(selectedSprites[i], totalDelay, i);
         }
@@ -198,9 +196,18 @@ const SpriteAnimation: React.FC = () => {
       loadSprites();
     });
 
+    let lastInnerWidth = window.innerWidth;
+    
     const handleResize = () => {
       if (appRef.current) {
         const newWidth = window.innerWidth;
+        
+        if (Math.abs(newWidth - lastInnerWidth) < 10) {
+          return;
+        }
+        
+        lastInnerWidth = newWidth;
+        
         let newHeight = 150;
         
         if (newWidth >= 1920) {
@@ -237,24 +244,32 @@ const SpriteAnimation: React.FC = () => {
     const pixiContainerEl = pixiContainer.current;
     mountedRef.current = true;
     
-    // Always clear any existing content first
     if (pixiContainerEl) {
       pixiContainerEl.innerHTML = '';
     }
     
-    // Small delay to ensure cleanup happens first
     const initTimeout = setTimeout(() => {
       initializeAnimation();
     }, 0);
 
+    let lastWidth = window.innerWidth;
+
     const handleResize = () => {
+      const currentWidth = window.innerWidth;
+      
+      if (Math.abs(currentWidth - lastWidth) < 10) {
+        return;
+      }
+      
+      lastWidth = currentWidth;
+      
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
       }
 
       resizeTimeoutRef.current = setTimeout(() => {
         initializeAnimation();
-      }, 300); // 300ms debounce
+      }, 300);
     };
 
     window.addEventListener('resize', handleResize);
@@ -263,7 +278,6 @@ const SpriteAnimation: React.FC = () => {
       mountedRef.current = false;
       window.removeEventListener('resize', handleResize);
       
-      // Clear all timeouts
       clearTimeout(initTimeout);
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
