@@ -101,12 +101,160 @@ body {
   transform: translateY(0);
 }
 
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.about-header {
+  margin-bottom: 2rem;
+}
+
+.about-header h2 {
+  margin-bottom: 0;
+}
+
+.coin-animation {
+  display: inline-block;
+  flex-shrink: 0;
+  transform: translateY(-36px);
+}
+
+.coin-sprite {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 .hero-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.clouds-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.cloud {
+  position: absolute;
+}
+
+.cloud.from-left {
+  animation: floatCloudLeft linear infinite;
+}
+
+.cloud.from-right {
+  animation: floatCloudRight linear infinite;
+}
+
+@keyframes floatCloudLeft {
+  from {
+    left: -200px;
+  }
+  to {
+    left: calc(100% + 200px);
+  }
+}
+
+@keyframes floatCloudRight {
+  from {
+    right: -200px;
+  }
+  to {
+    right: calc(100% + 200px);
+  }
+}
+
+.cloud-sprite {
+  width: 150px;
+  height: auto;
+  opacity: 0.7;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+[data-theme="dark"] .cloud-sprite {
+  opacity: 0.9;
+}
+
+.birds-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.bird {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  animation-fill-mode: forwards;
+}
+
+.bird.from-left {
+  animation: flyBirdLeft linear forwards;
+}
+
+.bird.from-right {
+  animation: flyBirdRight linear forwards;
+}
+
+.bird.hovering {
+  animation: hoverBird linear !important;
+}
+
+@keyframes flyBirdLeft {
+  from {
+    left: -60px;
+  }
+  to {
+    left: calc(100% + 60px);
+  }
+}
+
+@keyframes flyBirdRight {
+  from {
+    left: calc(100% + 60px);
+  }
+  to {
+    left: -60px;
+  }
+}
+
+@keyframes hoverBird {
+  0% {
+    left: -60px;
+  }
+  40% {
+    left: 45%;
+  }
+  60% {
+    left: 45%;
+  }
+  100% {
+    left: calc(100% + 60px);
+  }
 }
 
 h1 {
@@ -115,6 +263,8 @@ h1 {
   text-align: center;
   padding: 0 20px;
   min-height: 1.2em;
+  position: relative;
+  z-index: 2;
 }
 
 .cursor {
@@ -167,6 +317,7 @@ h1 {
 .about-section.standalone {
   width: 100%;
   padding: 80px 60px 20px 60px;
+  position: relative;
 }
 
 .about-section.standalone::after {
@@ -187,7 +338,7 @@ h1 {
   font-size: clamp(3rem, 6vw, 4.5rem);
   margin-bottom: 2rem;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   display: inline-block;
   border-bottom: 3px solid currentColor;
 }
@@ -196,6 +347,27 @@ h1 {
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.8;
   margin-bottom: 2rem;
+}
+
+.about-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-candle {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  top: 180px;
+  right: 400px;
 }
 
 .skills-section {
@@ -208,7 +380,7 @@ h1 {
   font-size: clamp(3rem, 6vw, 4.5rem);
   margin-bottom: 2rem;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   display: inline-block;
   border-bottom: 3px solid currentColor;
 }
@@ -234,7 +406,7 @@ h1 {
   font-size: clamp(3rem, 6vw, 4.5rem);
   margin-bottom: 2rem;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   display: inline-block;
   border-bottom: 3px solid currentColor;
 }
@@ -271,7 +443,7 @@ h1 {
   font-size: clamp(3rem, 6vw, 4.5rem);
   margin-bottom: 2rem;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   display: inline-block;
   border-bottom: 3px solid currentColor;
 }
@@ -294,16 +466,69 @@ h1 {
 }
 
 .projects-section.professional-work {
-  padding-top: 60px;
+  padding-top: 20px;
 }
 
 .projects-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
   margin-bottom: 2rem;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   display: inline-block;
   border-bottom: 3px solid currentColor;
+}
+
+.projects-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.projects-header h2 {
+  margin-bottom: 0;
+}
+
+.floating-exp-container {
+  position: relative;
+  width: 150px;
+  height: 120px;
+  transform: translateY(-20px);
+}
+
+.floating-exp-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: floatUp 2s ease-out;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+}
+
+.exp-sprite {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.exp-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .projects-section ul {
@@ -421,13 +646,20 @@ h1 {
   width: 100%;
   padding: 0 60px 80px 60px;
   text-align: center;
+  position: relative;
+}
+
+.connect-section > h2,
+.connect-section > .connect-links {
+  position: relative;
+  z-index: 1;
 }
 
 .connect-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
   margin-bottom: 2rem;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   display: inline-block;
   border-bottom: 3px solid currentColor;
 }
@@ -499,6 +731,118 @@ h1 {
 [data-theme="dark"] .projects-section,
 [data-theme="dark"] .connect-section {
   color: white;
+}
+
+.worms-section {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.worms-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.worm {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  animation-fill-mode: forwards;
+  bottom: 0;
+}
+
+.worm.from-left {
+  animation: crawlWormLeft linear forwards;
+  animation-fill-mode: forwards;
+}
+
+.worm.from-right {
+  animation: crawlWormRight linear forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes crawlWormLeft {
+  from {
+    left: -60px;
+  }
+  to {
+    left: calc(100% + 60px);
+  }
+}
+
+@keyframes crawlWormRight {
+  from {
+    left: calc(100% + 60px);
+  }
+  to {
+    left: -60px;
+  }
+}
+
+.servers-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 8rem;
+  gap: 4rem;
+}
+
+.server {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.server-center {
+  width: 140px;
+  height: 140px;
+  margin-bottom: -20px;
+}
+
+.forest-container {
+  position: absolute;
+  bottom: -250px;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.forest-tree {
+  position: absolute;
+  bottom: 0;
+  width: 80px;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  transform-origin: bottom center;
+  animation: sway 4s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-1deg) translateX(0) var(--tree-scale);
+  }
+  50% {
+    transform: rotate(1deg) translateX(2px) var(--tree-scale);
+  }
 }
 
 .modal-overlay {
@@ -596,6 +940,15 @@ h1 {
 }
 
 @media (max-width: 968px) {
+  .coin-sprite {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .coin-animation {
+    transform: translateY(-28px);
+  }
+  
   .theme-container {
     width: 240px;
     height: 240px;
@@ -615,6 +968,17 @@ h1 {
   .theme-text-button {
     font-size: 1.2rem;
     padding: 4px 8px;
+  }
+  
+  .about-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .about-candle {
+    width: 64px;
+    height: 64px;
+    margin-top: 0;
   }
   .content-container {
     flex-direction: column;
@@ -662,9 +1026,33 @@ h1 {
   .connect-links {
     gap: 20px;
   }
+  
+  .servers-container {
+    gap: 2rem;
+  }
+  
+  .server {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .server-center {
+    width: 100px;
+    height: 100px;
+    margin-bottom: -15px;
+  }
 }
 
 @media (max-width: 480px) {
+  .coin-sprite {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .coin-animation {
+    transform: translateY(-20px);
+  }
+  
   .theme-container {
     width: 180px;
     height: 180px;
@@ -717,5 +1105,91 @@ h1 {
   .connect-link {
     padding: 8px 16px;
     font-size: clamp(1.2rem, 3vw, 1.5rem);
+  }
+}
+
+.dj-animation-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.dj-sprite {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  z-index: 2;
+}
+
+.dj-laser {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  bottom: 20px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.laser-behind {
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.laser-p {
+  left: calc(50% - 450px);
+}
+
+.laser-dots {
+  left: calc(50% + 180px);
+}
+
+@media (max-width: 968px) {
+  .dj-sprite {
+    width: 96px;
+    height: 96px;
+  }
+  
+  .dj-laser {
+    width: 192px;
+    height: 192px;
+  }
+  
+  .laser-p {
+    left: calc(50% - 340px);
+  }
+  
+  .laser-dots {
+    left: calc(50% + 140px);
+  }
+}
+
+@media (max-width: 480px) {
+  .dj-sprite {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .dj-laser {
+    width: 128px;
+    height: 128px;
+  }
+  
+  .laser-p {
+    left: calc(50% - 230px);
+  }
+  
+  .laser-dots {
+    left: calc(50% + 100px);
   }
 }

@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import SpriteAnimation from './components/SpriteAnimation';
+import DJAnimation from './components/DJAnimation';
+import CoinAnimation from './components/CoinAnimation';
+import FloatingExp from './components/FloatingExp';
+import Forest from './components/Forest';
+import Clouds from './components/Clouds';
+import Birds from './components/Birds';
+import Worms from './components/Worms';
+import Servers from './components/Servers';
 import { useScrollFade } from './hooks/useScrollFade';
 
 interface AnimatedTextProps {
@@ -118,6 +126,7 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
 function App() {
   const [displayText, setDisplayText] = useState('');
   const [showTrailer, setShowTrailer] = useState(false);
+  const [showDJ, setShowDJ] = useState<boolean>(() => Math.random() < 0.5);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -175,23 +184,43 @@ function App() {
         </div>
       </div>
       <div className="hero-section">
+        <Clouds />
+        <Birds />
         <h1>
           {displayText}
           <span className="cursor">|</span>
         </h1>
         <div className="sprite-animation-container">
-          <SpriteAnimation key="sprite-animation" />
+          {showDJ ? (
+            <DJAnimation key="dj-animation" />
+          ) : (
+            <SpriteAnimation key="sprite-animation" />
+          )}
         </div>
       </div>
       
       <section ref={aboutFade.ref as React.RefObject<HTMLElement>} className={`about-section standalone fade-section ${aboutFade.isVisible ? 'visible' : ''}`}>
-        <h2>My name is Jai Li</h2>
-        <p>
-          I am an agile software engineer.<br />
-          I make backend applications with Springboot and ASP.NET<br />
-          I make games with Unity.
-        </p>
-        <p>Agile software engineer and indie game developer with experience in microservice architecture, cloud-native pipelines, CI/CD automation, and Unity-based real-time 2D/3D game mechanics.</p>
+        <div className="about-header">
+          <h2>My name is Jai Li</h2>
+          <CoinAnimation />
+        </div>
+        <div className="about-content">
+          <div className="about-text">
+            <p>
+              I am an agile software engineer.<br />
+              I make backend applications with Springboot and ASP.NET<br />
+              I make games with Unity.
+            </p>
+            <p>Agile software engineer and indie game developer with experience in microservice architecture, cloud-native pipelines, CI/CD automation, and Unity-based real-time 2D/3D game mechanics.</p>
+          </div>
+          {theme === 'dark' && (
+            <img 
+              src={`${process.env.PUBLIC_URL}/assets/sprites/Graveyard_Candle_9_16x16.gif`}
+              alt="Candle"
+              className="about-candle"
+            />
+          )}
+        </div>
       </section>
       
       <section ref={educationFade.ref as React.RefObject<HTMLElement>} className={`education-section fade-section ${educationFade.isVisible ? 'visible' : ''}`}>
@@ -209,6 +238,7 @@ function App() {
           <ul>
             <li>2022 - Present • Software Engineer • Brightspot</li>
           </ul>
+          <Servers />
         </section>
         
         <section ref={skillsFade.ref as React.RefObject<HTMLElement>} className={`skills-section fade-section ${skillsFade.isVisible ? 'visible' : ''}`}>
@@ -223,7 +253,10 @@ function App() {
       </div>
       
       <section ref={projectsFade.ref as React.RefObject<HTMLElement>} className={`projects-section fade-section ${projectsFade.isVisible ? 'visible' : ''}`}>
-        <h2>Personal Projects</h2>
+        <div className="projects-header">
+          <h2>Personal Projects</h2>
+          <FloatingExp />
+        </div>
         <ul>
           <li>
             <a href="https://github.com/lijw07/portfolio" target="_blank" rel="noopener noreferrer">
@@ -269,6 +302,10 @@ function App() {
           </li>
         </ul>
       </section>
+      
+      <div className="worms-section">
+        <Worms />
+      </div>
       
       <section ref={professionalFade.ref as React.RefObject<HTMLElement>} className={`projects-section professional-work fade-section ${professionalFade.isVisible ? 'visible' : ''}`}>
         <h2>Professional Work</h2>
@@ -356,7 +393,8 @@ function App() {
         </ul>
       </section>
       
-      <section ref={connectFade.ref as React.RefObject<HTMLElement>} className={`connect-section fade-section ${connectFade.isVisible ? 'visible' : ''}`}>
+      <section ref={connectFade.ref as React.RefObject<HTMLElement>} className={`connect-section fade-section ${connectFade.isVisible ? 'visible' : ''}`} style={{ position: 'relative' }}>
+        <Forest />
         <h2>Connect</h2>
         <div className="connect-links">
           <DirectionalButton href="https://github.com/lijw07">
