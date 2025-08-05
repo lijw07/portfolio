@@ -1,12 +1,19 @@
 import React, { useRef, useEffect, useMemo, useCallback } from 'react';
 import * as PIXI from 'pixi.js';
 
-const SpriteAnimation: React.FC = () => {
+interface SpriteAnimationProps {
+  onAllSpritesSettled?: () => void;
+}
+
+const SpriteAnimation: React.FC<SpriteAnimationProps> = ({ onAllSpritesSettled }) => {
+  console.log('SpriteAnimation mounted with callback:', !!onAllSpritesSettled);
   const pixiContainer = useRef<HTMLDivElement>(null);
   const appRef = useRef<PIXI.Application | null>(null);
   const resizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mountedRef = useRef<boolean>(false);
   const spriteTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
+  const settledSpritesRef = useRef<number>(0);
+  const totalSpritesRef = useRef<number>(0);
 
   const spriteConfigs = useMemo<Record<string, { cellSize: number; idleEndRow: number; yOffset: number }>>(() => ({
     'Spearman.png': { cellSize: 48, idleEndRow: 6, yOffset: 75 },
@@ -26,10 +33,13 @@ const SpriteAnimation: React.FC = () => {
   }), []);
 
   const initializeAnimation = useCallback(() => {
+    console.log('initializeAnimation called, mounted:', mountedRef.current);
     if (!pixiContainer.current || !mountedRef.current) return;
 
     spriteTimeoutsRef.current.forEach(timeout => clearTimeout(timeout));
     spriteTimeoutsRef.current = [];
+    settledSpritesRef.current = 0;
+    totalSpritesRef.current = 0;
 
     if (appRef.current) {
       appRef.current.destroy(true, { children: true, texture: true });
@@ -156,6 +166,13 @@ const SpriteAnimation: React.FC = () => {
                 sprite.textures = idleFrames;
                 sprite.animationSpeed = 0.1;
                 sprite.play();
+                
+                settledSpritesRef.current += 1;
+                console.log(`Sprite settled: ${settledSpritesRef.current}/${totalSpritesRef.current}`);
+                if (settledSpritesRef.current === totalSpritesRef.current && onAllSpritesSettled) {
+                  console.log('All sprites done, calling callback');
+                  onAllSpritesSettled();
+                }
               }
             }
           });
@@ -184,6 +201,8 @@ const SpriteAnimation: React.FC = () => {
         
         const shuffledSprites = [...allSprites].sort(() => Math.random() - 0.5);
         const selectedSprites = shuffledSprites.slice(0, maxSprites);
+        totalSpritesRef.current = selectedSprites.length;
+        console.log('Loading sprites, total:', selectedSprites.length);
         
         let totalDelay = 0;
         for (let i = 0; i < selectedSprites.length; i++) {
@@ -238,7 +257,7 @@ const SpriteAnimation: React.FC = () => {
         }
       }
     };
-  }, [spriteConfigs]);
+  }, [spriteConfigs, onAllSpritesSettled]);
 
   useEffect(() => {
     const pixiContainerEl = pixiContainer.current;

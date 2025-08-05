@@ -114,6 +114,8 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
 function App() {
   const [displayText, setDisplayText] = useState('');
   const [showTrailer, setShowTrailer] = useState(false);
+  const [spritesSettled, setSpritesSettled] = useState(false);
+  const [periodsToShow, setPeriodsToShow] = useState(4);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -136,6 +138,23 @@ function App() {
     
     return () => clearInterval(typingInterval);
   }, []);
+
+  useEffect(() => {
+    if (spritesSettled && periodsToShow > 0) {
+      console.log('Starting period removal, current periods:', periodsToShow);
+      const removeInterval = setInterval(() => {
+        setPeriodsToShow(prev => {
+          console.log('Removing period, current:', prev);
+          if (prev <= 1) {
+            clearInterval(removeInterval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 200);
+      return () => clearInterval(removeInterval);
+    }
+  }, [spritesSettled, periodsToShow]);
   
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -152,9 +171,20 @@ function App() {
         {theme === 'light' ? 'dark' : 'light'}
       </button>
       <div className="hero-section">
-        <h1>{displayText}<span className="cursor">|</span></h1>
+        <h1>
+          {displayText.slice(0, 9)}
+          {displayText.length > 9 && (
+            <span className="loading-dots">
+              {'.'.repeat(periodsToShow)}
+            </span>
+          )}
+          <span className="cursor">|</span>
+        </h1>
         <div className="sprite-animation-container">
-          <SpriteAnimation />
+          <SpriteAnimation onAllSpritesSettled={() => {
+            console.log('All sprites settled!');
+            setSpritesSettled(true);
+          }} />
         </div>
       </div>
       
@@ -171,9 +201,9 @@ function App() {
       <section className="education-section">
         <h2>Education</h2>
         <ul>
-          <li>Northern Virginia Community College • Associate of Science in Computer Science • 2018 - 2019</li>
-          <li>Virginia Commonwealth University • Bachelor of Science in Computer Science • 2020 - 2022</li>
           <li>Georgia Institute of Technology • Master of Science in Computer Science • 2025 - Present</li>
+          <li>Virginia Commonwealth University • Bachelor of Science in Computer Science • 2020 - 2022</li>
+          <li>Northern Virginia Community College • Associate of Science in Computer Science • 2018 - 2019</li>
         </ul>
       </section>
       
@@ -197,7 +227,7 @@ function App() {
       </div>
       
       <section className="projects-section">
-        <h2>Selected Work</h2>
+        <h2>Personal Projects</h2>
         <ul>
           <li>
             <a href="https://github.com/lijw07/portfolio" target="_blank" rel="noopener noreferrer">
@@ -241,6 +271,12 @@ function App() {
           <li>
             <span className="no-link"><AnimatedText text="Regurgitate (Private Repo)" /></span>
           </li>
+        </ul>
+      </section>
+      
+      <section className="projects-section professional-work">
+        <h2>Professional Work</h2>
+        <ul>
           <li>
             <a href="https://ads.google.com/intl/en_us/start/overview-ha/?subid=us-en-ha-awa-bk-c-000!o3~Cj0KCQjwhafEBhCcARIsAEGZEKJAul66GgkOSXDWPOurdERZvtxa--rq6w0ws_X-sax9HlMqHvwRC-4aAmcrEALw_wcB~137408560317~kwd-94527731~17414652933~725145496224&gad_source=1&gad_campaignid=17414652933&gclid=Cj0KCQjwhafEBhCcARIsAEGZEKJAul66GgkOSXDWPOurdERZvtxa--rq6w0ws_X-sax9HlMqHvwRC-4aAmcrEALw_wcB&gclsrc=aw.ds" target="_blank" rel="noopener noreferrer">
               <AnimatedText text="Google Ads" />
