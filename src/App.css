@@ -366,7 +366,7 @@ h1 {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-  top: 180px;
+  top: 240px;
   right: 400px;
 }
 
@@ -795,7 +795,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-top: 8rem;
+  margin-top: 5rem;
   gap: 4rem;
 }
 
@@ -979,6 +979,8 @@ h1 {
     width: 64px;
     height: 64px;
     margin-top: 0;
+    top: 260px;
+    right: 100px;
   }
   .content-container {
     flex-direction: column;
@@ -1029,6 +1031,7 @@ h1 {
   
   .servers-container {
     gap: 2rem;
+    margin-top: 0.5rem;
   }
   
   .server {
@@ -1105,6 +1108,29 @@ h1 {
   .connect-link {
     padding: 8px 16px;
     font-size: clamp(1.2rem, 3vw, 1.5rem);
+  }
+  
+  .servers-container {
+    margin-top: 0;
+    gap: 1.5rem;
+  }
+  
+  .server {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .server-center {
+    width: 75px;
+    height: 75px;
+    margin-bottom: -10px;
+  }
+  
+  .about-candle {
+    width: 48px;
+    height: 48px;
+    top: 280px;
+    right: 50px;
   }
 }
 

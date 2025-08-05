@@ -13,7 +13,15 @@ const Forest: React.FC = () => {
   // Generate random forest layout
   const generateTrees = () => {
     const treeData = [];
-    const numTrees = 100; // Number of trees to place
+    // Adjust number of trees based on screen size
+    const screenWidth = window.innerWidth;
+    let numTrees = 100; // Default for desktop
+    
+    if (screenWidth <= 480) {
+      numTrees = 20; // Mobile
+    } else if (screenWidth <= 968) {
+      numTrees = 40; // Tablet
+    }
     
     // First generate tree data
     for (let i = 0; i < numTrees; i++) {
