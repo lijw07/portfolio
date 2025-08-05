@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import SpriteAnimation from './components/SpriteAnimation';
+import { useScrollFade } from './hooks/useScrollFade';
 
 interface AnimatedTextProps {
   text: string;
@@ -76,8 +77,11 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button className="modal-close" onClick={onClose} aria-label="Close video">
+          <span>×</span>
+        </button>
         <div className="video-container">
           <video
             controls
@@ -114,8 +118,6 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
 function App() {
   const [displayText, setDisplayText] = useState('');
   const [showTrailer, setShowTrailer] = useState(false);
-  const [spritesSettled, setSpritesSettled] = useState(false);
-  const [periodsToShow, setPeriodsToShow] = useState(4);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -124,6 +126,15 @@ function App() {
     return 'light';
   });
   const fullText = 'Portfolio....';
+  
+  // Scroll fade hooks for each section
+  const aboutFade = useScrollFade();
+  const educationFade = useScrollFade();
+  const experienceFade = useScrollFade();
+  const skillsFade = useScrollFade();
+  const projectsFade = useScrollFade();
+  const professionalFade = useScrollFade();
+  const connectFade = useScrollFade();
   
   useEffect(() => {
     let currentIndex = 0;
@@ -139,22 +150,6 @@ function App() {
     return () => clearInterval(typingInterval);
   }, []);
 
-  useEffect(() => {
-    if (spritesSettled && periodsToShow > 0) {
-      console.log('Starting period removal, current periods:', periodsToShow);
-      const removeInterval = setInterval(() => {
-        setPeriodsToShow(prev => {
-          console.log('Removing period, current:', prev);
-          if (prev <= 1) {
-            clearInterval(removeInterval);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 200);
-      return () => clearInterval(removeInterval);
-    }
-  }, [spritesSettled, periodsToShow]);
   
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -167,28 +162,29 @@ function App() {
   
   return (
     <div className="App">
-      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-        {theme === 'light' ? 'dark' : 'light'}
-      </button>
+      <div className="theme-container">
+        <div className="theme-sprite-container">
+          <img 
+            src={`${process.env.PUBLIC_URL}/assets/sprites/${theme === 'light' ? 'sun.png' : 'moon.png'}`}
+            alt={theme === 'light' ? 'Dark mode' : 'Light mode'}
+            className="theme-sprite"
+          />
+          <button className="theme-text-button" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === 'light' ? 'light' : 'dark'}
+          </button>
+        </div>
+      </div>
       <div className="hero-section">
         <h1>
-          {displayText.slice(0, 9)}
-          {displayText.length > 9 && (
-            <span className="loading-dots">
-              {'.'.repeat(periodsToShow)}
-            </span>
-          )}
+          {displayText}
           <span className="cursor">|</span>
         </h1>
         <div className="sprite-animation-container">
-          <SpriteAnimation onAllSpritesSettled={() => {
-            console.log('All sprites settled!');
-            setSpritesSettled(true);
-          }} />
+          <SpriteAnimation key="sprite-animation" />
         </div>
       </div>
       
-      <section className="about-section standalone">
+      <section ref={aboutFade.ref as React.RefObject<HTMLElement>} className={`about-section standalone fade-section ${aboutFade.isVisible ? 'visible' : ''}`}>
         <h2>My name is Jai Li</h2>
         <p>
           I am an agile software engineer.<br />
@@ -198,7 +194,7 @@ function App() {
         <p>Agile software engineer and indie game developer with experience in microservice architecture, cloud-native pipelines, CI/CD automation, and Unity-based real-time 2D/3D game mechanics.</p>
       </section>
       
-      <section className="education-section">
+      <section ref={educationFade.ref as React.RefObject<HTMLElement>} className={`education-section fade-section ${educationFade.isVisible ? 'visible' : ''}`}>
         <h2>Education</h2>
         <ul>
           <li>Georgia Institute of Technology • Master of Science in Computer Science • 2025 - Present</li>
@@ -208,14 +204,14 @@ function App() {
       </section>
       
       <div className="content-container">
-        <section className="experience-section">
+        <section ref={experienceFade.ref as React.RefObject<HTMLElement>} className={`experience-section fade-section ${experienceFade.isVisible ? 'visible' : ''}`}>
           <h2>Experience</h2>
           <ul>
             <li>2022 - Present • Software Engineer • Brightspot</li>
           </ul>
         </section>
         
-        <section className="skills-section">
+        <section ref={skillsFade.ref as React.RefObject<HTMLElement>} className={`skills-section fade-section ${skillsFade.isVisible ? 'visible' : ''}`}>
           <h2>Skills</h2>
           <ul>
             <li>Java, C#, Sql</li>
@@ -226,7 +222,7 @@ function App() {
         </section>
       </div>
       
-      <section className="projects-section">
+      <section ref={projectsFade.ref as React.RefObject<HTMLElement>} className={`projects-section fade-section ${projectsFade.isVisible ? 'visible' : ''}`}>
         <h2>Personal Projects</h2>
         <ul>
           <li>
@@ -274,7 +270,7 @@ function App() {
         </ul>
       </section>
       
-      <section className="projects-section professional-work">
+      <section ref={professionalFade.ref as React.RefObject<HTMLElement>} className={`projects-section professional-work fade-section ${professionalFade.isVisible ? 'visible' : ''}`}>
         <h2>Professional Work</h2>
         <ul>
           <li>
@@ -360,7 +356,7 @@ function App() {
         </ul>
       </section>
       
-      <section className="connect-section">
+      <section ref={connectFade.ref as React.RefObject<HTMLElement>} className={`connect-section fade-section ${connectFade.isVisible ? 'visible' : ''}`}>
         <h2>Connect</h2>
         <div className="connect-links">
           <DirectionalButton href="https://github.com/lijw07">

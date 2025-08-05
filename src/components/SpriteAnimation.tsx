@@ -317,4 +317,4 @@ const SpriteAnimation: React.FC<SpriteAnimationProps> = ({ onAllSpritesSettled }
   return <div ref={pixiContainer} style={{ width: '100%', height: '150px', display: 'block' }} />;
 };
 
-export default SpriteAnimation;
+export default React.memo(SpriteAnimation);
