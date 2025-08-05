@@ -27,7 +27,7 @@ const Clouds: React.FC = () => {
       initialClouds.push({
         id: i,
         sprite: cloudSprites[Math.floor(Math.random() * cloudSprites.length)],
-        yPosition: Math.random() * 200,
+        yPosition: Math.random() * 20, // Use vh units later
         scale: 0.5 + Math.random() * 1,
         duration: 30 + Math.random() * 20,
         fromLeft: Math.random() < 0.5
@@ -41,7 +41,7 @@ const Clouds: React.FC = () => {
       const newCloud: CloudItem = {
         id: nextIdRef.current,
         sprite: cloudSprites[Math.floor(Math.random() * cloudSprites.length)],
-        yPosition: Math.random() * 200,
+        yPosition: Math.random() * 20, // Use vh units later
         scale: 0.5 + Math.random() * 1,
         duration: 30 + Math.random() * 20,
         fromLeft: Math.random() < 0.5
@@ -66,7 +66,7 @@ const Clouds: React.FC = () => {
           key={cloud.id}
           className={`cloud ${cloud.fromLeft ? 'from-left' : 'from-right'}`}
           style={{
-            top: `${cloud.yPosition}px`,
+            top: `${cloud.yPosition}vh`,
             animationDuration: `${cloud.duration}s`,
             transform: `scale(${cloud.scale})`
           }}

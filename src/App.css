@@ -11,6 +11,9 @@ html {
 :root {
   --bg-color: white;
   --text-color: black;
+  /* Scale factor based on viewport, with min/max constraints */
+  --scale-factor: clamp(6px, min(1vw, 1.5vh), 16px);
+  --base-size: calc(16 * var(--scale-factor));
 }
 
 [data-theme="dark"] {
@@ -42,24 +45,24 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 360px;
-  height: 360px;
+  width: calc(36 * var(--scale-factor));
+  height: calc(36 * var(--scale-factor));
   overflow: hidden;
   z-index: 1000;
 }
 
 .theme-sprite-container {
-  width: 360px;
-  height: 360px;
+  width: calc(36 * var(--scale-factor));
+  height: calc(36 * var(--scale-factor));
   overflow: hidden;
   position: relative;
 }
 
 .theme-sprite {
   position: absolute;
-  width: 720px;
-  height: 720px;
-  top: -360px;
+  width: calc(72 * var(--scale-factor));
+  height: calc(72 * var(--scale-factor));
+  top: calc(-36 * var(--scale-factor));
   left: 0;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -118,12 +121,12 @@ body {
 .coin-animation {
   display: inline-block;
   flex-shrink: 0;
-  transform: translateY(-36px);
+  transform: translateY(calc(-2 * var(--scale-factor)));
 }
 
 .coin-sprite {
-  width: 80px;
-  height: 80px;
+  width: calc(8 * var(--scale-factor));
+  height: calc(8 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -144,7 +147,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 300px;
+  height: 30vh;
   pointer-events: none;
   z-index: 1001;
 }
@@ -180,7 +183,7 @@ body {
 }
 
 .cloud-sprite {
-  width: 150px;
+  width: calc(15 * var(--scale-factor));
   height: auto;
   opacity: 0.7;
   image-rendering: pixelated;
@@ -197,15 +200,15 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 400px;
+  height: 15vh;
   pointer-events: none;
   z-index: 1000;
 }
 
 .bird {
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: calc(4.8 * var(--scale-factor));
+  height: calc(4.8 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -359,22 +362,13 @@ h1 {
   flex: 1;
 }
 
-.about-candle {
-  position: absolute;
-  width: 96px;
-  height: 96px;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  top: 240px;
-  right: 400px;
-}
 
 .skills-section {
   flex: 0 1 50%;
   text-align: left;
   padding-left: 30px;
 }
+
 
 .skills-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
@@ -483,17 +477,21 @@ h1 {
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+  flex-wrap: nowrap;
 }
 
 .projects-header h2 {
   margin-bottom: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .floating-exp-container {
   position: relative;
-  width: 150px;
-  height: 120px;
-  transform: translateY(-20px);
+  width: calc(15 * var(--scale-factor));
+  height: calc(12 * var(--scale-factor));
+  transform: translateY(calc(-2 * var(--scale-factor)));
+  flex-shrink: 1;
 }
 
 .floating-exp-item {
@@ -512,20 +510,20 @@ h1 {
   }
   100% {
     opacity: 0;
-    transform: translateY(-80px);
+    transform: translateY(calc(-8 * var(--scale-factor)));
   }
 }
 
 .exp-sprite {
-  width: 36px;
-  height: 36px;
+  width: calc(4.8 * var(--scale-factor));
+  height: calc(4.8 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 }
 
 .exp-value {
-  font-size: 1.5rem;
+  font-size: calc(2 * var(--scale-factor));
   font-weight: bold;
   color: #FFD700;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -680,7 +678,7 @@ h1 {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  background: transparent;
+  background: var(--bg-color);
   font-weight: 500;
   z-index: 1;
   display: inline-block;
@@ -751,8 +749,8 @@ h1 {
 
 .worm {
   position: absolute;
-  width: 64px;
-  height: 64px;
+  width: calc(6.4 * var(--scale-factor));
+  height: calc(6.4 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -800,26 +798,26 @@ h1 {
 }
 
 .server {
-  width: 120px;
-  height: 120px;
+  width: calc(12 * var(--scale-factor));
+  height: calc(12 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 }
 
 .server-center {
-  width: 140px;
-  height: 140px;
-  margin-bottom: -20px;
+  width: calc(14 * var(--scale-factor));
+  height: calc(14 * var(--scale-factor));
+  margin-bottom: calc(-2 * var(--scale-factor));
 }
 
 .forest-container {
   position: absolute;
-  bottom: -250px;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 300px;
-  overflow: hidden;
+  height: calc(35 * var(--scale-factor));
+  overflow: visible;
   pointer-events: none;
   z-index: 0;
 }
@@ -827,7 +825,7 @@ h1 {
 .forest-tree {
   position: absolute;
   bottom: 0;
-  width: 80px;
+  width: calc(8 * var(--scale-factor));
   height: auto;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -940,29 +938,8 @@ h1 {
 }
 
 @media (max-width: 968px) {
-  .coin-sprite {
-    width: 64px;
-    height: 64px;
-  }
-  
-  .coin-animation {
-    transform: translateY(-28px);
-  }
-  
-  .theme-container {
-    width: 240px;
-    height: 240px;
-  }
-  
-  .theme-sprite-container {
-    width: 240px;
-    height: 240px;
-  }
-  
-  .theme-sprite {
-    width: 480px;
-    height: 480px;
-    top: -240px;
+  :root {
+    --scale-factor: clamp(5px, min(1vw, 1.5vh), 12px);
   }
   
   .theme-text-button {
@@ -970,18 +947,17 @@ h1 {
     padding: 4px 8px;
   }
   
+  .floating-exp-container {
+    width: calc(12 * var(--scale-factor));
+    height: calc(10 * var(--scale-factor));
+  }
+  
+  
   .about-content {
     flex-direction: column;
     gap: 2rem;
   }
   
-  .about-candle {
-    width: 64px;
-    height: 64px;
-    margin-top: 0;
-    top: 260px;
-    right: 100px;
-  }
   .content-container {
     flex-direction: column;
     padding: 30px 40px 20px 40px;
@@ -1034,44 +1010,9 @@ h1 {
     margin-top: 0.5rem;
   }
   
-  .server {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .server-center {
-    width: 100px;
-    height: 100px;
-    margin-bottom: -15px;
-  }
 }
 
 @media (max-width: 480px) {
-  .coin-sprite {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .coin-animation {
-    transform: translateY(-20px);
-  }
-  
-  .theme-container {
-    width: 180px;
-    height: 180px;
-  }
-  
-  .theme-sprite-container {
-    width: 180px;
-    height: 180px;
-  }
-  
-  .theme-sprite {
-    width: 360px;
-    height: 360px;
-    top: -180px;
-  }
-  
   .theme-text-button {
     font-size: 1rem;
     padding: 3px 6px;
@@ -1115,29 +1056,13 @@ h1 {
     gap: 1.5rem;
   }
   
-  .server {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .server-center {
-    width: 75px;
-    height: 75px;
-    margin-bottom: -10px;
-  }
-  
-  .about-candle {
-    width: 48px;
-    height: 48px;
-    top: 280px;
-    right: 50px;
-  }
 }
 
-.dj-animation-container {
+.dj-animation-container,
+.sprite-animation-container {
   position: relative;
   width: 100%;
-  height: 150px;
+  height: calc(15 * var(--scale-factor));
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -1145,9 +1070,9 @@ h1 {
 
 .dj-sprite {
   position: absolute;
-  width: 120px;
-  height: 120px;
-  bottom: 20px;
+  width: calc(12 * var(--scale-factor));
+  height: calc(12 * var(--scale-factor));
+  bottom: calc(0 * var(--scale-factor));
   left: 50%;
   transform: translateX(-50%);
   image-rendering: pixelated;
@@ -1158,9 +1083,9 @@ h1 {
 
 .dj-laser {
   position: absolute;
-  width: 256px;
-  height: 256px;
-  bottom: 20px;
+  width: calc(25.6 * var(--scale-factor));
+  height: calc(25.6 * var(--scale-factor));
+  bottom: calc(0 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -1173,49 +1098,51 @@ h1 {
 }
 
 .laser-p {
-  left: calc(50% - 450px);
+  /* Position under the 'P' in Portfolio - scales with font size */
+  left: calc(50% - clamp(10rem, 30vw, 30rem));
 }
 
 .laser-dots {
-  left: calc(50% + 180px);
+  /* Position under the '....' - scales with font size */  
+  left: calc(50% + clamp(1rem, 5vw, 5rem));
 }
 
 @media (max-width: 968px) {
-  .dj-sprite {
-    width: 96px;
-    height: 96px;
-  }
-  
-  .dj-laser {
-    width: 192px;
-    height: 192px;
-  }
-  
-  .laser-p {
-    left: calc(50% - 340px);
-  }
-  
-  .laser-dots {
-    left: calc(50% + 140px);
-  }
+  /* Lasers scale automatically with clamp, no override needed */
 }
 
 @media (max-width: 480px) {
-  .dj-sprite {
-    width: 64px;
-    height: 64px;
+  :root {
+    --scale-factor: clamp(4px, min(1vw, 1.5vh), 8px);
   }
   
-  .dj-laser {
-    width: 128px;
-    height: 128px;
+  
+  /* Make FloatingExp smaller on mobile to fit with Personal Projects text */
+  .projects-header {
+    gap: 0.8rem;
   }
   
-  .laser-p {
-    left: calc(50% - 230px);
+  .projects-header h2 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
   }
   
-  .laser-dots {
-    left: calc(50% + 100px);
+  .floating-exp-container {
+    width: calc(8 * var(--scale-factor));
+    height: calc(6 * var(--scale-factor));
+    transform: translateY(calc(-1 * var(--scale-factor)));
   }
+  
+  .exp-sprite {
+    width: calc(3.2 * var(--scale-factor));
+    height: calc(3.2 * var(--scale-factor));
+  }
+  
+  .exp-value {
+    font-size: calc(1.4 * var(--scale-factor));
+  }
+  
+  .floating-exp-item {
+    gap: 0.2rem;
+  }
+  
 }

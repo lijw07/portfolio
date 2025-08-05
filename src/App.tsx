@@ -207,19 +207,12 @@ function App() {
         <div className="about-content">
           <div className="about-text">
             <p>
-              I am an agile software engineer.<br />
+              I an agile software engineer.<br />
               I make backend applications with Springboot and ASP.NET<br />
               I make games with Unity.
             </p>
             <p>Agile software engineer and indie game developer with experience in microservice architecture, cloud-native pipelines, CI/CD automation, and Unity-based real-time 2D/3D game mechanics.</p>
           </div>
-          {theme === 'dark' && (
-            <img 
-              src={`${process.env.PUBLIC_URL}/assets/sprites/Graveyard_Candle_9_16x16.gif`}
-              alt="Candle"
-              className="about-candle"
-            />
-          )}
         </div>
       </section>
       
@@ -410,7 +403,7 @@ function App() {
             Stackoverflow
           </DirectionalButton>
           <span className="connect-link selectable">
-            <span>Tommyli874@gmail.com</span>
+            <span>Jli3614@proton.me</span>
           </span>
         </div>
       </section>

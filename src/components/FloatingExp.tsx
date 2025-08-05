@@ -10,6 +10,7 @@ interface FloatingExpItem {
 
 const FloatingExp: React.FC = () => {
   const [expItems, setExpItems] = useState<FloatingExpItem[]>([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const nextIdRef = useRef(0);
 
   // All available sprites
@@ -24,6 +25,15 @@ const FloatingExp: React.FC = () => {
     'row-8-column-1.png', 'row-8-column-3.png',
     'row-9-column-1.png'
   ], []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     // Spawn new exp items periodically
@@ -55,7 +65,7 @@ const FloatingExp: React.FC = () => {
           key={item.id}
           className="floating-exp-item"
           style={{
-            left: `${50 + item.x}px`,
+            left: `calc(${(isMobile ? 2 : 5)}vw + ${item.x * 0.1}vw)`,
             bottom: '0px'
           }}
         >

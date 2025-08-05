@@ -27,7 +27,7 @@ const Forest: React.FC = () => {
     for (let i = 0; i < numTrees; i++) {
       const randomTree = trees[Math.floor(Math.random() * trees.length)];
       const randomX = Math.random() * 100; // Random position 0-100%
-      const randomY = Math.random() * 150; // Random Y position 0-150px from bottom
+      const randomY = Math.random() * 20 - 15; // Random Y position -15 to 5vh from bottom
       const randomScale = 0.8 + Math.random() * 0.4; // Random scale 0.8-1.2
       
       treeData.push({
@@ -52,7 +52,7 @@ const Forest: React.FC = () => {
         className="forest-tree"
         style={{
           left: `${tree.x}%`,
-          bottom: `${tree.y}px`,
+          bottom: `${tree.y}vh`,
           '--tree-scale': `scale(${tree.scale})`,
           zIndex: index, // Trees closer to bottom get higher z-index
           animationDelay: `${tree.animationDelay}s`

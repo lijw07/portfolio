@@ -17,7 +17,7 @@ const Birds: React.FC = () => {
     for (let i = 0; i < 3; i++) {
       initialBirds.push({
         id: i,
-        yPosition: Math.random() * 150 + 50, // Between 50-200px from top
+        yPosition: Math.random() * 8 + 1, // Between 1-9vh from top
         speed: 20 + Math.random() * 20, // 20-40s duration
         fromLeft: Math.random() < 0.5
       });
@@ -29,7 +29,7 @@ const Birds: React.FC = () => {
     const spawnInterval = setInterval(() => {
       const newBird: BirdItem = {
         id: nextIdRef.current,
-        yPosition: Math.random() * 150 + 50,
+        yPosition: Math.random() * 8 + 1, // Between 1-9vh from top
         speed: 20 + Math.random() * 20,
         fromLeft: Math.random() < 0.5
       };
@@ -60,7 +60,7 @@ const Birds: React.FC = () => {
           alt="bird"
           className={`bird ${bird.fromLeft ? 'from-left' : 'from-right'}`}
           style={{
-            top: `${bird.yPosition}px`,
+            top: `${bird.yPosition}vh`,
             animationDuration: `${bird.speed}s`
           }}
         />
