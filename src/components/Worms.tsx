@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface WormItem {
   id: number;
@@ -10,7 +10,7 @@ interface WormItem {
 
 const Worms: React.FC = () => {
   const [worms, setWorms] = useState<WormItem[]>([]);
-  const [nextId, setNextId] = useState(0);
+  const nextIdRef = useRef(0);
 
   useEffect(() => {
     // Initial worms
@@ -25,12 +25,12 @@ const Worms: React.FC = () => {
       });
     }
     setWorms(initialWorms);
-    setNextId(2);
+    nextIdRef.current = 2;
 
     // Spawn new worms periodically
     const spawnInterval = setInterval(() => {
       const newWorm: WormItem = {
-        id: nextId,
+        id: nextIdRef.current,
         type: Math.floor(Math.random() * 4) + 1,
         position: Math.random() * 30,
         speed: 25 + Math.random() * 15,
@@ -38,7 +38,7 @@ const Worms: React.FC = () => {
       };
       
       setWorms(prev => [...prev, newWorm]);
-      setNextId(prev => prev + 1);
+      nextIdRef.current += 1;
     }, 8000); // Spawn new worm every 8 seconds
 
     return () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 interface FloatingExpItem {
   id: number;
@@ -10,10 +10,10 @@ interface FloatingExpItem {
 
 const FloatingExp: React.FC = () => {
   const [expItems, setExpItems] = useState<FloatingExpItem[]>([]);
-  const [nextId, setNextId] = useState(0);
+  const nextIdRef = useRef(0);
 
   // All available sprites
-  const sprites = [
+  const sprites = useMemo(() => [
     'row-1-column-1.png', 'row-1-column-3.png',
     'row-2-column-1.png', 'row-2-column-3.png',
     'row-3-column-1.png', 'row-3-column-3.png',
@@ -23,13 +23,13 @@ const FloatingExp: React.FC = () => {
     'row-7-column-1.png', 'row-7-column-3.png',
     'row-8-column-1.png', 'row-8-column-3.png',
     'row-9-column-1.png'
-  ];
+  ], []);
 
   useEffect(() => {
     // Spawn new exp items periodically
     const spawnInterval = setInterval(() => {
       const newItem: FloatingExpItem = {
-        id: nextId,
+        id: nextIdRef.current,
         value: Math.floor(Math.random() * 300) + 1, // Random value between 1-300
         x: Math.random() * 60 - 30, // Random x offset between -30 and 30
         y: 0,
@@ -37,7 +37,7 @@ const FloatingExp: React.FC = () => {
       };
 
       setExpItems(prev => [...prev, newItem]);
-      setNextId(prev => prev + 1);
+      nextIdRef.current += 1;
 
       // Remove the item after animation completes (2 seconds)
       setTimeout(() => {
@@ -46,7 +46,7 @@ const FloatingExp: React.FC = () => {
     }, 800); // Spawn every 800ms
 
     return () => clearInterval(spawnInterval);
-  }, [nextId]);
+  }, [sprites]);
 
   return (
     <div className="floating-exp-container">

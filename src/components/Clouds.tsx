@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 interface CloudItem {
   id: number;
@@ -11,14 +11,14 @@ interface CloudItem {
 
 const Clouds: React.FC = () => {
   const [clouds, setClouds] = useState<CloudItem[]>([]);
-  const [nextId, setNextId] = useState(0);
+  const nextIdRef = useRef(0);
   
-  const cloudSprites = [
+  const cloudSprites = useMemo(() => [
     'row-1-column-1.png',
     'row-1-column-2.png',
     'row-2-column-1.png',
     'row-2-column-2.png'
-  ];
+  ], []);
 
   useEffect(() => {
     // Initial clouds
@@ -32,14 +32,14 @@ const Clouds: React.FC = () => {
         duration: 30 + Math.random() * 20,
         fromLeft: Math.random() < 0.5
       });
-      setNextId(5);
+      nextIdRef.current = 5;
     }
     setClouds(initialClouds);
 
     // Spawn new clouds periodically
     const spawnInterval = setInterval(() => {
       const newCloud: CloudItem = {
-        id: nextId,
+        id: nextIdRef.current,
         sprite: cloudSprites[Math.floor(Math.random() * cloudSprites.length)],
         yPosition: Math.random() * 200,
         scale: 0.5 + Math.random() * 1,
@@ -48,7 +48,7 @@ const Clouds: React.FC = () => {
       };
       
       setClouds(prev => [...prev, newCloud]);
-      setNextId(prev => prev + 1);
+      nextIdRef.current += 1;
       
       // Remove cloud after animation completes
       setTimeout(() => {
@@ -57,7 +57,7 @@ const Clouds: React.FC = () => {
     }, 4000); // Spawn new cloud every 4 seconds
 
     return () => clearInterval(spawnInterval);
-  }, []);
+  }, [cloudSprites]);
 
   return (
     <div className="clouds-container">

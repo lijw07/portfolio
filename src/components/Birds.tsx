@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface BirdItem {
   id: number;
@@ -9,7 +9,7 @@ interface BirdItem {
 
 const Birds: React.FC = () => {
   const [birds, setBirds] = useState<BirdItem[]>([]);
-  const [nextId, setNextId] = useState(0);
+  const nextIdRef = useRef(0);
 
   useEffect(() => {
     // Initial birds
@@ -23,24 +23,24 @@ const Birds: React.FC = () => {
       });
     }
     setBirds(initialBirds);
-    setNextId(3);
+    nextIdRef.current = 3;
 
     // Spawn new birds periodically
     const spawnInterval = setInterval(() => {
       const newBird: BirdItem = {
-        id: nextId,
+        id: nextIdRef.current,
         yPosition: Math.random() * 150 + 50,
         speed: 20 + Math.random() * 20,
         fromLeft: Math.random() < 0.5
       };
       
       setBirds(prev => [...prev, newBird]);
-      setNextId(prev => prev + 1);
+      nextIdRef.current += 1;
     }, 6000); // Spawn new bird every 6 seconds
     
     // Clean up old birds periodically (birds that have been on screen for more than 45 seconds)
     const cleanupInterval = setInterval(() => {
-      setBirds(prev => prev.filter(bird => bird.id > nextId - 10)); // Keep only last 10 birds
+      setBirds(prev => prev.filter(bird => bird.id > nextIdRef.current - 10)); // Keep only last 10 birds
     }, 30000); // Clean up every 30 seconds
 
     return () => {

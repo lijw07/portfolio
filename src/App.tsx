@@ -126,7 +126,7 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
 function App() {
   const [displayText, setDisplayText] = useState('');
   const [showTrailer, setShowTrailer] = useState(false);
-  const [showDJ, setShowDJ] = useState<boolean>(() => Math.random() < 0.5);
+  const [showDJ] = useState<boolean>(() => Math.random() < 0.5);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
