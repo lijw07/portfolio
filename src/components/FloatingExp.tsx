@@ -65,7 +65,7 @@ const FloatingExp: React.FC = () => {
           key={item.id}
           className="floating-exp-item"
           style={{
-            left: `calc(${(isMobile ? 2 : 5)}vw + ${item.x * 0.1}vw)`,
+            left: `calc(${(isMobile ? 4 : 8)}vw + ${item.x * 0.1}vw)`,
             bottom: '0px'
           }}
         >
