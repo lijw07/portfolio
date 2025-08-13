@@ -136,7 +136,6 @@ function App() {
   });
   const fullText = 'Portfolio....';
   
-  // Scroll fade hooks for each section
   const aboutFade = useScrollFade();
   const educationFade = useScrollFade();
   const experienceFade = useScrollFade();
@@ -207,8 +206,8 @@ function App() {
         <div className="about-content">
           <div className="about-text">
             <p>
-              I an agile software engineer.<br />
-              I make backend applications with Springboot and ASP.NET<br />
+              I am an agile software engineer.<br />
+              I build backend applications with Spring Boot and ASP.NET.<br />
               I make games with Unity.
             </p>
             <p>Agile software engineer and indie game developer with experience in microservice architecture, cloud-native pipelines, CI/CD automation, and Unity-based real-time 2D/3D game mechanics.</p>
@@ -237,10 +236,10 @@ function App() {
         <section ref={skillsFade.ref as React.RefObject<HTMLElement>} className={`skills-section fade-section ${skillsFade.isVisible ? 'visible' : ''}`}>
           <h2>Skills</h2>
           <ul>
-            <li>Java, C#, Sql</li>
+            <li>Java, C#, SQL</li>
             <li>Spring Boot, ASP.NET, Entity Framework, Unity</li>
-            <li>Docker, Kubernetes, RESTful api, S3, EC2, SQS, SNS Lambda, Cloudwatch, API Gateway, GCP, xUnit, jUnit, JDBC, JWT</li>
-            <li>MySql, NoSQl, MongoDb, SQL Server, H2</li>
+            <li>Docker, Kubernetes, RESTful APIs, AWS (S3, EC2, SQS, SNS, Lambda, CloudWatch, API Gateway), GCP, xUnit, JUnit, JDBC, JWT</li>
+            <li>MySQL, NoSQL, MongoDB, SQL Server, H2</li>
           </ul>
         </section>
       </div>

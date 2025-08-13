@@ -515,15 +515,15 @@ h1 {
 }
 
 .exp-sprite {
-  width: calc(4.8 * var(--scale-factor));
-  height: calc(4.8 * var(--scale-factor));
+  width: calc(5.5 * var(--scale-factor));
+  height: calc(5.5 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 }
 
 .exp-value {
-  font-size: calc(2 * var(--scale-factor));
+  font-size: calc(2.2 * var(--scale-factor));
   font-weight: bold;
   color: #FFD700;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
