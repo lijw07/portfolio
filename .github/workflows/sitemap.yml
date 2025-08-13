@@ -1,22 +1,37 @@
 name: Generate sitemap
+
 on:
-  push: { branches: [ master, main ] }
+  push:
+    branches: [ main, master ]
   workflow_dispatch: {}
+
 jobs:
   build-sitemap:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: cicirello/generate-sitemap@v1
+      - name: Checkout repo (need full history for lastmod)
+        uses: actions/checkout@v4
         with:
-          base-url: https://lijw07.github.io/portfolio/
-          sitemap-path: public/sitemap.xml
-      - name: Commit sitemap
+          fetch-depth: 0
+
+      - name: Generate the sitemap
+        id: sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://lijw07.github.io/portfolio/
+          path-to-root: public
+
+      - name: Show where the sitemap was written
+        run: echo "Sitemap path: ${{ steps.sitemap.outputs.sitemap-path }}"
+
+      - name: Commit sitemap if changed
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add public/sitemap.xml
+            git add "${{ steps.sitemap.outputs.sitemap-path }}"
             git commit -m "chore: update sitemap"
             git push
+          else
+            echo "No changes to commit."
           fi
