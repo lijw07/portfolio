@@ -78,7 +78,7 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
     
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen, onClose, trailerUrl]);
 

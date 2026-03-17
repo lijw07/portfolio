@@ -641,7 +641,7 @@ h1 {
 
 .connect-section {
   width: 100%;
-  padding: 0 60px 80px 60px;
+  padding: 0 60px 160px 60px;
   text-align: center;
   position: relative;
 }
@@ -816,7 +816,7 @@ h1 {
   left: 0;
   width: 100%;
   height: calc(35 * var(--scale-factor));
-  overflow: visible;
+  overflow: hidden;
   pointer-events: none;
   z-index: 0;
 }
@@ -988,7 +988,7 @@ h1 {
   }
   
   .connect-section {
-    padding: 0 40px 60px 40px;
+    padding: 0 40px 120px 40px;
   }
   
   .about-section h2,
@@ -1034,7 +1034,7 @@ h1 {
   }
   
   .connect-section {
-    padding: 0 20px 40px 20px;
+    padding: 0 20px 100px 20px;
   }
   
   .skills-section li {

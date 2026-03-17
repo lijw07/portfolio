@@ -27,7 +27,7 @@ const Forest: React.FC = () => {
     for (let i = 0; i < numTrees; i++) {
       const randomTree = trees[Math.floor(Math.random() * trees.length)];
       const randomX = Math.random() * 100;
-      const randomY = Math.random() * 20 - 15;
+      const randomY = Math.random() * 20 - 5;
       const randomScale = 0.8 + Math.random() * 0.4;
       
       treeData.push({
