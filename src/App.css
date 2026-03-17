@@ -11,7 +11,6 @@ html {
 :root {
   --bg-color: white;
   --text-color: black;
-  /* Scale factor based on viewport, with min/max constraints */
   --scale-factor: clamp(6px, min(1vw, 1.5vh), 16px);
   --base-size: calc(16 * var(--scale-factor));
 }
@@ -1098,17 +1097,15 @@ h1 {
 }
 
 .laser-p {
-  /* Position under the 'P' in Portfolio - scales with font size */
   left: calc(50% - clamp(10rem, 30vw, 30rem));
 }
 
 .laser-dots {
-  /* Position under the '....' - scales with font size */  
   left: calc(50% + clamp(1rem, 5vw, 5rem));
 }
 
 @media (max-width: 968px) {
-  /* Lasers scale automatically with clamp, no override needed */
+  
 }
 
 @media (max-width: 480px) {
@@ -1117,7 +1114,7 @@ h1 {
   }
   
   
-  /* Make FloatingExp smaller on mobile to fit with Personal Projects text */
+  
   .projects-header {
     gap: 0.8rem;
   }

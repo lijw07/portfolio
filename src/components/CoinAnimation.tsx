@@ -7,7 +7,7 @@ const CoinAnimation: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFrame((prevFrame) => (prevFrame % totalFrames) + 1);
-    }, 100); // Change frame every 100ms for smooth rotation
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);

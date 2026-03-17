@@ -228,7 +228,8 @@ function App() {
         <section ref={experienceFade.ref as React.RefObject<HTMLElement>} className={`experience-section fade-section ${experienceFade.isVisible ? 'visible' : ''}`}>
           <h2>Experience</h2>
           <ul>
-            <li>2022 - Present • Software Engineer • Brightspot</li>
+            <li> 2025 - Present • Patent Examiner • United States Patent and Trademark Office</li>
+            <li>2022 - 2024 • Software Engineer • Brightspot</li>
           </ul>
           <Servers />
         </section>

@@ -10,25 +10,25 @@ const Forest: React.FC = () => {
     'row-1-column-2-6.png'
   ];
 
-  // Generate random forest layout
+  
   const generateTrees = () => {
     const treeData = [];
-    // Adjust number of trees based on screen size
+    
     const screenWidth = window.innerWidth;
-    let numTrees = 100; // Default for desktop
+    let numTrees = 100;
     
     if (screenWidth <= 480) {
-      numTrees = 20; // Mobile
+      numTrees = 20;
     } else if (screenWidth <= 968) {
-      numTrees = 40; // Tablet
+      numTrees = 40;
     }
     
-    // First generate tree data
+    
     for (let i = 0; i < numTrees; i++) {
       const randomTree = trees[Math.floor(Math.random() * trees.length)];
-      const randomX = Math.random() * 100; // Random position 0-100%
-      const randomY = Math.random() * 20 - 15; // Random Y position -15 to 5vh from bottom
-      const randomScale = 0.8 + Math.random() * 0.4; // Random scale 0.8-1.2
+      const randomX = Math.random() * 100;
+      const randomY = Math.random() * 20 - 15;
+      const randomScale = 0.8 + Math.random() * 0.4;
       
       treeData.push({
         id: i,
@@ -40,10 +40,10 @@ const Forest: React.FC = () => {
       });
     }
     
-    // Sort trees by Y position (higher Y = further from bottom = should be behind)
+    
     treeData.sort((a, b) => b.y - a.y);
     
-    // Generate tree elements with proper z-index based on sort order
+    
     return treeData.map((tree, index) => (
       <img
         key={tree.id}
@@ -54,7 +54,7 @@ const Forest: React.FC = () => {
           left: `${tree.x}%`,
           bottom: `${tree.y}vh`,
           '--tree-scale': `scale(${tree.scale})`,
-          zIndex: index, // Trees closer to bottom get higher z-index
+          zIndex: index,
           animationDelay: `${tree.animationDelay}s`
         } as React.CSSProperties}
       />
