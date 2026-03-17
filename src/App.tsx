@@ -134,7 +134,7 @@ function App() {
     }
     return 'light';
   });
-  const fullText = 'Portfolio....';
+  const fullText = 'Portfolio';
   
   const aboutFade = useScrollFade();
   const educationFade = useScrollFade();
