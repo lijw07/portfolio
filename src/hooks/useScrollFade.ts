@@ -17,7 +17,6 @@ export const useScrollFade = (threshold = 0.1) => {
 
     const currentElement = elementRef.current;
     if (currentElement) {
-      // Check if element is already in view on mount
       const rect = currentElement.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
       if (inView) {

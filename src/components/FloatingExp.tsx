@@ -13,7 +13,7 @@ const FloatingExp: React.FC = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const nextIdRef = useRef(0);
 
-  // All available sprites
+  
   const sprites = useMemo(() => [
     'row-1-column-1.png', 'row-1-column-3.png',
     'row-2-column-1.png', 'row-2-column-3.png',
@@ -36,12 +36,12 @@ const FloatingExp: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Spawn new exp items periodically
+    
     const spawnInterval = setInterval(() => {
       const newItem: FloatingExpItem = {
         id: nextIdRef.current,
-        value: Math.floor(Math.random() * 300) + 1, // Random value between 1-300
-        x: Math.random() * 60 - 30, // Random x offset between -30 and 30
+        value: Math.floor(Math.random() * 300) + 1,
+        x: Math.random() * 60 - 30,
         y: 0,
         sprite: sprites[Math.floor(Math.random() * sprites.length)]
       };
@@ -49,11 +49,11 @@ const FloatingExp: React.FC = () => {
       setExpItems(prev => [...prev, newItem]);
       nextIdRef.current += 1;
 
-      // Remove the item after animation completes (2 seconds)
+      
       setTimeout(() => {
         setExpItems(prev => prev.filter(item => item.id !== newItem.id));
       }, 2000);
-    }, 800); // Spawn every 800ms
+    }, 800);
 
     return () => clearInterval(spawnInterval);
   }, [sprites]);
