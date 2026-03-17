@@ -386,8 +386,9 @@ function App() {
         </ul>
       </section>
       
-      <section ref={connectFade.ref as React.RefObject<HTMLElement>} className={`connect-section fade-section ${connectFade.isVisible ? 'visible' : ''}`} style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }}>
         <Forest />
+      <section ref={connectFade.ref as React.RefObject<HTMLElement>} className={`connect-section fade-section ${connectFade.isVisible ? 'visible' : ''}`} style={{ position: 'relative' }}>
         <h2>Connect</h2>
         <div className="connect-links">
           <DirectionalButton href="https://github.com/lijw07">
@@ -407,6 +408,7 @@ function App() {
           </span>
         </div>
       </section>
+      </div>
       <TrailerModal 
         isOpen={showTrailer} 
         onClose={() => setShowTrailer(false)}

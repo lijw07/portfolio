@@ -15,19 +15,19 @@ const Forest: React.FC = () => {
     const treeData = [];
     
     const screenWidth = window.innerWidth;
-    let numTrees = 100;
-    
+    let numTrees = 150;
+
     if (screenWidth <= 480) {
-      numTrees = 20;
+      numTrees = 35;
     } else if (screenWidth <= 968) {
-      numTrees = 40;
+      numTrees = 60;
     }
-    
-    
+
+
     for (let i = 0; i < numTrees; i++) {
       const randomTree = trees[Math.floor(Math.random() * trees.length)];
-      const randomX = Math.random() * 100;
-      const randomY = Math.random() * 20 - 5;
+      const randomX = Math.random() * 95;
+      const randomY = Math.random() * 30 - 5;
       const randomScale = 0.8 + Math.random() * 0.4;
       
       treeData.push({
