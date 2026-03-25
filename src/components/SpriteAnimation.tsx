@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import * as PIXI from 'pixi.js';
 
 interface SpriteAnimationProps {
@@ -95,8 +95,6 @@ const SpriteAnimation: React.FC<SpriteAnimationProps> = ({ onAllSpritesSettled }
       const spacing = spriteScale * 22;
       const totalWidth = (selected.length - 1) * spacing;
       const startX = centerX - totalWidth / 2;
-
-      const halfCount = Math.ceil(selected.length / 2);
 
       // Preload all textures up front
       const preloadAll = async () => {
