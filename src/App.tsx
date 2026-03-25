@@ -85,11 +85,14 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose} aria-label="Close video">
-          <span>×</span>
-        </button>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <span className="modal-title">Paws and Hooves</span>
+          <button className="modal-close" onClick={onClose} aria-label="Close video">
+            X
+          </button>
+        </div>
         <div className="video-container">
           <video
             controls
@@ -102,21 +105,19 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
             onLoadedMetadata={(e) => {
               const video = e.target as HTMLVideoElement;
               video.volume = 0.05;
-              console.log('Video metadata loaded successfully');
             }}
             onCanPlay={(e) => {
               const video = e.target as HTMLVideoElement;
-              console.log('Video can play, starting...');
-              video.play().catch(err => {
-                console.log('Autoplay blocked, user needs to click play:', err);
-              });
+              video.play().catch(() => {});
             }}
             onError={(e) => {
               const video = e.target as HTMLVideoElement;
               console.error('Video load failed for:', video.src);
-              console.error('Error:', video.error);
             }}
           />
+        </div>
+        <div className="modal-footer">
+          <a href="https://github.com/lijw07/paws-and-hooves" target="_blank" rel="noopener noreferrer" className="modal-link">&gt; GitHub</a>
         </div>
       </div>
     </div>
