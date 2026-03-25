@@ -318,7 +318,7 @@ h1 {
 
 .about-section.standalone {
   width: 100%;
-  padding: 80px 60px 20px 60px;
+  padding: 40px 60px 20px 60px;
   position: relative;
 }
 
@@ -460,6 +460,8 @@ h1 {
 
 .projects-section.professional-work {
   padding-top: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .projects-section h2 {
@@ -473,7 +475,7 @@ h1 {
 
 .projects-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 2rem;
   margin-bottom: 2rem;
   flex-wrap: nowrap;
@@ -769,19 +771,19 @@ h1 {
 
 @keyframes crawlWormLeft {
   from {
-    left: -60px;
+    left: calc(-10 * var(--scale-factor));
   }
   to {
-    left: calc(100% + 60px);
+    left: calc(100% + 10 * var(--scale-factor));
   }
 }
 
 @keyframes crawlWormRight {
   from {
-    left: calc(100% + 60px);
+    left: calc(100% + 10 * var(--scale-factor));
   }
   to {
-    left: -60px;
+    left: calc(-10 * var(--scale-factor));
   }
 }
 
@@ -812,10 +814,10 @@ h1 {
 
 .forest-container {
   position: absolute;
-  bottom: 0;
+  bottom: calc(-16 * var(--scale-factor));
   left: 0;
   width: 100%;
-  height: calc(35 * var(--scale-factor));
+  height: calc(50 * var(--scale-factor));
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
@@ -824,7 +826,7 @@ h1 {
 .forest-tree {
   position: absolute;
   bottom: 0;
-  width: calc(8 * var(--scale-factor));
+  width: calc(14 * var(--scale-factor));
   height: auto;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -848,32 +850,30 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  pointer-events: none;
 }
-
-.modal-overlay .modal-content {
-  pointer-events: auto;
-}
-
 
 .modal-content {
-  background-color: transparent;
-  padding: 0;
-  border-radius: 8px;
+  background-color: var(--bg-color);
+  border: 3px solid var(--text-color);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.4);
   max-width: 90vw;
   max-height: 90vh;
   position: relative;
   animation: slideIn 0.3s ease;
 }
 
+[data-theme="dark"] .modal-content {
+  box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.1);
+}
+
 @keyframes slideIn {
   from {
-    transform: translateY(-50px);
+    transform: translateY(-30px);
     opacity: 0;
   }
   to {
@@ -882,35 +882,33 @@ h1 {
   }
 }
 
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 3px solid var(--text-color);
+}
+
+.modal-title {
+  font-family: 'Pixellari', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: normal;
+}
+
 .modal-close {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: var(--bg-color);
+  background: none;
   border: 2px solid var(--text-color);
-  font-size: 1.5rem;
+  font-family: 'Pixellari', sans-serif;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
   cursor: pointer;
   color: var(--text-color);
   transition: all 0.2s ease;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
+  padding: 4px 10px;
   line-height: 1;
-  padding: 0;
-  z-index: 10;
-}
-
-.modal-close span {
-  display: block;
-  margin-top: -2px;
 }
 
 .modal-close:hover {
-  transform: rotate(90deg) scale(1.1);
   background-color: var(--text-color);
   color: var(--bg-color);
 }
@@ -919,8 +917,8 @@ h1 {
   position: relative;
   width: 80vw;
   height: 45vw;
-  max-width: 1200px;
-  max-height: 675px;
+  max-width: 1000px;
+  max-height: 562px;
 }
 
 .video-container iframe,
@@ -928,12 +926,35 @@ h1 {
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 4px;
+  display: block;
 }
 
 .trailer-video {
   object-fit: contain;
   background-color: #000;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  border-top: 3px solid var(--text-color);
+}
+
+.modal-link {
+  font-family: 'Pixellari', sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: var(--text-color);
+  text-decoration: none;
+  border: 2px solid var(--text-color);
+  padding: 4px 14px;
+  transition: all 0.2s ease;
+}
+
+.modal-link:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
 }
 
 @media (max-width: 968px) {
@@ -1061,7 +1082,7 @@ h1 {
 .sprite-animation-container {
   position: relative;
   width: 100%;
-  height: calc(15 * var(--scale-factor));
+  height: calc(22 * var(--scale-factor));
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -1069,8 +1090,8 @@ h1 {
 
 .dj-sprite {
   position: absolute;
-  width: calc(12 * var(--scale-factor));
-  height: calc(12 * var(--scale-factor));
+  width: calc(18 * var(--scale-factor));
+  height: calc(18 * var(--scale-factor));
   bottom: calc(0 * var(--scale-factor));
   left: 50%;
   transform: translateX(-50%);
@@ -1082,8 +1103,8 @@ h1 {
 
 .dj-laser {
   position: absolute;
-  width: calc(25.6 * var(--scale-factor));
-  height: calc(25.6 * var(--scale-factor));
+  width: calc(38 * var(--scale-factor));
+  height: calc(38 * var(--scale-factor));
   bottom: calc(0 * var(--scale-factor));
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -1096,12 +1117,24 @@ h1 {
   z-index: 1;
 }
 
-.laser-p {
-  left: calc(50% - clamp(10rem, 30vw, 30rem));
+.laser-near-left {
+  left: 50%;
+  transform: translateX(calc(-50% - 12 * var(--scale-factor)));
 }
 
-.laser-dots {
-  left: calc(50% + clamp(1rem, 5vw, 5rem));
+.laser-near-right {
+  left: 50%;
+  transform: translateX(calc(-50% + 12 * var(--scale-factor)));
+}
+
+.laser-far-left {
+  left: 50%;
+  transform: translateX(calc(-50% - 28 * var(--scale-factor)));
+}
+
+.laser-far-right {
+  left: 50%;
+  transform: translateX(calc(-50% + 28 * var(--scale-factor)));
 }
 
 @media (max-width: 968px) {
