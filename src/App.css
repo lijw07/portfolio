@@ -957,6 +957,58 @@ h1 {
   color: var(--bg-color);
 }
 
+.game-modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-container {
+  position: relative;
+  width: 70vw;
+  aspect-ratio: 16 / 9;
+  max-width: 900px;
+  max-height: 70vh;
+  background-color: #242424;
+}
+
+.game-container:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+}
+
+.game-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background-color: #242424;
+}
+
+.fullscreen-btn {
+  font-family: 'Pixellari', sans-serif;
+  cursor: pointer;
+  background: none;
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    width: 88vw;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-container {
+    width: 92vw;
+    aspect-ratio: 4 / 3;
+  }
+}
+
 @media (max-width: 968px) {
   :root {
     --scale-factor: clamp(5px, min(1vw, 1.5vh), 12px);

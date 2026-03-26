@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
 import SpriteAnimation from './components/SpriteAnimation';
 import DJAnimation from './components/DJAnimation';
@@ -69,13 +69,13 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
         onClose();
       }
     };
-    
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
       console.log('Modal opened, video URL:', trailerUrl);
     }
-    
+
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = '';
@@ -124,9 +124,86 @@ const TrailerModal: React.FC<TrailerModalProps> = ({ isOpen, onClose, trailerUrl
   );
 };
 
+interface GameModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  gameUrl: string;
+  title: string;
+  githubUrl: string;
+}
+
+const GameModal: React.FC<GameModalProps> = ({ isOpen, onClose, gameUrl, title, githubUrl }) => {
+  const gameContainerRef = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isFullscreen) {
+        onClose();
+      }
+    };
+
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.body.style.overflow = '';
+    };
+  }, [isOpen, onClose, isFullscreen]);
+
+  const toggleFullscreen = useCallback(() => {
+    if (!gameContainerRef.current) return;
+    if (!document.fullscreenElement) {
+      gameContainerRef.current.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }, []);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content game-modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <span className="modal-title">{title}</span>
+          <button className="modal-close" onClick={onClose} aria-label="Close game">
+            X
+          </button>
+        </div>
+        <div className="game-container" ref={gameContainerRef}>
+          <iframe
+            src={gameUrl}
+            title={title}
+            className="game-iframe"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          />
+        </div>
+        <div className="modal-footer">
+          <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="modal-link">&gt; GitHub</a>
+          <button className="modal-link fullscreen-btn" onClick={toggleFullscreen}>
+            {isFullscreen ? '[ ] Exit Fullscreen' : '[ ] Fullscreen'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   const [displayText, setDisplayText] = useState('');
   const [showTrailer, setShowTrailer] = useState(false);
+  const [showGame, setShowGame] = useState(false);
   const [showDJ] = useState<boolean>(() => Math.random() < 0.5);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -258,12 +335,12 @@ function App() {
             </a>
           </li>
           <li>
-            <a 
-              href="https://github.com/lijw07/paws-and-hooves" 
-              target="_blank" 
+            <a
+              href="https://github.com/lijw07/paws-and-hooves"
+              target="_blank"
               rel="noopener noreferrer"
             >
-              <span 
+              <span
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -272,6 +349,24 @@ function App() {
                 style={{ cursor: 'pointer' }}
               >
                 <AnimatedText text="Paws and Hooves (Click title for trailer)" />
+              </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/lijw07/tower-defense"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowGame(true);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <AnimatedText text="Tower Defense (Click title to play)" />
               </span>
             </a>
           </li>
@@ -410,10 +505,17 @@ function App() {
         </div>
       </section>
       </div>
-      <TrailerModal 
-        isOpen={showTrailer} 
+      <TrailerModal
+        isOpen={showTrailer}
         onClose={() => setShowTrailer(false)}
         trailerUrl={`${process.env.PUBLIC_URL}/Index_Paws_And_Hooves_Trailer_compressed.mp4`}
+      />
+      <GameModal
+        isOpen={showGame}
+        onClose={() => setShowGame(false)}
+        gameUrl={`${process.env.PUBLIC_URL}/tower-defense/index.html`}
+        title="Tower Defense"
+        githubUrl="https://github.com/lijw07/tower-defense"
       />
     </div>
   );
