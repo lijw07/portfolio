@@ -23,7 +23,7 @@ html {
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Pixellari', sans-serif;
+  font-family: 'VT323', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -79,7 +79,7 @@ body {
   color: var(--text-color);
   text-decoration: underline;
   text-underline-offset: 4px;
-  font-family: 'Pixellari', sans-serif;
+  font-family: 'VT323', monospace;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -895,7 +895,7 @@ h1 {
 }
 
 .modal-title {
-  font-family: 'Pixellari', sans-serif;
+  font-family: 'VT323', monospace;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   font-weight: normal;
 }
@@ -903,7 +903,7 @@ h1 {
 .modal-close {
   background: none;
   border: 2px solid var(--text-color);
-  font-family: 'Pixellari', sans-serif;
+  font-family: 'VT323', monospace;
   font-size: clamp(0.8rem, 1.5vw, 1rem);
   cursor: pointer;
   color: var(--text-color);
@@ -947,7 +947,7 @@ h1 {
 }
 
 .modal-link {
-  font-family: 'Pixellari', sans-serif;
+  font-family: 'VT323', monospace;
   font-size: clamp(0.85rem, 1.5vw, 1rem);
   color: var(--text-color);
   text-decoration: none;
@@ -993,7 +993,7 @@ h1 {
 }
 
 .fullscreen-btn {
-  font-family: 'Pixellari', sans-serif;
+  font-family: 'VT323', monospace;
   cursor: pointer;
   background: none;
   margin-left: auto;
