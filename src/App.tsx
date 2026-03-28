@@ -296,9 +296,9 @@ function App() {
       <section ref={educationFade.ref as React.RefObject<HTMLElement>} className={`education-section fade-section ${educationFade.isVisible ? 'visible' : ''}`}>
         <h2>Education</h2>
         <ul>
-          <li>Georgia Institute of Technology • Master of Science in Computer Science • 2025 - Present</li>
-          <li>Virginia Commonwealth University • Bachelor of Science in Computer Science • 2020 - 2022</li>
-          <li>Northern Virginia Community College • Associate of Science in Computer Science • 2018 - 2019</li>
+          <li>M.S Computer Science • Georgia Institute of Technology • 2025 - 2026</li>
+          <li>B.S Computer Science • Virginia Commonwealth University • 2020 - 2022</li>
+          <li>A.S Computer Science • Northern Virginia Community College • 2018 - 2019</li>
         </ul>
       </section>
       
@@ -306,8 +306,8 @@ function App() {
         <section ref={experienceFade.ref as React.RefObject<HTMLElement>} className={`experience-section fade-section ${experienceFade.isVisible ? 'visible' : ''}`}>
           <h2>Experience</h2>
           <ul>
-            <li> 2025 - Present • Patent Examiner • United States Patent and Trademark Office</li>
-            <li>2022 - 2024 • Software Engineer • Brightspot</li>
+            <li>Patent Examiner • United States Patent and Trademark Office • 2025 - Present</li>
+            <li>Software Engineer • Brightspot • 2022 - 2024</li>
           </ul>
           <Servers />
         </section>
@@ -316,9 +316,10 @@ function App() {
           <h2>Skills</h2>
           <ul>
             <li>Java, C#, SQL</li>
-            <li>Spring Boot, ASP.NET, Entity Framework, Unity</li>
-            <li>Docker, Kubernetes, RESTful APIs, AWS (S3, EC2, SQS, SNS, Lambda, CloudWatch, API Gateway), GCP, xUnit, JUnit, JDBC, JWT</li>
+            <li>Spring Boot, ASP.NET, Entity Framework</li>
+            <li>Docker, Kubernetes, RESTful APIs, AWS, GCP, xUnit, JUnit, JDBC, JWT</li>
             <li>MySQL, NoSQL, MongoDB, SQL Server, H2</li>
+            <li>Unity, Godot, Blender, Aseprite</li>
           </ul>
         </section>
       </div>

@@ -110,7 +110,7 @@ body {
 }
 
 .about-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .about-header h2 {
@@ -305,7 +305,7 @@ h1 {
 .content-container {
   display: flex;
   width: 100%;
-  padding: 40px 60px 20px 60px;
+  padding: 10px 60px 10px 60px;
   justify-content: space-between;
 }
 
@@ -318,7 +318,7 @@ h1 {
 
 .about-section.standalone {
   width: 100%;
-  padding: 40px 60px 20px 60px;
+  padding: 10px 60px 10px 60px;
   position: relative;
 }
 
@@ -338,7 +338,7 @@ h1 {
 
 .about-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: normal;
   padding-bottom: 0;
   display: inline-block;
@@ -348,7 +348,11 @@ h1 {
 .about-section p {
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.8;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-section p:last-child {
+  margin-bottom: 0;
 }
 
 .about-content {
@@ -371,7 +375,7 @@ h1 {
 
 .skills-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: normal;
   padding-bottom: 0;
   display: inline-block;
@@ -391,13 +395,13 @@ h1 {
 
 .education-section {
   width: 100%;
-  padding: 20px 60px 40px 60px;
+  padding: 10px 60px 10px 60px;
   text-align: left;
 }
 
 .education-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: normal;
   padding-bottom: 0;
   display: inline-block;
@@ -434,7 +438,7 @@ h1 {
 
 .experience-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: normal;
   padding-bottom: 0;
   display: inline-block;
@@ -454,19 +458,19 @@ h1 {
 
 .projects-section {
   width: 100%;
-  padding: 20px 60px 20px 60px;
+  padding: 10px 60px 10px 60px;
   text-align: left;
 }
 
 .projects-section.professional-work {
-  padding-top: 20px;
+  padding-top: 10px;
   position: relative;
   z-index: 1;
 }
 
 .projects-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: normal;
   padding-bottom: 0;
   display: inline-block;
@@ -477,7 +481,7 @@ h1 {
   display: flex;
   align-items: baseline;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   flex-wrap: nowrap;
 }
 
@@ -643,7 +647,7 @@ h1 {
 
 .connect-section {
   width: 100%;
-  padding: 0 60px 160px 60px;
+  padding: 10px 60px 160px 60px;
   text-align: center;
   position: relative;
 }
@@ -656,7 +660,7 @@ h1 {
 
 .connect-section h2 {
   font-size: clamp(3rem, 6vw, 4.5rem);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: normal;
   padding-bottom: 0;
   display: inline-block;
@@ -1032,7 +1036,7 @@ h1 {
   
   .content-container {
     flex-direction: column;
-    padding: 30px 40px 20px 40px;
+    padding: 10px 40px 10px 40px;
     gap: 40px;
   }
   
@@ -1044,7 +1048,7 @@ h1 {
   }
   
   .about-section.standalone {
-    padding: 60px 40px 20px 40px;
+    padding: 10px 40px 10px 40px;
   }
   
   .about-section::after,
@@ -1053,15 +1057,15 @@ h1 {
   }
   
   .education-section {
-    padding: 20px 40px 30px 40px;
+    padding: 10px 40px 10px 40px;
   }
-  
+
   .projects-section {
-    padding: 20px 40px 20px 40px;
+    padding: 10px 40px 10px 40px;
   }
-  
+
   .connect-section {
-    padding: 0 40px 120px 40px;
+    padding: 10px 40px 120px 40px;
   }
   
   .about-section h2,
@@ -1070,7 +1074,7 @@ h1 {
   .experience-section h2,
   .projects-section h2,
   .connect-section h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
   
   .connect-links {
@@ -1093,21 +1097,21 @@ h1 {
     padding: 20px 20px 20px 20px;
     gap: 30px;
   }
-  
+
   .about-section.standalone {
-    padding: 40px 20px 20px 20px;
+    padding: 10px 20px 10px 20px;
   }
-  
+
   .education-section {
-    padding: 20px 20px 20px 20px;
+    padding: 10px 20px 10px 20px;
   }
-  
+
   .projects-section {
-    padding: 20px 20px 20px 20px;
+    padding: 10px 20px 10px 20px;
   }
-  
+
   .connect-section {
-    padding: 0 20px 100px 20px;
+    padding: 10px 20px 100px 20px;
   }
   
   .skills-section li {
