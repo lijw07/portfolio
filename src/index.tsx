@@ -13,8 +13,4 @@ root.render(
   </React.StrictMode>
 );
 
-setTimeout(() => {
-  document.body.classList.add('loaded');
-}, 100);
-
 reportWebVitals();
