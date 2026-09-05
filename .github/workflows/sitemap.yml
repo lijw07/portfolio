@@ -5,12 +5,16 @@ on:
     branches: [ main, master ]
   workflow_dispatch: {}
 
+# The last step commits the generated sitemap back to the branch.
+permissions:
+  contents: write
+
 jobs:
   build-sitemap:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
