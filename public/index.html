@@ -15,13 +15,14 @@
     <title>Jai Li — Software Engineer & Game Designer</title>
     <meta
       name="description"
-      content="Software engineer and game designer. Enterprise systems in Java and Spring Boot, tools that automate tedious work, and games built in Unity and Godot — playable in the browser."
+      content="Portfolio of Jai Li, software engineer and game designer. Java & Spring Boot systems, automation tools, and Unity & Godot games you can play in the browser."
     />
     <link rel="canonical" href="https://lijw07.github.io/portfolio/" />
     <meta name="robots" content="index, follow" />
 
     <meta property="og:title" content="Jai Li — Software Engineer & Game Designer" />
-    <meta property="og:description" content="Java / Spring Boot systems, automation tools, and Unity & Godot games." />
+    <meta property="og:description" content="Portfolio of Jai Li, software engineer and game designer. Java & Spring Boot systems, automation tools, and Unity & Godot games playable in the browser." />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lijw07.github.io/portfolio/" />
     <meta property="og:image" content="https://lijw07.github.io/portfolio/og-image.png" />
@@ -29,6 +30,11 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jai Li — Software Engineer & Game Designer" />
+    <meta name="twitter:description" content="Java & Spring Boot systems, automation tools, and Unity & Godot games playable in the browser." />
+    <meta name="twitter:image" content="https://lijw07.github.io/portfolio/og-image.png" />
+    <meta name="author" content="Jai Li" />
+    <meta name="keywords" content="Jai Li, software engineer, game designer, game developer, Java, Spring Boot, Unity, Godot, portfolio" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,15 +46,47 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Jai Li",
-      "url": "https://lijw07.github.io/portfolio/",
-      "jobTitle": "Software Engineer",
-      "sameAs": [
-        "https://github.com/lijw07",
-        "https://www.linkedin.com/in/jai-li-va/",
-        "https://leetcode.com/u/Crosssoul1/",
-        "https://stackoverflow.com/users/10416064/crust01"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://lijw07.github.io/portfolio/#website",
+          "url": "https://lijw07.github.io/portfolio/",
+          "name": "Jai Li",
+          "alternateName": ["Jai Li Portfolio", "Jai Li — Software Engineer & Game Designer"],
+          "description": "Portfolio of Jai Li, software engineer and game designer. Java & Spring Boot systems, automation tools, and Unity & Godot games playable in the browser.",
+          "inLanguage": "en-US",
+          "publisher": { "@id": "https://lijw07.github.io/portfolio/#person" }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://lijw07.github.io/portfolio/#page",
+          "url": "https://lijw07.github.io/portfolio/",
+          "name": "Jai Li — Software Engineer & Game Designer",
+          "isPartOf": { "@id": "https://lijw07.github.io/portfolio/#website" },
+          "about": { "@id": "https://lijw07.github.io/portfolio/#person" },
+          "mainEntity": { "@id": "https://lijw07.github.io/portfolio/#person" },
+          "primaryImageOfPage": "https://lijw07.github.io/portfolio/og-image.png"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://lijw07.github.io/portfolio/#person",
+          "name": "Jai Li",
+          "url": "https://lijw07.github.io/portfolio/",
+          "image": "https://lijw07.github.io/portfolio/headshot.jpg",
+          "jobTitle": ["Software Engineer", "Game Designer"],
+          "description": "Software engineer and game designer building Java & Spring Boot systems, automation tools, and Unity & Godot games.",
+          "knowsAbout": ["Java", "Spring Boot", "React", "TypeScript", "Unity", "C#", "Godot", "GDScript", "REST APIs", "Docker", "Kubernetes", "Game Design"],
+          "alumniOf": [
+            { "@type": "CollegeOrUniversity", "name": "Georgia Institute of Technology" },
+            { "@type": "CollegeOrUniversity", "name": "Virginia Commonwealth University" }
+          ],
+          "sameAs": [
+            "https://github.com/lijw07",
+            "https://www.linkedin.com/in/jai-li-va/",
+            "https://leetcode.com/u/Crosssoul1/",
+            "https://stackoverflow.com/users/10416064/crust01"
+          ]
+        }
       ]
     }
     </script>
@@ -65,7 +103,8 @@
   <body>
     <noscript>
       <h1>Jai Li — Software Engineer & Game Designer</h1>
-      <p>Java / Spring Boot systems, automation tools, Unity &amp; Godot games, experience, and contact links.</p>
+      <p>Portfolio of Jai Li, software engineer and game designer. Java &amp; Spring Boot enterprise systems, automation tools, and games built in Unity and Godot that you can play in the browser. Experience at Brightspot and the U.S. Patent and Trademark Office; M.S. Computer Science, Georgia Tech.</p>
+      <p><a href="https://github.com/lijw07">GitHub</a> · <a href="https://www.linkedin.com/in/jai-li-va/">LinkedIn</a></p>
       <p>This site uses React. Enable JavaScript for the full experience.</p>
     </noscript>
     <div id="root"></div>
