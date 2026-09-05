@@ -22,7 +22,8 @@ jobs:
           path-to-root: public
 
       - name: Show where the action wrote the sitemap
-        run: echo "Sitemap path from action: ${{ steps.sitemap.outputs.sitemap-path }}"
+        run: |
+          echo "Sitemap path from action: ${{ steps.sitemap.outputs.sitemap-path }}"
 
       - name: Place sitemap in public/
         run: |
@@ -45,12 +46,12 @@ jobs:
         run: |
           mkdir -p public
           if [ ! -f public/robots.txt ]; then
-            cat > public/robots.txt <<'EOF'
-User-agent: *
-Allow: /
-
-Sitemap: https://lijw07.github.io/portfolio/sitemap.xml
-EOF
+            printf '%s\n' \
+              'User-agent: *' \
+              'Allow: /' \
+              '' \
+              'Sitemap: https://lijw07.github.io/portfolio/sitemap.xml' \
+              > public/robots.txt
           fi
 
       - name: Commit sitemap/robots if changed
