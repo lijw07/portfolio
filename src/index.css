@@ -1,58 +1,272 @@
-/* GameDeck — global reset, theme tokens, keyframes */
-* { box-sizing: border-box; }
+/* ─────────────────────────────────────────────────────────────────────────────
+   Industry — design-system tokens and component classes.
+   Ported from the design handoff's industry-styles.css + prototype helmet.
+   The accent ramp is derived from --accent-h (set per visit at boot), so any
+   of the six hues has identical contrast in light and dark mode.
+   ───────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --ink: #2b2118;
-  --ink-rgb: 43, 33, 24;
-  --bg: #fdf6e3;
-  --bg2: #f6eedd;
-  --surface: #fffdf7;
-  --surface2: #fff8e7;
+  --accent-h: 250;
+
+  /* Ground, text and neutrals are near-gray tints of the same hue, so the
+     whole page shifts with the accent while lightness (and so contrast) stays
+     identical to the original #f2f2f3 / #1d1f20 pairing. */
+  --ground-c: 0.012;
+  --color-bg: oklch(95.8% var(--ground-c) var(--accent-h));
+  --color-surface: oklch(93% var(--ground-c) var(--accent-h));
+  --color-text: oklch(20% 0.01 var(--accent-h));
+  --color-divider: color-mix(in srgb, var(--color-text) 16%, transparent);
+
+  --color-accent: oklch(58% 0.09 var(--accent-h));
+  --color-accent-100: oklch(93% 0.03 var(--accent-h));
+  --color-accent-200: oklch(88% 0.045 var(--accent-h));
+  --color-accent-300: oklch(80% 0.06 var(--accent-h));
+  --color-accent-400: oklch(68% 0.08 var(--accent-h));
+  --color-accent-500: oklch(58% 0.09 var(--accent-h));
+  --color-accent-600: oklch(52% 0.09 var(--accent-h));
+  --color-accent-700: oklch(45% 0.09 var(--accent-h));
+  --color-accent-800: oklch(37% 0.08 var(--accent-h));
+  --color-accent-900: oklch(28% 0.06 var(--accent-h));
+
+  --color-neutral-100: oklch(96.7% 0.008 var(--accent-h));
+  --color-neutral-200: oklch(92% 0.008 var(--accent-h));
+  --color-neutral-300: oklch(86% 0.008 var(--accent-h));
+  --color-neutral-400: oklch(76% 0.008 var(--accent-h));
+  --color-neutral-500: oklch(65% 0.01 var(--accent-h));
+  --color-neutral-600: oklch(54.5% 0.012 var(--accent-h));
+  --color-neutral-700: oklch(44% 0.012 var(--accent-h));
+  --color-neutral-800: oklch(33% 0.01 var(--accent-h));
+  --color-neutral-900: oklch(24% 0.01 var(--accent-h));
+
+  --font-heading: "Barlow Condensed", system-ui, sans-serif;
+  --font-heading-weight: 600;
+  --font-body: "Barlow", system-ui, sans-serif;
+  --font-mono: ui-monospace, Menlo, monospace;
+
+  --space-1: 3.4px;
+  --space-2: 6.8px;
+  --space-3: 10.2px;
+  --space-4: 13.6px;
+  --space-6: 20.4px;
+  --space-8: 27.2px;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 7px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--color-neutral-900) 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, var(--color-neutral-900) 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, var(--color-neutral-900) 22%, transparent);
+
+  --overlay: oklch(20% 0.02 var(--accent-h) / 0.78);
 }
 
-.gd-dark {
-  --ink: #efe4cf;
-  --ink-rgb: 239, 228, 207;
-  --bg: #14110c;
-  --bg2: #1b160f;
-  --surface: #221c14;
-  --surface2: #2c2418;
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* The dark neutrals already carried a steel cast (#15171b, #4a525e…);
+       here that cast follows the accent hue at the same lightness. */
+    --ground-c: 0.014;
+    --color-bg: oklch(17.5% var(--ground-c) var(--accent-h));
+    --color-surface: oklch(20% var(--ground-c) var(--accent-h));
+    --color-text: oklch(93% 0.006 var(--accent-h));
+    --color-divider: oklch(42% 0.02 var(--accent-h));
+
+    --color-accent: oklch(70% 0.09 var(--accent-h));
+    --color-accent-100: oklch(25% 0.03 var(--accent-h));
+    --color-accent-200: oklch(29% 0.04 var(--accent-h));
+    --color-accent-300: oklch(38% 0.05 var(--accent-h));
+    --color-accent-400: oklch(60% 0.08 var(--accent-h));
+    --color-accent-500: oklch(70% 0.09 var(--accent-h));
+    --color-accent-600: oklch(76% 0.08 var(--accent-h));
+    --color-accent-700: oklch(81% 0.07 var(--accent-h));
+    --color-accent-800: oklch(87% 0.05 var(--accent-h));
+    --color-accent-900: oklch(91% 0.04 var(--accent-h));
+
+    --color-neutral-100: oklch(20% 0.014 var(--accent-h));
+    --color-neutral-200: oklch(23.5% 0.014 var(--accent-h));
+    --color-neutral-300: oklch(42% 0.02 var(--accent-h));
+    --color-neutral-400: oklch(49% 0.02 var(--accent-h));
+    --color-neutral-500: oklch(60% 0.018 var(--accent-h));
+    --color-neutral-600: oklch(70% 0.016 var(--accent-h));
+    --color-neutral-700: oklch(84% 0.012 var(--accent-h));
+    --color-neutral-800: oklch(90.5% 0.008 var(--accent-h));
+    --color-neutral-900: oklch(95% 0.006 var(--accent-h));
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.55);
+    --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.6);
+  }
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-}
+/* ── base ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-/* Reserve the scrollbar gutter so the centered nav tabs never shift between pages */
-html { overflow-y: scroll; }
+html { scroll-behavior: smooth; }
 
 body {
+  margin: 0;
+  /* --sbw is set while a modal locks scrolling, so the content doesn't shift when the scrollbar disappears. */
+  padding-right: var(--sbw, 0px);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-thumb {
-  background: var(--ink);
-  border-radius: 99px;
-  border: 3px solid var(--bg);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-2);
+}
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent-700); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-900); }
+img { display: block; max-width: 100%; }
+section[id] { scroll-margin-top: 64px; }
+
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+.mono { font-family: var(--font-mono); }
+
+/* ── blueprint frame: hairline border + four registration marks ───────────── */
+.blueprint {
+  position: relative;
+  border: 1px solid var(--color-divider);
+  border-radius: 0;
+}
+.blueprint > .corner {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  pointer-events: none;
+}
+.blueprint > .corner::before, .blueprint > .corner::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.blueprint > .corner::before { left: 5px; top: 0; width: 1px; height: 100%; }
+.blueprint > .corner::after  { top: 5px; left: 0; width: 100%; height: 1px; }
+.blueprint > .corner.tl { top: -6px; left: -6px; }
+.blueprint > .corner.tr { top: -6px; right: -6px; }
+.blueprint > .corner.bl { bottom: -6px; left: -6px; }
+.blueprint > .corner.br { bottom: -6px; right: -6px; }
+
+/* ── cards ────────────────────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid var(--color-divider);
+}
+.card.hoverable { transition: border-color .15s ease, box-shadow .15s ease; }
+.card.hoverable:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+
+/* ── buttons ──────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-divider);
+  border-radius: 0;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+}
+.btn:hover { color: var(--color-text); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
+.btn-primary:hover { background: var(--color-accent-600); color: var(--color-bg); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent); border-color: transparent; padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); color: var(--color-accent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+
+/* ── forms ────────────────────────────────────────────────────────────────── */
+.field > label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-family: var(--font-mono);
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: 0;
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+textarea.input { min-height: 110px; resize: vertical; }
+
+/* ── tags ─────────────────────────────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
+  border-radius: 0;
+}
+.tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+/* ── tables ───────────────────────────────────────────────────────────────── */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-divider);
+}
+.table td {
+  padding: var(--space-2);
+  vertical-align: top;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+}
+.table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, transparent); }
+@media (prefers-color-scheme: dark) {
+  .table th, .table td { border-color: var(--color-divider); }
 }
 
-@keyframes gd-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes gd-float {
-  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
-  50% { transform: translateY(-14px) rotate(var(--r, 0deg)); }
-}
-@keyframes gd-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-@keyframes gd-pop {
-  from { opacity: 0; transform: translateY(18px) scale(.97); }
-  to { opacity: 1; transform: none; }
+/* ── keyframes ────────────────────────────────────────────────────────────── */
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pop { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card, path, text { animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
 }
