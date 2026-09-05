@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Corners } from './SchemaDiagram';
 import { Media, LINKS } from '../content';
 
-/** Backdrop + blueprint card. Escape and backdrop click close; clicks inside don't propagate. */
-function Overlay({ onClose, narrow, children }: { onClose: () => void; narrow?: boolean; children: React.ReactNode }) {
+function Overlay({ onClose, narrow, play, children }: { onClose: () => void; narrow?: boolean; play?: boolean; children: React.ReactNode }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
-    // Lock page scroll. Hiding the scrollbar widens the page by its width, so
-    // expose that width as --sbw and pad the body and fixed nav by it (see index.css/App.css).
     const root = document.documentElement;
     const scrollbarWidth = window.innerWidth - root.clientWidth;
     const prevOverflow = root.style.overflow;
@@ -22,9 +19,9 @@ function Overlay({ onClose, narrow, children }: { onClose: () => void; narrow?: 
   }, [onClose]);
 
   return (
-    <div className="overlay" onClick={onClose} role="presentation">
+    <div className={`overlay${play ? ' overlay-play' : ''}`} onClick={onClose} role="presentation">
       <div
-        className={`card blueprint modal${narrow ? ' narrow' : ''}`}
+        className={`card blueprint modal${narrow ? ' narrow' : ''}${play ? ' play' : ''}`}
         onClick={e => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -36,10 +33,9 @@ function Overlay({ onClose, narrow, children }: { onClose: () => void; narrow?: 
   );
 }
 
-/** Game (iframe) or trailer (video) player. */
 export function PlayModal({ media, onClose }: { media: Media; onClose: () => void }) {
   return (
-    <Overlay onClose={onClose}>
+    <Overlay onClose={onClose} play>
       <div className="modal-head">
         <span className="modal-title">{media.title}</span>
         <button className="btn btn-ghost" onClick={onClose}>✕ Close</button>
@@ -64,7 +60,6 @@ export function PlayModal({ media, onClose }: { media: Media; onClose: () => voi
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-/** Contact form posting to Formspree, so the email address never appears in the DOM. */
 export function ContactModal({ onClose }: { onClose: () => void }) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
