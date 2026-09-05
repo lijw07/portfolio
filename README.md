@@ -1,145 +1,63 @@
-# Portfolio - Jai Li
+# Portfolio — Jai Li
 
-A modern, minimalist portfolio website showcasing my software engineering experience and projects with a unique pixel art aesthetic.
+A single-page personal portfolio styled as a database schema. The hero is an
+entity-relationship diagram that draws itself on load; below it are Experience,
+Projects, Skills, Education, and Contact. Live at
+[lijw07.github.io/portfolio](https://lijw07.github.io/portfolio/).
 
-## 🎨 Features
+## Design
 
-### Visual Design
-- **Pixel Art Theme**: Custom 'Pixelify Sans' font for a retro aesthetic
-- **Dark/Light Mode**: Toggle between themes with smooth transitions
-- **Animated Typography**: Character-by-character hover animations on project titles
-- **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices
+"Industry" — a blueprint/wireframe aesthetic: light technical ground, a single
+accent hue, square corners everywhere, and hairline-bordered "blueprint objects"
+with `+` registration marks at the corners. Headings are Barlow Condensed, body
+is Barlow, schema text is the system monospace stack. Dark mode follows the OS.
 
-### Interactive Elements
-- **Typing Animation**: Portfolio title types out on page load
-- **Video Trailer Modal**: Click on "Paws and Hooves" to view the game trailer
-- **Smooth Scrolling**: Seamless navigation throughout the page
-- **Hover Effects**: Interactive animations on all links and buttons
+### Per-visit randomization
 
-### Content Sections
-- **About**: Personal introduction as an agile software engineer
-- **Education**: Academic background from NVCC, VCU, and Georgia Tech
-- **Experience**: Current role as Software Engineer at Brightspot
-- **Skills**: Technical stack including Java, C#, Unity, cloud services, and more
-- **Selected Work**: 20+ projects including personal projects and enterprise solutions
-- **Connect**: Direct links to GitHub, LinkedIn, LeetCode, Stack Overflow, and email
+Every page load rolls once (`roll()` in `src/schema.ts`) and renders consistently:
 
-### Technical Features
-- **Performance Optimized**: Fast loading with optimized assets
-- **Accessibility**: Semantic HTML and ARIA labels where needed
-- **SEO Ready**: Proper meta tags and structured content
-- **Text Selection Disabled**: Clean viewing experience with intentional UI/UX choices
-- **Video Controls**: Custom video player with volume preset and restricted controls
+- **Engine dialect** — PostgreSQL, MongoDB, or DynamoDB. Changes entity titles,
+  field types, row-count badges, header treatment, connector line style, and the
+  nav brand line (`JAI_LI.SCHEMA · <engine> · rev a.b.c`).
+- **Layout** — one of four six-slot arrangements on a 1120×680 stage.
+- **PERSON placement** — a random slot; the five satellites shuffle into the rest.
+- **Accent hue** — one of six OKLCH hues (steel, teal, green, olive, rust, violet).
+  The whole ramp derives from `--accent-h`, so contrast is identical for every hue.
 
-## 🛠️ Tech Stack
+## Structure
 
-- **Frontend**: React 19.1.0 with TypeScript
-- **Styling**: Custom CSS with CSS Variables for theming
-- **Build Tool**: Create React App
-- **Deployment**: GitHub Pages
-- **Assets**: Compressed MP4 video, optimized images
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/lijw07/portfolio.git
-cd portfolio
+```
+src/
+├── index.css                   # Design tokens + shared component classes (.blueprint, .card, .btn, .tag, .table)
+├── App.css                     # Page layout and section styles
+├── App.tsx                     # Nav, hero, sections, modal wiring
+├── content.ts                  # All copy: bio, experience, projects, skills, education, links
+├── schema.ts                   # Roll + diagram model (dialect rows, layouts, connector geometry) — pure functions
+└── components/
+    ├── SchemaDiagram.tsx       # Scaled ER diagram (ResizeObserver → transform: scale)
+    └── Modals.tsx              # Play/trailer modal and Formspree contact form
+public/
+├── tower-defense/, 2048/       # Godot web exports, embedded in the play modal
+├── paws-and-hooves/            # Unity WebGL build
+└── Index_Paws_And_Hooves_Trailer_compressed.mp4
 ```
 
-2. Install dependencies:
+Edit copy in `src/content.ts`; retune the look in `src/index.css`.
+
+## Contact
+
+The Email button opens a form that posts to Formspree, so the address never
+appears in the DOM. Change the destination via `LINKS.contactEndpoint` in
+`src/content.ts`.
+
+## Development
+
 ```bash
 npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## 📁 Project Structure
-
-```
-portfolio/
-├── public/
-│   ├── Index_Paws_And_Hooves_Trailer_compressed.mp4  # Game trailer
-│   ├── favicon.ico
-│   └── index.html
-├── src/
-│   ├── App.tsx           # Main component with all sections
-│   ├── App.css           # All styling including themes
-│   ├── index.tsx         # Entry point
-│   └── index.css         # Minimal global styles
-├── package.json
-├── tsconfig.json
-└── README.md
-```
-
-## 🎯 Available Scripts
-
-- `npm start` - Runs the app in development mode
-- `npm run build` - Builds the app for production
-- `npm test` - Launches the test runner
-- `npm run deploy` - Deploys to GitHub Pages
-
-## 🎨 Customization
-
-### Theme Colors
-The portfolio uses CSS variables for easy theme customization:
-```css
-/* Light theme (default) */
---bg-color: #fff;
---text-color: #333;
-
-/* Dark theme */
---bg-color: #1a1a1a;
---text-color: #e0e0e0;
-```
-
-### Typography
-- Primary font: 'Pixelify Sans' (Google Fonts)
-- Responsive font sizing using `clamp()`
-- Custom animations on hover
-
-## 📱 Responsive Breakpoints
-
-- Desktop: ≥968px (full layout with side-by-side sections)
-- Tablet/Mobile: <968px (stacked layout with adjusted spacing)
-
-## 🚀 Deployment
-
-The site is configured for GitHub Pages deployment:
-
-1. Build the project:
-```bash
+npm start        # http://localhost:3000/portfolio
 npm run build
+npm run deploy   # gh-pages
 ```
 
-2. Deploy to GitHub Pages:
-```bash
-npm run deploy
-```
-
-## 🔧 Key Components
-
-### AnimatedText Component
-Splits text into individual characters for hover animations with proper space handling.
-
-### TrailerModal Component
-Custom modal for video playback with:
-- Click-outside-to-close functionality
-- Escape key support
-- Volume preset to 5%
-- Picture-in-picture disabled
-- Download option removed
-
-### DirectionalButton Component
-Styled link component for the Connect section with consistent hover effects.
+React 19 + TypeScript on Create React App; deployed to GitHub Pages by the
+workflow in `.github/workflows/deploy.yml` on push to `master`.
