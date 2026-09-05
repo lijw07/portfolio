@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Corners } from './SchemaDiagram';
 import { Media, LINKS } from '../content';
+import { releaseGameAudio } from '../gameAudio';
 
 function Overlay({ onClose, narrow, play, children }: { onClose: () => void; narrow?: boolean; play?: boolean; children: React.ReactNode }) {
   useEffect(() => {
@@ -34,6 +35,11 @@ function Overlay({ onClose, narrow, play, children }: { onClose: () => void; nar
 }
 
 export function PlayModal({ media, onClose }: { media: Media; onClose: () => void }) {
+  useEffect(() => {
+    if (media.video) return;
+    return () => releaseGameAudio();
+  }, [media.video]);
+
   return (
     <Overlay onClose={onClose} play>
       <div className="modal-head">

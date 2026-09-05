@@ -4,6 +4,7 @@ import { brandLine, roll, Roll, SECTIONS } from './schema';
 import { BIO, EDUCATION, EXPERIENCE, LINKS, Media, PROJECTS, SKILLS } from './content';
 import SchemaDiagram, { Corners } from './components/SchemaDiagram';
 import { ContactModal, PlayModal } from './components/Modals';
+import { primeGameAudio } from './gameAudio';
 
 function App() {
   // One roll per page load: dialect, layout, entity placement, accent hue.
@@ -16,6 +17,10 @@ function App() {
     document.documentElement.style.setProperty('--accent-h', String(visit.hue));
   }, [visit.hue]);
 
+  const openPlay = (media: Media) => {
+    if (!media.video) primeGameAudio();
+    setPlaying(media);
+  };
   const closePlay = useCallback(() => setPlaying(null), []);
   const closeContact = useCallback(() => setContactOpen(false), []);
   const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -88,7 +93,7 @@ function App() {
                     : <span className="k">{p.when}</span>}
                 </div>
                 {p.action && (
-                  <button className="btn btn-primary" onClick={() => setPlaying(p.action!.media)}>
+                  <button className="btn btn-primary" onClick={() => openPlay(p.action!.media)}>
                     {p.action.label}
                   </button>
                 )}
