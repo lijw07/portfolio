@@ -40,7 +40,11 @@ jobs:
             fi
           fi
           echo "Using sitemap at: $SITEMAP_PATH"
-          cp "$SITEMAP_PATH" public/sitemap.xml
+          if [ "$(realpath "$SITEMAP_PATH")" != "$(realpath -m public/sitemap.xml)" ]; then
+            cp "$SITEMAP_PATH" public/sitemap.xml
+          else
+            echo "Sitemap already in public/, nothing to copy."
+          fi
 
       - name: Ensure robots.txt
         run: |
