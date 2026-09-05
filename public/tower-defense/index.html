@@ -92,7 +92,7 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
+<script>(function(){var Orig=window.AudioContext||window.webkitAudioContext;if(!Orig){return;}var made=[];function shared(){try{var p=window.parent;if(p&&p!==window){var c=p.__gameAudioCtx;if(c&&c.state!=='closed'){return c;}}}catch(e){}return null;}function rebase(aw){if(!aw||aw.__rebased){return;}var add=aw.addModule.bind(aw);aw.addModule=function(u,o){return add(new URL(u,document.baseURI).href,o);};aw.__rebased=true;}function Ctx(opts){var c=shared();if(c){rebase(c.audioWorklet);if(c.state!=='running'){c.resume().catch(function(){});}}else{c=new Orig(opts);}made.push(c);return c;}Ctx.prototype=Orig.prototype;window.AudioContext=Ctx;if(window.webkitAudioContext){window.webkitAudioContext=Ctx;}function unlock(){for(var i=0;i<made.length;i++){if(made[i].state!=='running'){made[i].resume().catch(function(){});}}}['touchstart','touchend','pointerdown','pointerup','mousedown','keydown','click'].forEach(function(t){window.addEventListener(t,unlock,{capture:true,passive:true});});})();</script>
 	</head>
 	<body>
 		<canvas id="canvas">
