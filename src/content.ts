@@ -73,9 +73,17 @@ export const PROJECTS: Project[] = [
     title: '2048',
     tag: 'game',
     description: 'The classic sliding-tile puzzle, rebuilt in Godot. Slide to merge matching numbers and chase the 2048 tile — one move from a full board ends the run.',
-    stack: ['godot', 'gdscript'],
+    stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/2048',
     action: { label: 'Play in browser', media: { title: '2048', url: `${PUBLIC}/2048/2048.html`, video: false } },
+  },
+  {
+    title: 'Pac-Man',
+    tag: 'game',
+    description: 'Arcade-faithful Pac-Man in Godot 4 with procedurally generated mazes that change every level, per-ghost AI personalities with scatter/chase waves and house release timing, fruit bonuses, synthesized retro sound effects, and a saved high score.',
+    stack: ['godot 4', 'gdscript'],
+    source: 'https://github.com/lijw07/pacman',
+    action: { label: 'Play in browser', media: { title: 'Pac-Man', url: `${PUBLIC}/pacman/index.html`, video: false } },
   },
   {
     title: 'CoStar Extraction Pipeline',

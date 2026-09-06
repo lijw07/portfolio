@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>2048</title>
+		<title>pacman</title>
 		<style>
 html, body, #canvas {
 	margin: 0;
@@ -90,8 +90,8 @@ body {
 	z-index: 1;
 }
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="2048.icon.png" />
-<link rel="apple-touch-icon" href="2048.apple-touch-icon.png"/>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 <script>(function(){var Orig=window.AudioContext||window.webkitAudioContext;if(!Orig){return;}var made=[];function shared(){try{var p=window.parent;if(p&&p!==window){var c=p.__gameAudioCtx;if(c&&c.state!=='closed'){return c;}}}catch(e){}return null;}function rebase(aw){if(!aw||aw.__rebased){return;}var add=aw.addModule.bind(aw);aw.addModule=function(u,o){return add(new URL(u,document.baseURI).href,o);};aw.__rebased=true;}function Ctx(opts){var c=shared();if(c){rebase(c.audioWorklet);if(c.state!=='running'){c.resume().catch(function(){});}}else{c=new Orig(opts);}made.push(c);return c;}Ctx.prototype=Orig.prototype;window.AudioContext=Ctx;if(window.webkitAudioContext){window.webkitAudioContext=Ctx;}function unlock(){for(var i=0;i<made.length;i++){if(made[i].state!=='running'){made[i].resume().catch(function(){});}}}['touchstart','touchend','pointerdown','pointerup','mousedown','keydown','click'].forEach(function(t){window.addEventListener(t,unlock,{capture:true,passive:true});});})();</script>
 	</head>
 	<body>
@@ -104,14 +104,14 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="2048.png" alt="">
+			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="2048.js"></script>
+		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"2048","experimentalVK":false,"fileSizes":{"2048.pck":45120,"2048.wasm":37902138},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":80708,"index.wasm":39509339},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
