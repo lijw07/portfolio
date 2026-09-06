@@ -1,4 +1,3 @@
-// Page content — edit copy here, not in App.tsx.
 const PUBLIC = process.env.PUBLIC_URL || '';
 
 export const BIO =
@@ -7,7 +6,6 @@ export const BIO =
 export const LINKS = {
   github: 'https://github.com/lijw07',
   linkedin: 'https://www.linkedin.com/in/jai-li-va/',
-  /** Formspree endpoint — the address is configured on the form, never in the DOM. */
   contactEndpoint: 'https://formspree.io/f/meewbgqz',
 };
 
@@ -28,20 +26,15 @@ export const EXPERIENCE: Experience[] = [
   },
 ];
 
-/** What the primary button on a project card opens. */
 export interface Media { title: string; url: string; video: boolean }
 
 export interface Project {
   title: string;
   tag: string;
   description: string;
-  /** Stack tokens joined with " · " in the mono meta line. */
   stack: string[];
-  /** Trailing accent token (a year range) — mutually exclusive with `source`. */
   when?: string;
-  /** GitHub repo, rendered as "source →". */
   source?: string;
-  /** Primary button label + what it opens. */
   action?: { label: string; media: Media };
 }
 

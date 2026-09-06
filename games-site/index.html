@@ -15,7 +15,6 @@
   <link href="https://fonts.cdnfonts.com/css/pixellari" rel="stylesheet" />
 
   <style>
-    /* ── Reset & Variables ── */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
@@ -48,7 +47,6 @@
       overflow-x: hidden;
     }
 
-    /* ── Theme Toggle ── */
     .theme-toggle {
       position: fixed;
       top: 20px;
@@ -70,7 +68,6 @@
       color: var(--bg-color);
     }
 
-    /* ── Back Link ── */
     .back-link {
       position: fixed;
       top: 20px;
@@ -90,7 +87,6 @@
       color: var(--bg-color);
     }
 
-    /* ── Hero ── */
     .hero {
       text-align: center;
       padding: 120px 40px 60px;
@@ -116,7 +112,6 @@
       50% { opacity: 0; }
     }
 
-    /* ── Games Grid ── */
     .games-section {
       max-width: 1200px;
       margin: 0 auto;
@@ -129,7 +124,6 @@
       gap: calc(4 * var(--scale-factor));
     }
 
-    /* ── Game Card ── */
     .game-card {
       border: 2px solid var(--card-border);
       background: var(--card-bg);
@@ -250,7 +244,6 @@
       color: var(--text-color);
     }
 
-    /* ── Footer ── */
     .footer {
       text-align: center;
       padding: 40px;
@@ -265,7 +258,6 @@
       color: var(--text-color);
     }
 
-    /* ── Fade-in Animation ── */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -277,7 +269,6 @@
       transform: translateY(0);
     }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       .game-card {
         grid-template-columns: 1fr;
@@ -329,7 +320,6 @@
   </footer>
 
   <script>
-    /* ── Theme ── */
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -344,7 +334,6 @@
       localStorage.setItem('theme', next);
     }
 
-    /* ── Typing Effect ── */
     const title = 'Games';
     let i = 0;
     const heroEl = document.getElementById('hero-title');
@@ -358,7 +347,6 @@
     }
     type();
 
-    /* ── Game Data ── */
     const games = [
       {
         title: 'Paws and Hooves',
@@ -391,7 +379,6 @@
       }
     ];
 
-    /* ── Render Cards ── */
     const grid = document.getElementById('games-grid');
 
     games.forEach((game, index) => {
@@ -424,7 +411,6 @@
       grid.appendChild(card);
     });
 
-    /* ── Scroll Fade ── */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { buildDiagram, Roll, Row, STAGE_H, STAGE_W } from '../schema';
 
-/** The four `+` registration marks every blueprint object carries. */
 export function Corners() {
   return (
     <>
@@ -31,11 +30,6 @@ function Rows({ rows }: { rows: Row[] }) {
 
 interface Props { roll: Roll }
 
-/**
- * The hero ER diagram. Authored on a fixed 1120×680 stage and scaled down
- * with transform: scale() to fit its container, so it never scrolls
- * horizontally. All geometry comes from buildDiagram() in schema.ts.
- */
 export default function SchemaDiagram({ roll }: Props) {
   const diagram = useMemo(() => buildDiagram(roll), [roll]);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -94,7 +88,6 @@ export default function SchemaDiagram({ roll }: Props) {
             ))}
           </svg>
 
-          {/* PERSON — the one solid object on the stage */}
           <div
             className="card blueprint hoverable ent"
             style={{ left: person.slot.l, top: person.slot.t, width: person.slot.w, animationDelay: '.1s' }}
@@ -107,7 +100,6 @@ export default function SchemaDiagram({ roll }: Props) {
             <Rows rows={person.rows} />
           </div>
 
-          {/* Satellites — each links to its section */}
           {diagram.satellites.map(ent => (
             <a
               key={ent.id}

@@ -7,12 +7,10 @@ import { ContactModal, PlayModal } from './components/Modals';
 import { primeGameAudio } from './gameAudio';
 
 function App() {
-  // One roll per page load: dialect, layout, entity placement, accent hue.
   const [visit] = useState<Roll>(roll);
   const [playing, setPlaying] = useState<Media | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
 
-  // The accent ramp is derived from --accent-h in CSS; set it before first paint.
   useEffect(() => {
     document.documentElement.style.setProperty('--accent-h', String(visit.hue));
   }, [visit.hue]);
@@ -50,7 +48,6 @@ function App() {
       </div>
 
       <main className="main">
-        {/* ── EXPERIENCE ─────────────────────────────────────────────────── */}
         <section id="experience">
           <h2 className="section-title">Experience</h2>
           <div className="kicker">SELECT * FROM experience ORDER BY period DESC;</div>
@@ -73,7 +70,6 @@ function App() {
           </div>
         </section>
 
-        {/* ── PROJECTS ───────────────────────────────────────────────────── */}
         <section id="projects">
           <h2 className="section-title">Projects</h2>
           <div className="kicker">SELECT * FROM projects WHERE person_id = 'jai_li';</div>
@@ -102,7 +98,6 @@ function App() {
           </div>
         </section>
 
-        {/* ── SKILLS ─────────────────────────────────────────────────────── */}
         <section id="skills">
           <h2 className="section-title">Skills</h2>
           <div className="kicker">SELECT name FROM skills GROUP BY category;</div>
@@ -121,7 +116,6 @@ function App() {
           </div>
         </section>
 
-        {/* ── EDUCATION ──────────────────────────────────────────────────── */}
         <section id="education">
           <h2 className="section-title">Education</h2>
           <div className="kicker">SELECT degree, school FROM education;</div>
@@ -137,7 +131,6 @@ function App() {
           </div>
         </section>
 
-        {/* ── CONTACT ────────────────────────────────────────────────────── */}
         <section id="contact" className="contact">
           <div className="kicker">COMMIT; -- let's build something</div>
           <h2>Get in touch</h2>

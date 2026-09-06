@@ -1,16 +1,6 @@
-/* ─────────────────────────────────────────────────────────────────────────────
-   Industry — design-system tokens and component classes.
-   Ported from the design handoff's industry-styles.css + prototype helmet.
-   The accent ramp is derived from --accent-h (set per visit at boot), so any
-   of the six hues has identical contrast in light and dark mode.
-   ───────────────────────────────────────────────────────────────────────── */
-
 :root {
   --accent-h: 250;
 
-  /* Ground, text and neutrals are near-gray tints of the same hue, so the
-     whole page shifts with the accent while lightness (and so contrast) stays
-     identical to the original #f2f2f3 / #1d1f20 pairing. */
   --ground-c: 0.012;
   --color-bg: oklch(95.8% var(--ground-c) var(--accent-h));
   --color-surface: oklch(93% var(--ground-c) var(--accent-h));
@@ -63,8 +53,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* The dark neutrals already carried a steel cast (#15171b, #4a525e…);
-       here that cast follows the accent hue at the same lightness. */
     --ground-c: 0.014;
     --color-bg: oklch(17.5% var(--ground-c) var(--accent-h));
     --color-surface: oklch(20% var(--ground-c) var(--accent-h));
@@ -98,14 +86,12 @@
   }
 }
 
-/* ── base ─────────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  /* --sbw is set while a modal locks scrolling, so the content doesn't shift when the scrollbar disappears. */
   padding-right: var(--sbw, 0px);
   background: var(--color-bg);
   color: var(--color-text);
@@ -136,7 +122,6 @@ section[id] { scroll-margin-top: 64px; }
 
 .mono { font-family: var(--font-mono); }
 
-/* ── blueprint frame: hairline border + four registration marks ───────────── */
 .blueprint {
   position: relative;
   border: 1px solid var(--color-divider);
@@ -161,7 +146,6 @@ section[id] { scroll-margin-top: 64px; }
 .blueprint > .corner.bl { bottom: -6px; left: -6px; }
 .blueprint > .corner.br { bottom: -6px; right: -6px; }
 
-/* ── cards ────────────────────────────────────────────────────────────────── */
 .card {
   display: flex;
   flex-direction: column;
@@ -174,7 +158,6 @@ section[id] { scroll-margin-top: 64px; }
 .card.hoverable { transition: border-color .15s ease, box-shadow .15s ease; }
 .card.hoverable:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
 
-/* ── buttons ──────────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -204,7 +187,6 @@ section[id] { scroll-margin-top: 64px; }
 .btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); color: var(--color-accent); }
 .btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
 
-/* ── forms ────────────────────────────────────────────────────────────────── */
 .field > label {
   display: block;
   font-size: 12px;
@@ -228,7 +210,6 @@ section[id] { scroll-margin-top: 64px; }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 textarea.input { min-height: 110px; resize: vertical; }
 
-/* ── tags ─────────────────────────────────────────────────────────────────── */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -240,7 +221,6 @@ textarea.input { min-height: 110px; resize: vertical; }
 .tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
 .tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
 
-/* ── tables ───────────────────────────────────────────────────────────────── */
 .table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .table th {
   text-align: left;
@@ -261,7 +241,6 @@ textarea.input { min-height: 110px; resize: vertical; }
   .table th, .table td { border-color: var(--color-divider); }
 }
 
-/* ── keyframes ────────────────────────────────────────────────────────────── */
 @keyframes drawLine { to { stroke-dashoffset: 0; } }
 @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pop { from { opacity: 0; } to { opacity: 1; } }

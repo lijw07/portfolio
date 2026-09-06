@@ -1,26 +1,21 @@
-// Schema-diagram model: the per-visit random roll and everything derived from
-// it (entity rows per dialect, slot layout, connector geometry, labels).
-// Pure functions only — no DOM, no React — so it's trivially unit-testable.
-
 export type Dialect = 'sql' | 'mongo' | 'dynamo';
 export type SectionId = 'experience' | 'projects' | 'skills' | 'education' | 'contact';
 
 export const STAGE_W = 1120;
 export const STAGE_H = 680;
 
-/** One roll per page load; everything on the page renders from this. */
 export interface Roll {
   dialect: Dialect;
-  layout: number;          // 0-3
-  personSlot: number;      // 0-5
-  order: SectionId[];      // the five satellites, shuffled
-  rev: string;             // a.b.c
-  hue: number;             // OKLCH hue for the accent ramp
+  layout: number;
+  personSlot: number;
+  order: SectionId[];
+  rev: string;
+  hue: number;
 }
 
 export const DIALECTS: Dialect[] = ['sql', 'mongo', 'dynamo'];
 export const SECTIONS: SectionId[] = ['experience', 'projects', 'skills', 'education', 'contact'];
-export const HUES = [250, 205, 160, 85, 45, 310]; // steel, teal, green, olive, rust, violet
+export const HUES = [250, 205, 160, 85, 45, 310];
 
 const randInt = (n: number) => Math.floor(Math.random() * n);
 const pick = <T>(xs: T[]): T => xs[randInt(xs.length)];
@@ -50,14 +45,10 @@ export const ENGINE_LABEL: Record<Dialect, string> = {
   dynamo: 'dynamodb',
 };
 
-/** Nav brand. The engine name from the prototype was dropped by request; the random rev stays. */
 export function brandLine(r: Roll): string {
   return `JAI_LI.SCHEMA · rev ${r.rev}`;
 }
 
-// ── entity definitions ───────────────────────────────────────────────────────
-
-/** [key, marker (PK/FK/''), sql type, accent?] */
 type Field = [string, string, string, boolean?];
 
 interface EntityDef { count: number; fields: Field[] }
@@ -92,20 +83,17 @@ const UNITS: Record<Dialect, [string, string]> = {
   sql: ['row', 'rows'], mongo: ['doc', 'docs'], dynamo: ['item', 'items'],
 };
 
-/** Cardinality between PERSON and each satellite: [near-person, far]. */
 const CARDINALITY: Record<SectionId, [string, string]> = {
   experience: ['1', 'N'], projects: ['N', 'M'], skills: ['N', 'M'], education: ['1', 'N'], contact: ['1', '1'],
 };
 
-// ── rendered row model ───────────────────────────────────────────────────────
-
 export interface Row {
   key: string;
-  marker: string;      // PK / FK / ref / ''
+  marker: string;
   value: string;
-  accent: boolean;     // value drawn in accent-700
-  indent: boolean;     // mongo inner rows
-  keyBg: boolean;      // dynamo PK/SK rows
+  accent: boolean;
+  indent: boolean;
+  keyBg: boolean;
 }
 
 const row = (key: string, marker: string, value: string, accent = false, indent = false, keyBg = false): Row =>
@@ -142,11 +130,8 @@ function badge(count: number, d: Dialect): string {
   return `${count} ${count === 1 ? one : many}`;
 }
 
-// ── layout ───────────────────────────────────────────────────────────────────
-
 export interface Slot { l: number; t: number; w: number }
 
-/** Four handcrafted six-slot arrangements on the 1120×680 stage. */
 export const LAYOUTS: Slot[][] = [
   [{ l: 60, t: 60, w: 260 }, { l: 810, t: 60, w: 260 }, { l: 40, t: 430, w: 260 }, { l: 830, t: 430, w: 260 }, { l: 450, t: 460, w: 240 }, { l: 440, t: 180, w: 260 }],
   [{ l: 40, t: 40, w: 260 }, { l: 40, t: 290, w: 260 }, { l: 340, t: 450, w: 260 }, { l: 820, t: 40, w: 260 }, { l: 820, t: 290, w: 260 }, { l: 430, t: 40, w: 260 }],
@@ -156,7 +141,6 @@ export const LAYOUTS: Slot[][] = [
 
 const PERSON_W = 260;
 const PERSON_H = 215;
-/** Rise-in delays for the five satellites, in order. */
 const DELAYS = [0.6, 0.9, 1.2, 1.5, 1.8];
 
 export interface Entity {
@@ -211,21 +195,18 @@ export function buildDiagram(r: Roll): Diagram {
     let d_: string;
 
     if (sl.l + sl.w <= P.x + 20) {
-      // satellite is left of PERSON: elbow out of PERSON's left edge
       const A = { x: sl.l + sl.w, y: sl.t + 70 };
       const sy = clampY(A.y), sx = P.x, mx = (sx + A.x) / 2;
       d_ = `M ${sx} ${sy} L ${mx} ${sy} L ${mx} ${A.y} L ${A.x} ${A.y}`;
       labels.push({ x: sx - 10, y: sy - 6, anchor: 'end', text: near, delay: labelDelay });
       labels.push({ x: A.x + 10, y: A.y - 6, anchor: 'start', text: far, delay: labelDelay });
     } else if (sl.l >= P.x + P.w - 20) {
-      // satellite is right of PERSON
       const A = { x: sl.l, y: sl.t + 70 };
       const sy = clampY(A.y), sx = P.x + P.w, mx = (sx + A.x) / 2;
       d_ = `M ${sx} ${sy} L ${mx} ${sy} L ${mx} ${A.y} L ${A.x} ${A.y}`;
       labels.push({ x: sx + 10, y: sy - 6, anchor: 'start', text: near, delay: labelDelay });
       labels.push({ x: A.x - 10, y: A.y - 6, anchor: 'end', text: far, delay: labelDelay });
     } else {
-      // satellite is above or below: vertical elbow with one combined label
       const cx = sl.l + sl.w / 2;
       const below = sl.t > P.y + P.h / 2;
       const A = below ? { x: cx, y: sl.t } : { x: cx, y: sl.t + 170 };

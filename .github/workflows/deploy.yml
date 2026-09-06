@@ -4,7 +4,6 @@ on:
   push:
     branches: [ master ]
 
-# Sets permissions for deployment
 permissions:
   contents: write
   pages: write
@@ -18,7 +17,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v5
       with:
-        # Fetch full history for Git LFS
         fetch-depth: 0
         lfs: true
         token: ${{ secrets.GITHUB_TOKEN }}
