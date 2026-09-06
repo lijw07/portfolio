@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { buildDiagram, Roll, Row, STAGE_H, STAGE_W } from '../schema';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { buildDiagram, Roll, routeDiagram, Row, STAGE_H, STAGE_W } from '../schema';
 
 export function Corners() {
   return (
@@ -35,6 +35,14 @@ export default function SchemaDiagram({ roll }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(STAGE_W);
 
+  const boxes = useRef(new Map<string, HTMLElement>());
+  const [heights, setHeights] = useState<Record<string, number>>({});
+
+  const setBox = useCallback((key: string) => (el: HTMLElement | null) => {
+    if (el) boxes.current.set(key, el);
+    else boxes.current.delete(key);
+  }, []);
+
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -44,6 +52,32 @@ export default function SchemaDiagram({ roll }: Props) {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      setHeights(prev => {
+        const next: Record<string, number> = {};
+        let changed = false;
+        boxes.current.forEach((el, key) => {
+          const h = el.offsetHeight;
+          next[key] = h;
+          if (Math.abs((prev[key] ?? 0) - h) > 0.5) changed = true;
+        });
+        return changed || Object.keys(next).length !== Object.keys(prev).length ? next : prev;
+      });
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    boxes.current.forEach(el => ro.observe(el));
+
+    const fonts = (document as { fonts?: { ready?: Promise<unknown> } }).fonts;
+    fonts?.ready?.then(measure).catch(() => {});
+
+    return () => ro.disconnect();
+  }, [diagram]);
+
+  const { connectors, labels } = useMemo(() => routeDiagram(diagram, heights), [diagram, heights]);
 
   const scale = Math.min(1, width / STAGE_W);
   const frameStyle: React.CSSProperties = { height: STAGE_H * scale };
@@ -66,7 +100,7 @@ export default function SchemaDiagram({ roll }: Props) {
             viewBox={`0 0 ${STAGE_W} ${STAGE_H}`}
             aria-hidden="true"
           >
-            {diagram.connectors.map((c, i) => (
+            {connectors.map((c, i) => (
               <path
                 key={i}
                 d={c.d}
@@ -75,7 +109,7 @@ export default function SchemaDiagram({ roll }: Props) {
                 style={{ animationDelay: `${c.delay}s` }}
               />
             ))}
-            {diagram.labels.map((lb, i) => (
+            {labels.map((lb, i) => (
               <text
                 key={i}
                 x={lb.x}
@@ -89,6 +123,7 @@ export default function SchemaDiagram({ roll }: Props) {
           </svg>
 
           <div
+            ref={setBox('person')}
             className="card blueprint hoverable ent"
             style={{ left: person.slot.l, top: person.slot.t, width: person.slot.w, animationDelay: '.1s' }}
           >
@@ -103,6 +138,7 @@ export default function SchemaDiagram({ roll }: Props) {
           {diagram.satellites.map(ent => (
             <a
               key={ent.id}
+              ref={setBox(ent.id)}
               href={ent.href}
               className="card blueprint hoverable ent ent-link"
               style={{ left: ent.slot.l, top: ent.slot.t, width: ent.slot.w, animationDelay: `${ent.delay}s` }}
