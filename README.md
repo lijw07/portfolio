@@ -41,7 +41,7 @@ src/
 public/
 ├── index.html                  document shell, meta tags, JSON-LD
 ├── analytics.js                Google Analytics bootstrap
-├── 2048/, tower-defense/, pacman/
+├── 2048/, tower-defense/, pacman/, flappy-bird/
 │                               Godot web exports, embedded in the play modal
 ├── GODOT-LICENSE.txt           MIT notice for the Godot runtime files above
 └── Index_Paws_And_Hooves_Trailer_compressed.mp4

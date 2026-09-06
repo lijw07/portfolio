@@ -88,6 +88,14 @@ export const PROJECTS: Project[] = [
     action: { label: 'Play in browser', media: { title: 'Pac-Man', url: `${PUBLIC}/pacman/index.html`, video: false } },
   },
   {
+    title: 'Flappy Bird',
+    tag: 'game',
+    description: 'Flappy Bird rebuilt in Godot 4 with typed GDScript: single-impulse flap physics with tilt-on-dive, randomized pipe gaps, bronze-to-platinum medals, a persistent best score, and a fixed-height playfield that fills any phone, desktop, or iframe without letterboxing.',
+    stack: ['godot 4', 'gdscript'],
+    source: 'https://github.com/lijw07/flappybird',
+    action: { label: 'Play in browser', media: { title: 'Flappy Bird', url: `${PUBLIC}/flappy-bird/index.html`, video: false } },
+  },
+  {
     title: 'CoStar Extraction Pipeline',
     tag: 'pipeline',
     description: 'Dockerized Python/AWS serverless pipeline (Chalice, Lambda, S3) that ingested and translated 20,000+ multilingual lease PDFs; SNS/SQS queuing and ML models extracting tenant names, addresses, rent, and lease terms.',
