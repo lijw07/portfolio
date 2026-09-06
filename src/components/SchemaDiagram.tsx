@@ -1,16 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { buildDiagram, Roll, routeDiagram, Row, STAGE_H, STAGE_W } from '../schema';
-
-export function Corners() {
-  return (
-    <>
-      <i className="corner tl" aria-hidden="true" />
-      <i className="corner tr" aria-hidden="true" />
-      <i className="corner bl" aria-hidden="true" />
-      <i className="corner br" aria-hidden="true" />
-    </>
-  );
-}
+import Corners from './Corners';
 
 function Rows({ rows }: { rows: Row[] }) {
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Corners } from './SchemaDiagram';
+import Corners from './Corners';
 import { Media, LINKS } from '../content';
 import { releaseGameAudio } from '../gameAudio';
 

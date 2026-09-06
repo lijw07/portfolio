@@ -1,10 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import { brandLine, roll, Roll, SECTIONS } from './schema';
-import { BIO, EDUCATION, EXPERIENCE, LINKS, Media, PROJECTS, SKILLS } from './content';
-import SchemaDiagram, { Corners } from './components/SchemaDiagram';
+import { BIO, EDUCATION, EXPERIENCE, LINKS, Media, ProjectAction, PROJECTS, SKILLS } from './content';
+import SchemaDiagram from './components/SchemaDiagram';
+import Corners from './components/Corners';
 import { ContactModal, PlayModal } from './components/Modals';
 import { primeGameAudio } from './gameAudio';
+
+function PlayButton({ action, onOpen }: { action: ProjectAction; onOpen: (media: Media) => void }) {
+  return (
+    <button className="btn btn-primary" onClick={() => onOpen(action.media)}>
+      {action.label}
+    </button>
+  );
+}
 
 function App() {
   const [visit] = useState<Roll>(roll);
@@ -88,11 +97,7 @@ function App() {
                     ? <a href={p.source} target="_blank" rel="noopener noreferrer">source →</a>
                     : <span className="k">{p.when}</span>}
                 </div>
-                {p.action && (
-                  <button className="btn btn-primary" onClick={() => openPlay(p.action!.media)}>
-                    {p.action.label}
-                  </button>
-                )}
+                {p.action && <PlayButton action={p.action} onOpen={openPlay} />}
               </article>
             ))}
           </div>

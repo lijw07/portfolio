@@ -1,3 +1,5 @@
+import { EDUCATION, EXPERIENCE, LINKS, PROJECTS, SKILLS } from './content';
+
 export type Dialect = 'sql' | 'mongo' | 'dynamo';
 export type SectionId = 'experience' | 'projects' | 'skills' | 'education' | 'contact';
 
@@ -13,9 +15,9 @@ export interface Roll {
   hue: number;
 }
 
-export const DIALECTS: Dialect[] = ['sql', 'mongo', 'dynamo'];
+const DIALECTS: Dialect[] = ['sql', 'mongo', 'dynamo'];
 export const SECTIONS: SectionId[] = ['experience', 'projects', 'skills', 'education', 'contact'];
-export const HUES = [250, 205, 160, 85, 45, 310];
+const HUES = [250, 205, 160, 85, 45, 310];
 
 const randInt = (n: number) => Math.floor(Math.random() * n);
 const pick = <T>(xs: T[]): T => xs[randInt(xs.length)];
@@ -39,12 +41,6 @@ export function roll(): Roll {
   };
 }
 
-export const ENGINE_LABEL: Record<Dialect, string> = {
-  sql: 'postgresql 16',
-  mongo: 'mongodb 7',
-  dynamo: 'dynamodb',
-};
-
 export function brandLine(r: Roll): string {
   return `JAI_LI.SCHEMA · rev ${r.rev}`;
 }
@@ -54,11 +50,11 @@ type Field = [string, string, string, boolean?];
 interface EntityDef { count: number; fields: Field[] }
 
 const ENTITIES: Record<SectionId, EntityDef> = {
-  experience: { count: 2, fields: [['person_id', 'FK', 'uuid'], ['role', '', 'varchar'], ['company', '', 'varchar'], ['period', '', 'daterange']] },
-  projects:   { count: 6, fields: [['person_id', 'FK', 'uuid'], ['title', '', 'varchar'], ['stack', '', 'varchar[]'], ['status', '', 'shipped | active']] },
-  skills:     { count: 28, fields: [['person_id', 'FK', 'uuid'], ['name', '', 'varchar'], ['category', '', 'enum(5)']] },
-  education:  { count: 3, fields: [['person_id', 'FK', 'uuid'], ['degree', '', 'MS | BS | AS'], ['school', '', 'varchar']] },
-  contact:    { count: 3, fields: [['github', '', 'url'], ['linkedin', '', 'url'], ['email', '', 'varchar']] },
+  experience: { count: EXPERIENCE.length, fields: [['person_id', 'FK', 'uuid'], ['role', '', 'varchar'], ['company', '', 'varchar'], ['period', '', 'daterange']] },
+  projects:   { count: PROJECTS.length, fields: [['person_id', 'FK', 'uuid'], ['title', '', 'varchar'], ['stack', '', 'varchar[]'], ['status', '', 'shipped | active']] },
+  skills:     { count: SKILLS.reduce((n, g) => n + g.items.length, 0), fields: [['person_id', 'FK', 'uuid'], ['name', '', 'varchar'], ['category', '', 'enum(5)']] },
+  education:  { count: EDUCATION.length, fields: [['person_id', 'FK', 'uuid'], ['degree', '', 'MS | BS | AS'], ['school', '', 'varchar']] },
+  contact:    { count: Object.keys(LINKS).length, fields: [['github', '', 'url'], ['linkedin', '', 'url'], ['email', '', 'varchar']] },
 };
 
 const PERSON_FIELDS: Record<Dialect, Field[]> = {
@@ -119,7 +115,7 @@ function personRows(d: Dialect): Row[] {
   return d === 'mongo' ? wrapBraces(rows) : rows;
 }
 
-export function entityTitle(name: string, d: Dialect): string {
+function entityTitle(name: string, d: Dialect): string {
   if (d === 'sql') return name.toUpperCase();
   if (d === 'mongo') return `db.${name}`;
   return name;
@@ -129,9 +125,9 @@ function badge(count: number, d: Dialect): string {
   const [one, many] = UNITS[d];
   return `${count} ${count === 1 ? one : many}`;
 }
-export interface Slot { l: number; t: number; w: number }
+interface Slot { l: number; t: number; w: number }
 
-export const LAYOUTS: Slot[][] = [
+const LAYOUTS: Slot[][] = [
   [{ l: 60, t: 60, w: 260 }, { l: 810, t: 60, w: 260 }, { l: 40, t: 430, w: 260 }, { l: 830, t: 430, w: 260 }, { l: 450, t: 460, w: 240 }, { l: 440, t: 180, w: 260 }],
   [{ l: 40, t: 40, w: 260 }, { l: 40, t: 290, w: 260 }, { l: 340, t: 450, w: 260 }, { l: 820, t: 40, w: 260 }, { l: 820, t: 290, w: 260 }, { l: 430, t: 40, w: 260 }],
   [{ l: 160, t: 30, w: 260 }, { l: 720, t: 30, w: 260 }, { l: 60, t: 330, w: 260 }, { l: 850, t: 330, w: 240 }, { l: 460, t: 460, w: 240 }, { l: 440, t: 160, w: 260 }],
@@ -148,13 +144,13 @@ const ROW_H = 27.4;
 const BADGE_H = 23;
 const TITLE_H: Record<Dialect, number> = { sql: 26.4, mongo: 21, dynamo: 20.2 };
 
-export function entityHeight(rowCount: number, d: Dialect, isPerson: boolean): number {
+function entityHeight(rowCount: number, d: Dialect, isPerson: boolean): number {
   const head = isPerson ? TITLE_H[d] : Math.max(TITLE_H[d], BADGE_H);
   const rule = !isPerson && d === 'dynamo' ? 2 : 1;
   return BORDER + HEAD_PAD + head + rule + BODY_PAD + rowCount * ROW_H;
 }
 
-export interface Entity {
+interface Entity {
   id: SectionId;
   href: string;
   title: string;
@@ -165,11 +161,11 @@ export interface Entity {
   delay: number;
 }
 
-export interface Connector { d: string; delay: number }
+interface Connector { d: string; delay: number }
 
-export interface Label { x: number; y: number; anchor: 'start' | 'middle' | 'end'; text: string; delay: number }
+interface Label { x: number; y: number; anchor: 'start' | 'middle' | 'end'; text: string; delay: number }
 
-export interface Diagram {
+interface Diagram {
   dialect: Dialect;
   person: { title: string; badge: string; rows: Row[]; slot: Slot; height: number };
   satellites: Entity[];
@@ -211,7 +207,7 @@ export function buildDiagram(r: Roll): Diagram {
   };
 }
 
-export interface Rect { x: number; y: number; w: number; h: number }
+interface Rect { x: number; y: number; w: number; h: number }
 
 type Side = 'left' | 'right' | 'top' | 'bottom';
 
@@ -677,7 +673,7 @@ function spreadLabels(labels: Label[]): Label[] {
   return placed;
 }
 
-export interface Routing { connectors: Connector[]; labels: Label[] }
+interface Routing { connectors: Connector[]; labels: Label[] }
 
 export function routeDiagram(diagram: Diagram, heights: Record<string, number> = {}): Routing {
   const p = diagram.person;
