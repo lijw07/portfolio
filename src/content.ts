@@ -28,6 +28,8 @@ export const EXPERIENCE: Experience[] = [
 
 export interface Media { title: string; url: string; video: boolean }
 
+export interface ProjectAction { label: string; media: Media }
+
 export interface Project {
   title: string;
   tag: string;
@@ -35,7 +37,7 @@ export interface Project {
   stack: string[];
   when?: string;
   source?: string;
-  action?: { label: string; media: Media };
+  action?: ProjectAction;
 }
 
 export const PROJECTS: Project[] = [

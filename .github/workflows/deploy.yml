@@ -12,7 +12,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v5
@@ -20,35 +20,31 @@ jobs:
         fetch-depth: 0
         lfs: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        
+
     - name: Checkout LFS objects
       run: git lfs checkout
-      
+
     - name: Setup Node.js
       uses: actions/setup-node@v5
       with:
         node-version: '18'
         cache: 'npm'
-        
+
     - name: Install dependencies
       run: npm ci
-      
+
     - name: Build application
       run: npm run build
-      
-    - name: Configure Git LFS for deployment
+
+    - name: Commit build output
       run: |
         cd build
         git init
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git lfs install
-        git lfs track "unity-build/*.data"
-        git lfs track "unity-build/*.wasm"
-        git add .gitattributes
         git add .
         git commit -m "Deploy to GitHub Pages"
-        
+
     - name: Deploy to GitHub Pages
       run: |
         cd build

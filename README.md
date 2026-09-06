@@ -28,21 +28,42 @@ Every page load rolls once (`roll()` in `src/schema.ts`) and renders consistentl
 
 ```
 src/
-├── index.css                   # Design tokens + shared component classes (.blueprint, .card, .btn, .tag, .table)
-├── App.css                     # Page layout and section styles
-├── App.tsx                     # Nav, hero, sections, modal wiring
-├── content.ts                  # All copy: bio, experience, projects, skills, education, links
-├── schema.ts                   # Roll + diagram model (dialect rows, layouts, connector geometry) — pure functions
+├── index.css                   design tokens + shared component classes (.blueprint, .card, .btn, .tag, .table)
+├── App.css                     page layout and section styles
+├── App.tsx                     nav, hero, sections, modal wiring
+├── content.ts                  all copy: bio, experience, projects, skills, education, links
+├── schema.ts                   roll + diagram model (dialect rows, layouts, connector routing) — pure functions
+├── gameAudio.ts                primes an AudioContext on the play click so iOS Safari lets the game play sound
 └── components/
-    ├── SchemaDiagram.tsx       # Scaled ER diagram (ResizeObserver → transform: scale)
-    └── Modals.tsx              # Play/trailer modal and Formspree contact form
+    ├── Corners.tsx             the four + registration marks used by every blueprint card
+    ├── SchemaDiagram.tsx       scaled ER diagram (ResizeObserver → transform: scale)
+    └── Modals.tsx              play/trailer modal and Formspree contact form
 public/
-├── tower-defense/, 2048/       # Godot web exports, embedded in the play modal
-├── paws-and-hooves/            # Unity WebGL build
+├── index.html                  document shell, meta tags, JSON-LD
+├── analytics.js                Google Analytics bootstrap
+├── 2048/, tower-defense/, pacman/
+│                               Godot web exports, embedded in the play modal
+├── GODOT-LICENSE.txt           MIT notice for the Godot runtime files above
 └── Index_Paws_And_Hooves_Trailer_compressed.mp4
 ```
 
 Edit copy in `src/content.ts`; retune the look in `src/index.css`.
+
+## Adding a Godot game
+
+1. Export the Web preset from the Godot editor with the executable name `index`.
+2. Copy the export (`index.html`, `index.js`, `index.wasm`, `index.pck`, both
+   `index.audio.*.worklet.js` files, and the PNG icons) into `public/<game>/`.
+3. Add an iOS audio handoff to the shell: copy the `<script>` in the `<head>` of
+   `public/tower-defense/index.html` into the new `index.html` — or set it as
+   `html/head_include` in the game's `export_presets.cfg` so every export carries it.
+4. Add a card to `PROJECTS` in `src/content.ts`:
+
+   ```ts
+   action: { label: 'Play in browser', media: { title: 'Name', url: `${PUBLIC}/<game>/index.html`, video: false } }
+   ```
+
+(2048 predates this convention and keeps its `2048.*` file names.)
 
 ## Contact
 
@@ -54,9 +75,9 @@ appears in the DOM. Change the destination via `LINKS.contactEndpoint` in
 
 ```bash
 npm install
-npm start        # http://localhost:3000/portfolio
+npm start
 npm run build
-npm run deploy   # gh-pages
+npm run deploy
 ```
 
 React 19 + TypeScript on Create React App; deployed to GitHub Pages by the
