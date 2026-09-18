@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>TowerDefence</title>
+		<title>tanks</title>
 		<style>
 html, body, #canvas {
 	margin: 0;
@@ -93,6 +93,7 @@ body {
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 <script>(function(){var Orig=window.AudioContext||window.webkitAudioContext;if(!Orig){return;}var made=[];function usable(c){return c&&c.state!=='closed';}function shared(){try{var p=window.parent;if(p&&p!==window){var c=p.__gameAudioCtx;if(usable(c)){return c;}}}catch(e){}return null;}function rebase(aw){if(!aw||aw.__rebased){return;}var add=aw.addModule.bind(aw);aw.addModule=function(u,o){return add(new URL(u,document.baseURI).href,o);};aw.__rebased=true;}function revive(c){if(c.state!=='running'&&c.state!=='closed'){c.resume().catch(function(){});}}function watch(c){if(c.__watched){return;}c.addEventListener('statechange',function(){revive(c);});c.__watched=true;}function Ctx(opts){var c=shared();if(c){rebase(c.audioWorklet);}else{c=new Orig(opts);}watch(c);revive(c);made.push(c);return c;}Ctx.prototype=Orig.prototype;window.AudioContext=Ctx;if(window.webkitAudioContext){window.webkitAudioContext=Ctx;}function unlock(){for(var i=0;i<made.length;i++){revive(made[i]);}}['touchstart','touchend','pointerdown','pointerup','mousedown','keydown','click'].forEach(function(t){window.addEventListener(t,unlock,{capture:true,passive:true});});})();</script>
+
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,7 +112,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":810512,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":6404080,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -174,6 +175,7 @@ const engine = new Engine(GODOT_CONFIG);
 			} catch (err) {
 				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
 			}
+			// There's a chance that installing the service worker would fix the issue
 			Promise.race([
 				serviceWorkerRegistrationPromise.then((registration) => {
 					if (registration != null) {
@@ -181,15 +183,18 @@ const engine = new Engine(GODOT_CONFIG);
 					}
 					return registration;
 				}).then(() => engine.installServiceWorker()),
+				// For some reason, `getRegistration()` can stall
 				new Promise((resolve) => {
 					setTimeout(() => resolve(), 2000);
 				}),
 			]).then(() => {
+				// Reload if there was no error.
 				window.location.reload();
 			}).catch((err) => {
 				console.error('Error while registering service worker:', err);
 			});
 		} else {
+			// Display the message as usual
 			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
 			displayFailureNotice(missingMsg + missing.join('\n'));
 		}
