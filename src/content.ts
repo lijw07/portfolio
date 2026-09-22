@@ -104,6 +104,14 @@ export const PROJECTS: Project[] = [
     action: { label: 'Play in browser', media: { title: 'Pocket Armor', url: `${PUBLIC}/pocket-armor/index.html`, video: false } },
   },
   {
+    title: 'Bomberman',
+    tag: 'game',
+    description: 'NES Bomberman rebuilt in Godot 4 with every campaign stage procedurally generated from a seeded RNG: the eight original enemy archetypes with their own speed, chase axis and wall-pass rules, chain-reacting blast propagation on an authoritative grid, hidden power-ups under bricks, and a battle mode against AI bombers that plan with a danger map and breadth-first safe-path search under a sudden-death pressure spiral.',
+    stack: ['godot 4', 'gdscript'],
+    source: 'https://github.com/lijw07/bomberman',
+    action: { label: 'Play in browser', media: { title: 'Bomberman', url: `${PUBLIC}/bomberman/index.html`, video: false } },
+  },
+  {
     title: 'CoStar Extraction Pipeline',
     tag: 'pipeline',
     description: 'Dockerized Python/AWS serverless pipeline (Chalice, Lambda, S3) that ingested and translated 20,000+ multilingual lease PDFs; SNS/SQS queuing and ML models extracting tenant names, addresses, rent, and lease terms.',
