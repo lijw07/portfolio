@@ -34,11 +34,22 @@ function Overlay({ onClose, narrow, play, children }: { onClose: () => void; nar
   );
 }
 
+const GAME_QUIT_MESSAGE = 'game-quit';
+
 export function PlayModal({ media, onClose }: { media: Media; onClose: () => void }) {
   useEffect(() => {
     if (media.video) return;
     return () => releaseGameAudio();
   }, [media.video]);
+
+  useEffect(() => {
+    if (media.video) return;
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin === window.location.origin && e.data === GAME_QUIT_MESSAGE) onClose();
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [media.video, onClose]);
 
   return (
     <Overlay onClose={onClose} play>
@@ -112,7 +123,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
         <div className="contact-sent">
           <div className="kicker">COMMIT; -- 1 row affected</div>
           <h3>Message sent</h3>
-          <p>Thanks for reaching out — I'll get back to you soon.</p>
+          <p>Thanks for reaching out. I'll get back to you soon.</p>
           <div className="contact-sent-btns">
             <button className="btn btn-secondary" onClick={() => setStatus('idle')}>Send another</button>
             <button className="btn btn-primary" onClick={onClose}>Done</button>
