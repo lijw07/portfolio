@@ -28,7 +28,7 @@ export const EXPERIENCE: Experience[] = [
 
 export interface Media { title: string; url: string; video: boolean }
 
-export interface ProjectAction { label: string; media: Media }
+export interface ProjectAction { label: string; media: Media; desktopOnly?: boolean }
 
 export interface Project {
   title: string;
@@ -110,6 +110,14 @@ export const PROJECTS: Project[] = [
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/galaxian',
     action: { label: 'Play in browser', media: { title: 'Galaxian', url: `${PUBLIC}/galaxian/index.html`, video: false } },
+  },
+  {
+    title: 'Tetris',
+    tag: 'game',
+    description: 'Tetris rebuilt in Godot 4 to the modern guideline: SRS rotation with standard wall kicks, a 7-piece bag randomizer, hold and ghost piece, the guideline gravity curve, a 0.5 s lock delay that resets on movement up to 15 times, line-clear and drop scoring that scales with level, and 19 original procedurally synthesized sound effects on their own audio bus.',
+    stack: ['godot 4', 'gdscript'],
+    source: 'https://github.com/lijw07/Tetris',
+    action: { label: 'Play in browser', media: { title: 'Tetris', url: `${PUBLIC}/tetris/index.html`, video: false }, desktopOnly: true },
   },
   {
     title: 'CoStar Extraction Pipeline',
