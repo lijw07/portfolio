@@ -41,7 +41,8 @@ src/
 public/
 ├── index.html                  document shell, meta tags, JSON-LD
 ├── analytics.js                Google Analytics bootstrap
-├── 2048/, tower-defense/, pacman/, flappy-bird/, pocket-armor/, galaxian/
+├── 2048/, tower-defense/, pacman/, flappy-bird/, pocket-armor/, galaxian/,
+│   tetris/
 │                               Godot web exports, embedded in the play modal
 ├── GODOT-LICENSE.txt           MIT notice for the Godot runtime files above
 └── Index_Paws_And_Hooves_Trailer_compressed.mp4
@@ -62,6 +63,9 @@ Edit copy in `src/content.ts`; retune the look in `src/index.css`.
    ```ts
    action: { label: 'Play in browser', media: { title: 'Name', url: `${PUBLIC}/<game>/index.html`, video: false } }
    ```
+
+   Add `desktopOnly: true` to the action when the game has no touch controls; on
+   phones and tablets its button then reads "No mobile support" and is disabled.
 
 5. For a Quit menu item on web, post `'game-quit'` to the parent window; the play
    modal closes when it receives it:

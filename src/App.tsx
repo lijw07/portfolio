@@ -7,7 +7,23 @@ import Corners from './components/Corners';
 import { ContactModal, PlayModal } from './components/Modals';
 import { primeGameAudio } from './gameAudio';
 
-function PlayButton({ action, onOpen }: { action: ProjectAction; onOpen: (media: Media) => void }) {
+const TOUCH_ONLY_QUERY = '(hover: none) and (pointer: coarse)';
+
+function useTouchOnly(): boolean {
+  const [touchOnly, setTouchOnly] = useState(() => window.matchMedia(TOUCH_ONLY_QUERY).matches);
+  useEffect(() => {
+    const query = window.matchMedia(TOUCH_ONLY_QUERY);
+    const update = () => setTouchOnly(query.matches);
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  return touchOnly;
+}
+
+function PlayButton({ action, onOpen, touchOnly }: { action: ProjectAction; onOpen: (media: Media) => void; touchOnly: boolean }) {
+  if (action.desktopOnly && touchOnly) {
+    return <button className="btn btn-secondary" disabled>No mobile support</button>;
+  }
   return (
     <button className="btn btn-primary" onClick={() => onOpen(action.media)}>
       {action.label}
@@ -19,6 +35,7 @@ function App() {
   const [visit] = useState<Roll>(roll);
   const [playing, setPlaying] = useState<Media | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
+  const touchOnly = useTouchOnly();
 
   useEffect(() => {
     document.documentElement.style.setProperty('--accent-h', String(visit.hue));
@@ -97,7 +114,7 @@ function App() {
                     ? <a href={p.source} target="_blank" rel="noopener noreferrer">source →</a>
                     : <span className="k">{p.when}</span>}
                 </div>
-                {p.action && <PlayButton action={p.action} onOpen={openPlay} />}
+                {p.action && <PlayButton action={p.action} onOpen={openPlay} touchOnly={touchOnly} />}
               </article>
             ))}
           </div>
