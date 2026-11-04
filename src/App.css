@@ -164,6 +164,8 @@
 .table-scroll .table { min-width: 640px; }
 .nowrap { white-space: nowrap; }
 
+.project-group + .project-group { margin-top: 40px; }
+.group-title { font-size: 20px; text-transform: uppercase; letter-spacing: .04em; margin: 16px 0 2px; }
 .grid-projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
 .grid-skills   { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 .grid-edu      { display: grid; grid-template-columns: repeat(auto-fit,  minmax(260px, 1fr)); gap: 20px; }
@@ -192,7 +194,8 @@
 }
 .contact .kicker { margin-bottom: 0; }
 .contact h2 { font-size: 34px; text-transform: uppercase; margin: 10px 0 18px; }
-.contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.contact-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .contact-btns .btn { text-decoration: none; }
 
 .overlay {

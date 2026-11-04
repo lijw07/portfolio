@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import { brandLine, roll, Roll, SECTIONS } from './schema';
-import { BIO, EDUCATION, EXPERIENCE, LINKS, Media, ProjectAction, PROJECTS, SKILLS } from './content';
+import { BIO, EDUCATION, EXPERIENCE, LINKS, Media, Project, ProjectAction, PROJECTS, SKILLS } from './content';
 import SchemaDiagram from './components/SchemaDiagram';
 import Corners from './components/Corners';
 import { ContactModal, PlayModal } from './components/Modals';
@@ -28,6 +28,33 @@ function PlayButton({ action, onOpen, touchOnly }: { action: ProjectAction; onOp
     <button className="btn btn-primary" onClick={() => onOpen(action.media)}>
       {action.label}
     </button>
+  );
+}
+
+const isGame = (project: Project) => project.tag === 'game';
+
+const PROJECT_GROUPS = [
+  { title: 'Software', query: "SELECT * FROM projects WHERE tag != 'game';", projects: PROJECTS.filter(p => !isGame(p)) },
+  { title: 'Games', query: "SELECT * FROM projects WHERE tag = 'game';", projects: PROJECTS.filter(isGame) },
+];
+
+function ProjectCard({ project, onOpen, touchOnly }: { project: Project; onOpen: (media: Media) => void; touchOnly: boolean }) {
+  return (
+    <article className="card blueprint hoverable proj">
+      <Corners />
+      <div className="proj-head">
+        <h3>{project.title}</h3>
+        <span className="tag tag-outline">{project.tag}</span>
+      </div>
+      <p>{project.description}</p>
+      <div className="proj-meta">
+        <span className="k">stack:</span> {project.stack.join(' · ')} ·{' '}
+        {project.source
+          ? <a href={project.source} target="_blank" rel="noopener noreferrer">source →</a>
+          : <span className="k">{project.when}</span>}
+      </div>
+      {project.action && <PlayButton action={project.action} onOpen={onOpen} touchOnly={touchOnly} />}
+    </article>
   );
 }
 
@@ -98,26 +125,17 @@ function App() {
 
         <section id="projects">
           <h2 className="section-title">Projects</h2>
-          <div className="kicker">SELECT * FROM projects WHERE person_id = 'jai_li';</div>
-          <div className="grid-projects">
-            {PROJECTS.map(p => (
-              <article key={p.title} className="card blueprint hoverable proj">
-                <Corners />
-                <div className="proj-head">
-                  <h3>{p.title}</h3>
-                  <span className="tag tag-outline">{p.tag}</span>
-                </div>
-                <p>{p.description}</p>
-                <div className="proj-meta">
-                  <span className="k">stack:</span> {p.stack.join(' · ')} ·{' '}
-                  {p.source
-                    ? <a href={p.source} target="_blank" rel="noopener noreferrer">source →</a>
-                    : <span className="k">{p.when}</span>}
-                </div>
-                {p.action && <PlayButton action={p.action} onOpen={openPlay} touchOnly={touchOnly} />}
-              </article>
-            ))}
-          </div>
+          {PROJECT_GROUPS.map(group => (
+            <div key={group.title} className="project-group">
+              <h3 className="group-title">{group.title}</h3>
+              <div className="kicker">{group.query}</div>
+              <div className="grid-projects">
+                {group.projects.map(p => (
+                  <ProjectCard key={p.title} project={p} onOpen={openPlay} touchOnly={touchOnly} />
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
 
         <section id="skills">
@@ -157,9 +175,12 @@ function App() {
           <div className="kicker">COMMIT; -- let's build something</div>
           <h2>Get in touch</h2>
           <div className="contact-btns">
+            <div className="contact-links">
+              <a className="btn btn-secondary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a className="btn btn-secondary" href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a className="btn btn-secondary" href={LINKS.itchio} target="_blank" rel="noopener noreferrer">itch.io</a>
+            </div>
             <button className="btn btn-primary" onClick={() => setContactOpen(true)}>Request data dump</button>
-            <a className="btn btn-secondary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a className="btn btn-secondary" href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </section>
       </main>
