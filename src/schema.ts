@@ -54,7 +54,7 @@ const ENTITIES: Record<SectionId, EntityDef> = {
   projects:   { count: PROJECTS.length, fields: [['person_id', 'FK', 'uuid'], ['title', '', 'varchar'], ['stack', '', 'varchar[]'], ['status', '', 'shipped | active']] },
   skills:     { count: SKILLS.reduce((n, g) => n + g.items.length, 0), fields: [['person_id', 'FK', 'uuid'], ['name', '', 'varchar'], ['category', '', 'enum(5)']] },
   education:  { count: EDUCATION.length, fields: [['person_id', 'FK', 'uuid'], ['degree', '', 'MS | BS | AS'], ['school', '', 'varchar']] },
-  contact:    { count: Object.keys(LINKS).length, fields: [['github', '', 'url'], ['linkedin', '', 'url'], ['email', '', 'varchar']] },
+  contact:    { count: Object.keys(LINKS).length, fields: [['github', '', 'url'], ['linkedin', '', 'url'], ['itchio', '', 'url'], ['email', '', 'varchar']] },
 };
 
 const PERSON_FIELDS: Record<Dialect, Field[]> = {

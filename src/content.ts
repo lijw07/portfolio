@@ -6,6 +6,7 @@ export const BIO =
 export const LINKS = {
   github: 'https://github.com/lijw07',
   linkedin: 'https://www.linkedin.com/in/jai-li-va/',
+  itchio: 'https://jai1li.itch.io',
   contactEndpoint: 'https://formspree.io/f/meewbgqz',
 };
 
