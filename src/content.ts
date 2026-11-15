@@ -121,6 +121,14 @@ export const PROJECTS: Project[] = [
     action: { label: 'Play in browser', media: { title: 'Tetris', url: `${PUBLIC}/tetris/index.html`, video: false }, desktopOnly: true },
   },
   {
+    title: 'Roam',
+    tag: 'game',
+    description: 'Third-person 3D dungeon crawler in Godot 4: pick one of five classes, each limited to its own weapons and shields, then fight through procedurally generated dungeons to a boss whose death unlocks the exit. Combat covers weapon combos, shield and dual-wield blocking, aimed bows and crossbows, wand and staff casting, stamina and mana pools, and navmesh enemies that re-route around broken furniture. Between runs a hub holds the stash, weapon crafting and a coin shop that rotates every 15 minutes, and everything carried is lost on death.',
+    stack: ['godot 4', 'gdscript'],
+    source: 'https://github.com/lijw07/roam',
+    action: { label: 'Play in browser', media: { title: 'Roam', url: `${PUBLIC}/roam/index.html`, video: false }, desktopOnly: true },
+  },
+  {
     title: 'CoStar Extraction Pipeline',
     tag: 'pipeline',
     description: 'Dockerized Python/AWS serverless pipeline (Chalice, Lambda, S3) that ingested and translated 20,000+ multilingual lease PDFs; SNS/SQS queuing and ML models extracting tenant names, addresses, rent, and lease terms.',
