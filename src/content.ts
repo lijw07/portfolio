@@ -31,6 +31,8 @@ export interface Media { title: string; url: string; video: boolean }
 
 export interface ProjectAction { label: string; media: Media; desktopOnly?: boolean }
 
+const coverImage = (dir: string) => `${PUBLIC}/${dir}/cover.png`;
+
 export interface Project {
   title: string;
   tag: string;
@@ -39,6 +41,7 @@ export interface Project {
   when?: string;
   source?: string;
   action?: ProjectAction;
+  cover?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -62,6 +65,7 @@ export const PROJECTS: Project[] = [
     description: 'Real-time tower defense in Godot 4 / GDScript with Resource-driven wave and enemy authoring, Path2D pathing, signal-driven Area2D collisions, upgradeable towers, and save/load UI.',
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/tower-defense',
+    cover: coverImage('tower-defense'),
     action: { label: 'Play in browser', media: { title: 'Tower Defense', url: `${PUBLIC}/tower-defense/index.html`, video: false } },
   },
   {
@@ -70,6 +74,7 @@ export const PROJECTS: Project[] = [
     description: '3D puzzle-adventure in Unity (C#) with four playable animals whose distinct abilities drive the puzzles; NPC behavior trees, NavMesh pathfinding, day/night lighting, enemy AI, inventory.',
     stack: ['unity', 'c#'],
     source: 'https://github.com/lijw07/paws-and-hooves',
+    cover: coverImage('paws-and-hooves'),
     action: { label: 'Watch trailer', media: { title: 'Paws and Hooves Trailer', url: `${PUBLIC}/Index_Paws_And_Hooves_Trailer_compressed.mp4`, video: true } },
   },
   {
@@ -78,6 +83,7 @@ export const PROJECTS: Project[] = [
     description: 'The classic sliding-tile puzzle, rebuilt in Godot. Slide to merge matching numbers and chase the 2048 tile. One move from a full board ends the run.',
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/2048',
+    cover: coverImage('2048'),
     action: { label: 'Play in browser', media: { title: '2048', url: `${PUBLIC}/2048/2048.html`, video: false } },
   },
   {
@@ -86,6 +92,7 @@ export const PROJECTS: Project[] = [
     description: 'Arcade-faithful Pac-Man in Godot 4 with procedurally generated mazes that change every level, per-ghost AI personalities with scatter/chase waves and house release timing, fruit bonuses, synthesized retro sound effects, and a saved high score.',
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/pacman',
+    cover: coverImage('pacman'),
     action: { label: 'Play in browser', media: { title: 'Pac-Man', url: `${PUBLIC}/pacman/index.html`, video: false } },
   },
   {
@@ -94,6 +101,7 @@ export const PROJECTS: Project[] = [
     description: 'Flappy Bird rebuilt in Godot 4 with typed GDScript: single-impulse flap physics with tilt-on-dive, randomized pipe gaps, bronze-to-platinum medals, a persistent best score, and a fixed-height playfield that fills any phone, desktop, or iframe without letterboxing.',
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/flappybird',
+    cover: coverImage('flappy-bird'),
     action: { label: 'Play in browser', media: { title: 'Flappy Bird', url: `${PUBLIC}/flappy-bird/index.html`, video: false } },
   },
   {
@@ -102,6 +110,7 @@ export const PROJECTS: Project[] = [
     description: 'Arcade tank battler in Godot 4 with cartoon 3D models authored in Blender and outlined at import time: pick one of eight tanks trading speed against reload and shell damage, then fight seven AI opponents across six hand-built arenas with mouse-aimed fire, deployable mines, navmesh enemy routing, rebindable controls, and touch pads on phones.',
     stack: ['godot 4', 'gdscript', 'blender'],
     source: 'https://github.com/lijw07/Tanks',
+    cover: coverImage('pocket-armor'),
     action: { label: 'Play in browser', media: { title: 'Pocket Armor', url: `${PUBLIC}/pocket-armor/index.html`, video: false } },
   },
   {
@@ -110,6 +119,7 @@ export const PROJECTS: Project[] = [
     description: "Namco's 1979 Galaxian rebuilt in Godot 4 at the arcade's native 224x256 resolution: a flapping convoy that peels off into curving dive attacks, flagships that launch with red escorts and pay up to 800 points when both escorts fall first, per-round scaling of dive speed, launch cadence and enemy fire, a late-wave swarm once only a few aliens remain, swept hit checks so fast shots never tunnel, synthesized sound effects and saved high scores.",
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/galaxian',
+    cover: coverImage('galaxian'),
     action: { label: 'Play in browser', media: { title: 'Galaxian', url: `${PUBLIC}/galaxian/index.html`, video: false } },
   },
   {
@@ -118,6 +128,7 @@ export const PROJECTS: Project[] = [
     description: 'Tetris rebuilt in Godot 4 to the modern guideline: SRS rotation with standard wall kicks, a 7-piece bag randomizer, hold and ghost piece, the guideline gravity curve, a 0.5 s lock delay that resets on movement up to 15 times, line-clear and drop scoring that scales with level, and 19 original procedurally synthesized sound effects on their own audio bus.',
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/Tetris',
+    cover: coverImage('tetris'),
     action: { label: 'Play in browser', media: { title: 'Tetris', url: `${PUBLIC}/tetris/index.html`, video: false }, desktopOnly: true },
   },
   {

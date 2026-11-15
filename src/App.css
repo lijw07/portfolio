@@ -178,6 +178,36 @@
 .proj-meta { font-family: var(--font-mono); font-size: 12px; }
 .proj-meta .k { color: var(--color-accent-700); }
 .proj .btn { margin-top: 12px; align-self: flex-start; }
+.proj .cover {
+  width: calc(100% + 36px);
+  max-width: none;
+  margin: -18px -18px 14px;
+  aspect-ratio: 315 / 250;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-divider);
+  background: var(--color-surface);
+}
+.proj .cover-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-100);
+  background-image:
+    linear-gradient(var(--color-neutral-300) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-neutral-300) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.proj .cover-empty span {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 26px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--color-accent-700);
+  background: var(--color-bg);
+  padding: 4px 14px;
+  border: 1px solid var(--color-divider);
+}
 
 .skill { padding: 16px; gap: 0; }
 .skill-cat { font-family: var(--font-mono); font-size: 12px; color: var(--color-neutral-600); margin-bottom: 8px; }

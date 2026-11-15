@@ -4,6 +4,7 @@ import { brandLine, roll, Roll, SECTIONS } from './schema';
 import { BIO, EDUCATION, EXPERIENCE, LINKS, Media, Project, ProjectAction, PROJECTS, SKILLS } from './content';
 import SchemaDiagram from './components/SchemaDiagram';
 import Corners from './components/Corners';
+import Cover from './components/Cover';
 import { ContactModal, PlayModal } from './components/Modals';
 import { primeGameAudio } from './gameAudio';
 
@@ -42,6 +43,7 @@ function ProjectCard({ project, onOpen, touchOnly }: { project: Project; onOpen:
   return (
     <article className="card blueprint hoverable proj">
       <Corners />
+      {project.cover && <Cover src={project.cover} title={project.title} />}
       <div className="proj-head">
         <h3>{project.title}</h3>
         <span className="tag tag-outline">{project.tag}</span>
