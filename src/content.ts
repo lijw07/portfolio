@@ -123,13 +123,13 @@ export const PROJECTS: Project[] = [
     action: { label: 'Play in browser', media: { title: 'Galaxian', url: `${PUBLIC}/galaxian/index.html`, video: false } },
   },
   {
-    title: 'Tetris',
+    title: 'BlockFall',
     tag: 'game',
-    description: 'Tetris rebuilt in Godot 4 to the modern guideline: SRS rotation with standard wall kicks, a 7-piece bag randomizer, hold and ghost piece, the guideline gravity curve, a 0.5 s lock delay that resets on movement up to 15 times, line-clear and drop scoring that scales with level, and 19 original procedurally synthesized sound effects on their own audio bus.',
+    description: 'Falling-block puzzler rebuilt in Godot 4 to the modern guideline: SRS rotation with standard wall kicks, a 7-piece bag randomizer, hold and ghost piece, the guideline gravity curve, a 0.5 s lock delay that resets on movement up to 15 times, line-clear and drop scoring that scales with level, and 19 original procedurally synthesized sound effects on their own audio bus.',
     stack: ['godot 4', 'gdscript'],
     source: 'https://github.com/lijw07/Tetris',
     cover: coverImage('tetris'),
-    action: { label: 'Play in browser', media: { title: 'Tetris', url: `${PUBLIC}/tetris/index.html`, video: false }, desktopOnly: true },
+    action: { label: 'Play in browser', media: { title: 'BlockFall', url: `${PUBLIC}/tetris/index.html`, video: false }, desktopOnly: true },
   },
   {
     title: 'Roam',
