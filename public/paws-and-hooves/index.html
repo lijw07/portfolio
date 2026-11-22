@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Paws and Hooves</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #1a1a1a;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #unity-container {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #unity-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #1a1a1a;
+    }
+    #unity-loading {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #eee;
+    }
+    #unity-logo {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+    #unity-progress-track {
+      width: 260px;
+      height: 10px;
+      background: #333;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    #unity-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #f5c542;
+      transition: width 0.1s ease-out;
+    }
+    #unity-fullscreen {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 38px;
+      height: 38px;
+      background: rgba(0,0,0,0.45) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='white'><path d='M2 2h6V0H0v8h2V2zm10-2v2h6v6h2V0h-8zM2 12H0v8h8v-2H2v-6zm16 6h-6v2h8v-8h-2v6z'/></svg>") center/20px no-repeat;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.6;
+      display: none;
+    }
+    #unity-fullscreen:hover { opacity: 1; }
+    #unity-warning {
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      color: #fff;
+      background: #b00;
+      padding: 6px 12px;
+      border-radius: 4px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="unity-container">
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div id="unity-loading">
+      <div id="unity-logo">Paws and Hooves</div>
+      <div id="unity-progress-track"><div id="unity-progress-fill"></div></div>
+    </div>
+    <button id="unity-fullscreen" title="Fullscreen"></button>
+    <div id="unity-warning"></div>
+  </div>
+
+  <script>
+    var container = document.querySelector("#unity-container");
+    var canvas = document.querySelector("#unity-canvas");
+    var loadingBox = document.querySelector("#unity-loading");
+    var progressFill = document.querySelector("#unity-progress-fill");
+    var fullscreenBtn = document.querySelector("#unity-fullscreen");
+    var warningBanner = document.querySelector("#unity-warning");
+
+    function unityShowBanner(msg, type) {
+      warningBanner.innerHTML = msg;
+      warningBanner.style.display = "block";
+      if (type !== "error") {
+        setTimeout(function () { warningBanner.style.display = "none"; }, 5000);
+      }
+    }
+
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/WebGL.loader.js";
+    var config = {
+      dataUrl: buildUrl + "/WebGL.data.unityweb",
+      frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
+      codeUrl: buildUrl + "/WebGL.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Index",
+      productName: "Index_PawsAndHooves",
+      productVersion: "0.1",
+      showBanner: unityShowBanner,
+      onQuit: function () { window.parent.postMessage('game-quit', window.location.origin); },
+    };
+
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = function () {
+      createUnityInstance(canvas, config, function (progress) {
+        progressFill.style.width = (100 * progress) + "%";
+      }).then(function (unityInstance) {
+        loadingBox.style.display = "none";
+        fullscreenBtn.style.display = "block";
+        fullscreenBtn.onclick = function () {
+          unityInstance.SetFullscreen(1);
+        };
+      }).catch(function (message) {
+        unityShowBanner(message, "error");
+      });
+    };
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>

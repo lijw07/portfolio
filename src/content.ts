@@ -41,6 +41,7 @@ export interface Project {
   when?: string;
   source?: string;
   action?: ProjectAction;
+  secondaryAction?: ProjectAction;
   cover?: string;
 }
 
@@ -75,7 +76,8 @@ export const PROJECTS: Project[] = [
     stack: ['unity', 'c#'],
     source: 'https://github.com/lijw07/paws-and-hooves',
     cover: coverImage('paws-and-hooves'),
-    action: { label: 'Watch trailer', media: { title: 'Paws and Hooves Trailer', url: `${PUBLIC}/Index_Paws_And_Hooves_Trailer_compressed.mp4`, video: true } },
+    action: { label: 'Play in browser', media: { title: 'Paws and Hooves', url: `${PUBLIC}/paws-and-hooves/index.html`, video: false }, desktopOnly: true },
+    secondaryAction: { label: 'Watch trailer', media: { title: 'Paws and Hooves Trailer', url: `${PUBLIC}/Index_Paws_And_Hooves_Trailer_compressed.mp4`, video: true } },
   },
   {
     title: '2048',

@@ -21,12 +21,12 @@ function useTouchOnly(): boolean {
   return touchOnly;
 }
 
-function PlayButton({ action, onOpen, touchOnly }: { action: ProjectAction; onOpen: (media: Media) => void; touchOnly: boolean }) {
+function PlayButton({ action, onOpen, touchOnly, secondary }: { action: ProjectAction; onOpen: (media: Media) => void; touchOnly: boolean; secondary?: boolean }) {
   if (action.desktopOnly && touchOnly) {
     return <button className="btn btn-secondary" disabled>No mobile support</button>;
   }
   return (
-    <button className="btn btn-primary" onClick={() => onOpen(action.media)}>
+    <button className={`btn ${secondary ? 'btn-secondary' : 'btn-primary'}`} onClick={() => onOpen(action.media)}>
       {action.label}
     </button>
   );
@@ -55,7 +55,12 @@ function ProjectCard({ project, onOpen, touchOnly }: { project: Project; onOpen:
           ? <a href={project.source} target="_blank" rel="noopener noreferrer">source →</a>
           : <span className="k">{project.when}</span>}
       </div>
-      {project.action && <PlayButton action={project.action} onOpen={onOpen} touchOnly={touchOnly} />}
+      {project.action && (
+        <div className="proj-actions">
+          <PlayButton action={project.action} onOpen={onOpen} touchOnly={touchOnly} />
+          {project.secondaryAction && <PlayButton action={project.secondaryAction} onOpen={onOpen} touchOnly={touchOnly} secondary />}
+        </div>
+      )}
     </article>
   );
 }
