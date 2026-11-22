@@ -177,7 +177,7 @@
 .proj p { font-size: 14px; line-height: 1.55; color: var(--color-neutral-700); margin: 8px 0 12px; flex: 1; }
 .proj-meta { font-family: var(--font-mono); font-size: 12px; }
 .proj-meta .k { color: var(--color-accent-700); }
-.proj .btn { margin-top: 12px; align-self: flex-start; }
+.proj-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .proj .cover {
   width: calc(100% + 36px);
   max-width: none;

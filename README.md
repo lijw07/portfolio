@@ -45,6 +45,7 @@ public/
 │   tetris/, roam/
 │                               Godot web exports, embedded in the play modal
 ├── GODOT-LICENSE.txt           MIT notice for the Godot runtime files above
+├── paws-and-hooves/            Unity WebGL build (index.html + Build/), embedded in the play modal
 └── Index_Paws_And_Hooves_Trailer_compressed.mp4
 ```
 
@@ -75,6 +76,21 @@ Edit copy in `src/content.ts`; retune the look in `src/index.css`.
    ```
 
 (2048 predates this convention and keeps its `2048.*` file names.)
+
+## Updating the Unity game
+
+Paws and Hooves is a Unity WebGL build with gzip compression and Decompression
+Fallback enabled, which GitHub Pages needs because it cannot send
+`Content-Encoding` headers.
+
+1. Build the WebGL target in Unity to `Builds/WebGL`.
+2. Copy `Build/` over `public/paws-and-hooves/Build/`.
+3. Keep the existing `public/paws-and-hooves/index.html`. It carries the display
+   title and an `onQuit` hook that posts `'game-quit'` so the in-game Quit closes
+   the play modal. Replace it only when the build file names change.
+
+A card can carry a second button through `secondaryAction`; Paws and Hooves uses
+it to keep the trailer next to Play in browser.
 
 ## Contact
 
